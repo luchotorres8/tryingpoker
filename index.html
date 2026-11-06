@@ -1,0 +1,437 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Perfil TryingPoker</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow:wght@400;500;600;700&display=swap">
+<style>
+body{margin:0}img{max-width:100%}
+/* Una sola estética oscura (el manual de TryingPoker prohíbe fondos claros).
+   Layout: comparación antes/después en dos móviles, luego los seis cambios en el orden en que se hacen. */
+:root{
+  --negro:#0B0B0B; --carbon:#161616; --carbon2:#1E1E1E; --linea:#2A2A2A;
+  --naranja:#F7961A; --ambar:#FFB547; --verde:#2FAE4E; --rojo:#E5484D;
+  --blanco:#F5F2EC; --gris:#9A968F;
+  --display:"Anton","Impact","Arial Narrow",sans-serif;
+  --body:"Barlow","Helvetica Neue",Arial,sans-serif;
+  --grad:linear-gradient(180deg,#FFB547,#F28E14);
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--negro);color:var(--blanco);font-family:var(--body);font-size:17px;line-height:1.55}
+.wrap{max-width:1080px;margin:0 auto;padding-block:48px 80px;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--display);font-weight:400;text-transform:uppercase;letter-spacing:.01em;line-height:1.02;text-wrap:balance;margin:0}
+h1{font-size:clamp(44px,8vw,88px)}
+h2{font-size:clamp(30px,4.6vw,46px)}
+h3{font-size:22px;letter-spacing:.02em}
+.hot{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.eyebrow{font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--gris)}
+p{margin:0}
+.lead{color:var(--gris);max-width:62ch;font-size:19px}
+a{color:var(--naranja)}
+:focus-visible{outline:2px solid var(--naranja);outline-offset:3px}
+
+/* HERO */
+.hero{display:grid;gap:18px;padding-bottom:40px;border-bottom:1px solid var(--linea)}
+.score{display:flex;align-items:center;gap:18px;flex-wrap:wrap;margin-top:10px}
+.score .n{font-family:var(--display);font-size:64px;line-height:1;font-variant-numeric:tabular-nums}
+.score .n small{font-size:26px;color:var(--gris)}
+.score .antes{color:var(--gris)}
+.score .arrow{font-size:34px;color:var(--naranja)}
+.score .desp{color:var(--verde)}
+.score .cap{color:var(--gris);font-size:15px;max-width:30ch}
+
+/* COMPARACIÓN */
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:28px;padding-block:44px;align-items:start}
+.col{display:grid;gap:14px;justify-items:center;min-width:0}
+.tag{font-family:var(--display);font-size:20px;letter-spacing:.06em;text-transform:uppercase}
+.tag.a{color:var(--gris)} .tag.d{color:var(--naranja)}
+.phone{width:100%;max-width:380px;border:1px solid var(--linea);border-radius:34px;padding:10px;background:var(--carbon)}
+.phone img.shot{display:block;width:100%;border-radius:26px}
+.screen{background:#000;border-radius:26px;padding:22px 16px 0;overflow:hidden;font-size:14px;line-height:1.35}
+.ig-top{display:flex;justify-content:space-between;align-items:center;font-weight:700;font-size:18px;margin-bottom:16px}
+.ig-top span:last-child{color:var(--gris);letter-spacing:2px}
+.ig-head{display:flex;gap:16px;align-items:center}
+.avatar{width:86px;height:86px;border-radius:50%;padding:3px;background:conic-gradient(#F7961A,#E5484D,#FFB547,#F7961A);flex:none}
+.avatar img{width:100%;height:100%;border-radius:50%;object-fit:cover;border:3px solid #000;display:block}
+.stats{display:flex;gap:14px;flex:1;justify-content:space-around;text-align:center;font-size:12px;color:var(--gris)}
+.stats b{display:block;color:var(--blanco);font-size:16px}
+.ig-name{font-weight:700;margin-top:12px}
+.ig-cat{color:var(--gris)}
+.ig-bio{white-space:pre-line}
+.ig-link{color:#8AB4FF;margin-top:2px}
+.ig-btns{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:12px}
+.ig-btns span{background:#262626;border-radius:8px;text-align:center;padding:7px;font-weight:600}
+.ig-btns span:first-child{background:#3D5AFE}
+.hl-row{display:flex;gap:12px;margin:16px -4px 14px;overflow:hidden}
+.hl{display:grid;justify-items:center;gap:5px;width:62px;flex:none;font-size:11.5px}
+.hl i{width:58px;height:58px;border-radius:50%;border:1px solid var(--linea);background:var(--negro);display:grid;place-items:center;font-style:normal;color:var(--naranja);font-size:24px;box-shadow:0 0 0 2px #000,0 0 0 3px #333}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin:0 -16px}
+.tile{aspect-ratio:3/4;position:relative;background:var(--carbon2);display:flex;align-items:flex-end;padding:6px;overflow:hidden}
+.tile::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 35%,#3a3a3a 0 22%,transparent 23%),linear-gradient(180deg,#1b1b1b,#0b0b0b)}
+.tile b{position:relative;font-family:var(--display);font-weight:400;font-size:15px;line-height:1;text-transform:uppercase}
+.tile b em{font-style:normal;color:var(--naranja)}
+.tile .pin{position:absolute;top:6px;right:6px;width:18px;height:18px;fill:var(--blanco)}
+.note{font-size:13px;color:var(--gris);text-align:center;max-width:40ch}
+
+/* PASOS */
+.step{display:grid;grid-template-columns:110px 1fr;gap:28px;padding-block:44px;border-top:1px solid var(--linea)}
+.step .num{font-family:var(--display);font-size:72px;line-height:.9;color:var(--linea);-webkit-text-stroke:1px #555}
+.step .body{display:grid;gap:20px;min-width:0}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.card{background:var(--carbon);border:1px solid var(--linea);border-radius:14px;padding:20px;display:grid;gap:10px;align-content:start;min-width:0}
+.card.pick{border-color:var(--naranja)}
+.card .k{font-size:12.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--gris)}
+.card.pick .k{color:var(--naranja)}
+ul.clean{margin:0;padding:0;list-style:none;display:grid;gap:8px}
+ul.clean li{padding-left:22px;position:relative}
+ul.clean li::before{content:"♠";position:absolute;left:0;color:var(--naranja);font-size:13px;top:3px}
+ul.no li::before{content:"✕";color:var(--rojo)}
+
+.copybox{display:grid;gap:10px}
+.copy{background:var(--negro);border:1px solid var(--linea);border-radius:10px;padding:14px 16px;font-size:16px;white-space:pre-line;font-weight:500}
+.copyfoot{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.count{font-size:13px;color:var(--gris);font-variant-numeric:tabular-nums}
+.count.over{color:var(--rojo)}
+button.cp{font:600 13px var(--body);letter-spacing:.06em;text-transform:uppercase;background:transparent;color:var(--naranja);border:1px solid var(--naranja);border-radius:999px;padding:6px 14px;cursor:pointer}
+button.cp:hover{background:var(--naranja);color:var(--negro)}
+
+.photo{display:grid;grid-template-columns:auto 1fr;gap:28px;align-items:center}
+.circles{display:flex;gap:22px;align-items:end}
+.circles figure{margin:0;display:grid;gap:8px;justify-items:center;font-size:12px;color:var(--gris)}
+.circles .big{width:150px;height:150px;border-radius:50%;overflow:hidden;border:2px solid var(--naranja);background:var(--negro)}
+.circles .big img,.circles .mini img{width:100%;height:100%;object-fit:cover;display:block}
+.circles .mini{width:40px;height:40px;border-radius:50%;overflow:hidden;border:1px solid var(--linea)}
+.circles .old{width:110px;height:110px;border-radius:50%;overflow:hidden;background:var(--negro);border:1px solid var(--linea);opacity:.75}
+.circles .old img{width:100%;height:100%;object-fit:contain;display:block}
+
+.names{display:grid;gap:10px}
+.name{display:flex;justify-content:space-between;align-items:center;gap:12px;background:var(--carbon);border:1px solid var(--linea);border-radius:10px;padding:14px 16px;flex-wrap:wrap}
+.name.pick{border-color:var(--naranja)}
+.name strong{font-size:19px}
+.name .meta{display:flex;gap:12px;align-items:center}
+.badge{font-size:11.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;background:var(--naranja);color:var(--negro);border-radius:999px;padding:3px 9px}
+
+.linkpage{display:grid;gap:8px;max-width:340px;background:var(--negro);border:1px solid var(--linea);border-radius:18px;padding:18px}
+.linkpage .lb{border:1px solid var(--linea);border-radius:10px;padding:11px 14px;font-weight:600;display:flex;justify-content:space-between}
+.linkpage .lb:first-of-type{background:var(--naranja);color:var(--negro);border-color:var(--naranja)}
+.linkpage .lb span{opacity:.6}
+.url{font-family:ui-monospace,Menlo,monospace;font-size:14px;word-break:break-all}
+.url s{color:var(--rojo)}
+
+.hls{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+.hlc{display:grid;gap:10px;justify-items:center;text-align:center;align-content:start;min-width:0}
+.hlc i{width:76px;height:76px;border-radius:50%;background:var(--negro);border:1px solid var(--linea);box-shadow:0 0 0 3px var(--negro),0 0 0 4px #3a3a3a;display:grid;place-items:center;font-style:normal;color:var(--naranja);font-size:30px}
+.hlc b{font-size:15px}
+.hlc p{font-size:14px;color:var(--gris);line-height:1.4}
+.from{font-size:12px;color:var(--verde);font-weight:600}
+
+.pins{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.pins .card h3{color:var(--naranja)}
+.pins .sub{font-size:12.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--gris);margin-top:6px}
+.pins .now{border-top:1px dashed var(--linea);padding-top:10px}
+
+.tablewrap{overflow-x:auto;border:1px solid var(--linea);border-radius:14px}
+table{border-collapse:collapse;width:100%;min-width:560px;font-size:15px}
+th,td{text-align:left;padding:11px 14px;border-bottom:1px solid var(--linea);vertical-align:top}
+th{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--gris);font-weight:600;background:var(--carbon)}
+td.n{font-variant-numeric:tabular-nums;white-space:nowrap;font-weight:600}
+td.n.up{color:var(--verde)}
+tr:last-child td{border-bottom:0;background:var(--carbon);font-weight:700}
+.bar{height:6px;background:var(--linea);border-radius:3px;overflow:hidden;width:90px;display:inline-block;vertical-align:middle;margin-left:8px}
+.bar i{display:block;height:100%;background:var(--verde)}
+
+footer{border-top:1px solid var(--linea);padding-top:28px;color:var(--gris);font-size:14px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:center}
+footer img{width:56px}
+
+@media (max-width:820px){
+  .compare,.row2,.pins{grid-template-columns:1fr}
+  .hls{grid-template-columns:repeat(2,1fr)}
+  .hls .hlc:last-child{grid-column:1/-1}
+  .step{grid-template-columns:1fr;gap:10px}
+  .step .num{font-size:52px}
+  .photo{grid-template-columns:1fr}
+}
+@media (max-width:420px){ .circles{gap:14px} .circles .big{width:120px;height:120px} .circles .old{width:86px;height:86px} }
+</style>
+
+</head>
+<body>
+<div class="wrap">
+
+<header class="hero">
+  <span class="eyebrow">Propuesta para @tryingpoker · noviembre 2026</span>
+  <h1>Tu perfil, <span class="hot">rediseñado</span></h1>
+  <p class="lead">Quien llega a tu perfil viene de un solo reel y decide en tres segundos si te sigue. Hoy el perfil cuenta tus afiliaciones. La propuesta es que cuente para quién eres y qué va a encontrar aquí.</p>
+  <div class="score">
+    <span class="n antes">42<small>/100</small></span>
+    <span class="arrow">→</span>
+    <span class="n desp">80<small>/100</small></span>
+    <span class="cap">Puntuación del perfil con una rúbrica de 12 puntos. El detalle está al final.</span>
+  </div>
+</header>
+
+<section class="compare" aria-label="Antes y después">
+  <div class="col">
+    <span class="tag a">Hoy</span>
+    <div class="phone"><img class="shot" src="antes.jpg" alt="Captura del perfil actual de @tryingpoker"></div>
+  </div>
+  <div class="col">
+    <span class="tag d">Propuesta</span>
+    <div class="phone">
+      <div class="screen">
+        <div class="ig-top"><span>‹ &nbsp;tryingpoker</span><span>•••</span></div>
+        <div class="ig-head">
+          <div class="avatar"><img src="cara.jpg" alt=""></div>
+          <div class="stats"><div><b>355</b>posts</div><div><b>722</b>seguidores</div><div><b>63</b>seguidos</div></div>
+        </div>
+        <div class="ig-name">Toni Vázquez | Poker PLO</div>
+        <div class="ig-cat">Creador(a) digital</div>
+        <div class="ig-bio">Juego PLO mientras trabajo. Te enseño el camino real a pro
+📊 Mis resultados cada mes, sin filtro
+👇 Empieza aquí: guía gratis + mis códigos</div>
+        <div class="ig-link">🔗 tryingpoker.com/empieza</div>
+        <div class="ig-btns"><span>Seguir</span><span>Mensaje</span></div>
+        <div class="hl-row">
+          <div class="hl"><i>▶</i>Empieza</div>
+          <div class="hl"><i>↗</i>Resultados</div>
+          <div class="hl"><i>♠</i>Mi historia</div>
+          <div class="hl"><i>⏱</i>Rutina</div>
+          <div class="hl"><i>%</i>Códigos</div>
+        </div>
+        <div class="grid3">
+          <div class="tile"><svg class="pin" viewBox="0 0 24 24"><path d="M16 3l5 5-3 1-4 4 1 5-2 2-4-4-5 5-1-1 5-5-4-4 2-2 5 1 4-4z"/></svg><b>Trabajo y <em>juego</em> PLO</b></div>
+          <div class="tile"><svg class="pin" viewBox="0 0 24 24"><path d="M16 3l5 5-3 1-4 4 1 5-2 2-4-4-5 5-1-1 5-5-4-4 2-2 5 1 4-4z"/></svg><b>Mi mes en <em>números</em></b></div>
+          <div class="tile"><svg class="pin" viewBox="0 0 24 24"><path d="M16 3l5 5-3 1-4 4 1 5-2 2-4-4-5 5-1-1 5-5-4-4 2-2 5 1 4-4z"/></svg><b>Rakeback <em>explicado</em></b></div>
+        </div>
+      </div>
+    </div>
+    <p class="note">Maqueta. La foto es un fotograma de tu vídeo de PsicoPoker y solo sirve para enseñar el encuadre. El dominio del link es un ejemplo.</p>
+  </div>
+</section>
+
+<!-- 1 FOTO -->
+<section class="step">
+  <div class="num">01</div>
+  <div class="body">
+    <span class="eyebrow">Foto de perfil</span>
+    <h2>Tu cara, no el <span class="hot">dibujo</span></h2>
+    <div class="photo">
+      <div class="circles">
+        <figure><div class="old"><img src="logo.png" alt="Logo actual"></div>Hoy</figure>
+        <figure><div class="big"><img src="cara.jpg" alt="Encuadre propuesto"></div>Propuesta</figure>
+        <figure><div class="mini"><img src="cara.jpg" alt=""></div>Así se ve en un comentario</figure>
+      </div>
+      <p class="lead" style="font-size:17px">La caricatura funciona en YouTube, pero en Instagram tu foto aparece a 40 píxeles al lado de cada comentario y cada historia. Quien acaba de verte en un reel tiene que reconocerte en ese círculo.</p>
+    </div>
+    <div class="row2">
+      <div class="card pick">
+        <span class="k">Cómo hacerla</span>
+        <ul class="clean">
+          <li>La cara ocupa el 60 % del círculo, mirando a cámara y con una sonrisa natural.</li>
+          <li>Con los auriculares: ya son tu sello en los reels y en el logo.</li>
+          <li>Fondo negro liso con una luz naranja de lado. Así enlaza con el logo sin usarlo.</li>
+          <li>Hecha con el móvil y buena luz de ventana. No hace falta estudio.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <span class="k">Qué evitar</span>
+        <ul class="clean no">
+          <li>Cartas, fichas o texto. En 40 píxeles no se leen.</li>
+          <li>Plano de medio cuerpo o foto de lejos.</li>
+          <li>Fondo con pantallas o la habitación detrás.</li>
+        </ul>
+        <span class="k" style="margin-top:6px">El logo se queda en</span>
+        <p>El banner de YouTube, la página del link y la marca de agua de los vídeos.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 2 NOMBRE -->
+<section class="step">
+  <div class="num">02</div>
+  <div class="body">
+    <span class="eyebrow">Nombre · máximo 30 caracteres</span>
+    <h2>El campo que <span class="hot">lee el buscador</span></h2>
+    <p class="lead" style="font-size:17px">Es la línea en negrita, no el usuario. Instagram la usa para las búsquedas. Hoy dice "Toni Vazquez" y nadie te encuentra buscando poker o PLO. "Poker" va sin tilde porque es como más se busca.</p>
+    <div class="names">
+      <div class="name pick"><strong>Toni Vázquez | Poker PLO</strong><span class="meta"><span class="badge">Recomendado</span><span class="count" data-c="Toni Vázquez | Poker PLO" data-max="30"></span><button class="cp" data-t="Toni Vázquez | Poker PLO">Copiar</button></span></div>
+      <div class="name"><strong>Toni Vázquez | PLO online</strong><span class="meta"><span class="count" data-c="Toni Vázquez | PLO online" data-max="30"></span><button class="cp" data-t="Toni Vázquez | PLO online">Copiar</button></span></div>
+      <div class="name"><strong>Toni | Poker con trabajo</strong><span class="meta"><span class="count" data-c="Toni | Poker con trabajo" data-max="30"></span><button class="cp" data-t="Toni | Poker con trabajo">Copiar</button></span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 3 BIO -->
+<section class="step">
+  <div class="num">03</div>
+  <div class="body">
+    <span class="eyebrow">Bio · máximo 150 caracteres</span>
+    <h2>Para quién eres, <span class="hot">no con quién vas</span></h2>
+    <p class="lead" style="font-size:17px">Hoy la bio es una lista: TryingPoker, PLO, PsicoPoker, MentoPoker. La primera línea tiene que decirle al que empieza qué va a ganar siguiéndote. Los códigos salen de aquí y pasan al link y a la destacada Códigos.</p>
+    <div class="row2">
+      <div class="card pick copybox">
+        <span class="k">Opción A · recomendada</span>
+        <div class="copy" id="bioA">Juego PLO mientras trabajo. Te enseño el camino real a pro
+📊 Mis resultados cada mes, sin filtro
+👇 Empieza aquí: guía gratis + mis códigos</div>
+        <div class="copyfoot"><span class="count" data-from="bioA" data-max="150"></span><button class="cp" data-from="bioA">Copiar</button></div>
+      </div>
+      <div class="card copybox">
+        <span class="k">Opción B · con el mindset</span>
+        <div class="copy" id="bioB">PLO con trabajo de 8 h: el proceso real hacia pro
+📊 Resultados cada mes · 🧠 Mindset en @psicopoker.pro
+👇 Empieza aquí</div>
+        <div class="copyfoot"><span class="count" data-from="bioB" data-max="150"></span><button class="cp" data-from="bioB">Copiar</button></div>
+      </div>
+    </div>
+    <p class="note" style="text-align:left;max-width:none">Por confirmar contigo: si encaja lo de las 8 horas de trabajo. El contador cuenta los emojis como Instagram, que puede variar en uno o dos caracteres.</p>
+  </div>
+</section>
+
+<!-- 4 LINK -->
+<section class="step">
+  <div class="num">04</div>
+  <div class="body">
+    <span class="eyebrow">Link</span>
+    <h2>Una puerta, <span class="hot">no un menú</span></h2>
+    <div class="row2">
+      <div class="card">
+        <span class="k">Hoy mismo</span>
+        <p>Limpiar el enlace. El que tienes arrastra un código de rastreo que se ve en la bio:</p>
+        <p class="url">youtube.com/@tryingpoker<s>?si=HuMKRzW7dx…</s></p>
+        <p class="url" style="color:var(--verde)">youtube.com/@tryingpoker</p>
+      </div>
+      <div class="card pick">
+        <span class="k">En la primera semana</span>
+        <p>Una página propia "Empieza aquí", que es justo lo que promete la bio. Cuatro bloques y en este orden:</p>
+        <div class="linkpage" aria-hidden="true">
+          <div class="lb">Guía gratis: empieza en PLO <span>→</span></div>
+          <div class="lb">Mi último mes en números <span>→</span></div>
+          <div class="lb">Mis códigos: MentoPoker, Hand2Note <span>→</span></div>
+          <div class="lb">Marcas y colaboraciones <span>→</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 5 DESTACADAS -->
+<section class="step">
+  <div class="num">05</div>
+  <div class="body">
+    <span class="eyebrow">Historias destacadas</span>
+    <h2>Las preguntas de <span class="hot">quien llega nuevo</span></h2>
+    <p class="lead" style="font-size:17px">Cinco, con nombres cortos para que no se corten ("ENTRENAM…") y todas con la misma portada: fondo negro y un icono naranja.</p>
+    <div class="hls">
+      <div class="hlc"><i>▶</i><b>Empieza</b><p>Quién eres, para quién es la cuenta y por dónde arrancar. Lo primero que se ve.</p><span class="from">Nueva</span></div>
+      <div class="hlc"><i>↗</i><b>Resultados</b><p>Gráficas de cada mes, el mejor y el peor, el mayor pinchazo del año.</p><span class="from">Absorbe "Estudio 2026"</span></div>
+      <div class="hlc"><i>♠</i><b>Mi historia</b><p>Cómo empezaste, cómo combinas trabajo y póker, tu paso por PsicoPoker.</p><span class="from">Nueva</span></div>
+      <div class="hlc"><i>⏱</i><b>Rutina</b><p>La vida del jugador fuera de la mesa: entreno, estudio y horarios.</p><span class="from">Junta Entrenamiento y Calistenia</span></div>
+      <div class="hlc"><i>%</i><b>Códigos</b><p>MentoPoker, Hand2Note y salas: qué te da cada uno y cómo se usa.</p><span class="from">Saca los códigos de los copys</span></div>
+    </div>
+    <p class="note" style="text-align:left;max-width:none">"Haters" se borra. Si hay respuestas buenas, más adelante pasan a una sexta destacada, Dudas.</p>
+  </div>
+</section>
+
+<!-- 6 FIJADOS -->
+<section class="step">
+  <div class="num">06</div>
+  <div class="body">
+    <span class="eyebrow">Posts fijados</span>
+    <h2>Tres posts, <span class="hot">tres trabajos</span></h2>
+    <p class="lead" style="font-size:17px">Sin nada fijado, arriba del todo aparece lo último que subiste. Fijar tres posts son cuatro toques y es el cambio que más rinde de todo el perfil.</p>
+    <div class="pins">
+      <div class="card">
+        <span class="k">1 · Presentación</span>
+        <h3>Quién eres</h3>
+        <p>Reel nuevo: "Tengo trabajo y quiero vivir del póker. Esto es lo que estoy haciendo".</p>
+        <div class="now"><span class="sub">Mientras tanto</span><p>"Intentando trabajar… pero mi novia". Ya cuenta lo de trabajo y póker, con humor.</p></div>
+      </div>
+      <div class="card">
+        <span class="k">2 · Prueba</span>
+        <h3>Tus números</h3>
+        <p>El resultado del mes recortado de tu resumen de YouTube. Se cambia cada mes.</p>
+        <div class="now"><span class="sub">Mientras tanto</span><p>"Deja de jugar…", el de la gráfica de +12,5 bb/100.</p></div>
+      </div>
+      <div class="card">
+        <span class="k">3 · Valor</span>
+        <h3>Algo que se guarda</h3>
+        <p>El sistema VIP de Winamax explicado en reel (tu vídeo de 3.000 visualizaciones) o un carrusel "Empieza en PLO".</p>
+        <div class="now"><span class="sub">Mientras tanto</span><p>"+Mucho rakeback vs poco rakeback".</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PUNTUACIÓN -->
+<section class="step">
+  <div class="num">42<br>→80</div>
+  <div class="body">
+    <span class="eyebrow">Puntuación</span>
+    <h2>De dónde salen <span class="hot">los puntos</span></h2>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Apartado</th><th>Hoy</th><th>Con los cambios</th><th>Qué cambia</th></tr></thead>
+        <tbody id="tbody"></tbody>
+      </table>
+    </div>
+    <div class="card">
+      <span class="k">Los 20 puntos que faltan no son de texto</span>
+      <ul class="clean">
+        <li>Grabar el reel de presentación que va fijado en primer lugar.</li>
+        <li>Contestar cada comentario durante la primera hora después de publicar.</li>
+        <li>Una sola plantilla de portada con tu marca, en lugar de mezclar miniaturas y capturas de OpusClip.</li>
+        <li>Historias casi todos los días, con plantillas para que te lleven 5 minutos.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>Propuesta de perfil para Toni Vázquez · @tryingpoker · noviembre 2026</span>
+  <img src="logo.png" alt="TryingPoker">
+</footer>
+</div>
+
+<script>
+const rows=[
+ ["Nombre",3,12,10,"Nombre más palabras que se buscan"],
+ ["Primera línea de la bio",2,12,9,"Dice para quién es y qué gana"],
+ ["Resto de la bio",2,8,6,"Una prueba y una acción, sin lista de afiliados"],
+ ["Posts fijados",0,10,8,"Presentación, prueba y valor"],
+ ["Link",4,8,7,"Una página que cumple lo que promete la bio"],
+ ["Destacadas",2,8,7,"Cinco, pensadas para quien llega nuevo"],
+ ["Portadas de la grilla",6,8,6,"Ya se leen bien. Falta una plantilla única"],
+ ["Foto",2,6,5,"Tu cara de cerca, reconocible a 40 px"],
+ ["Usuario",6,6,6,"Ya está bien: igual que en YouTube"],
+ ["Categoría y contacto",4,6,5,"Añadir el email de colaboraciones"],
+ ["Actividad reciente",6,10,6,"Publicas bien. Faltan respuestas a comentarios"],
+ ["Historias",5,6,5,"Mantener el ritmo diario"]
+];
+const tb=document.getElementById('tbody');let a=0,b=0,m=0;
+rows.forEach(([n,h,max,d,t])=>{a+=h;b+=d;m+=max;
+ tb.insertAdjacentHTML('beforeend',`<tr><td>${n}</td><td class="n">${h}/${max}</td><td class="n ${d>h?'up':''}">${d}/${max}<span class="bar"><i style="width:${d/max*100}%"></i></span></td><td>${t}</td></tr>`)});
+tb.insertAdjacentHTML('beforeend',`<tr><td>Total</td><td class="n">${a}/${m}</td><td class="n up">${b}/${m}</td><td></td></tr>`);
+
+const len=s=>[...new Intl.Segmenter('es',{granularity:'grapheme'}).segment(s)].length;
+document.querySelectorAll('.count').forEach(el=>{
+ const txt=el.dataset.c ?? document.getElementById(el.dataset.from).textContent;
+ const n=len(txt), max=+el.dataset.max;
+ el.textContent=`${n}/${max} caracteres`; if(n>max) el.classList.add('over');
+});
+document.querySelectorAll('button.cp').forEach(btn=>btn.addEventListener('click',()=>{
+ const src=btn.dataset.from?document.getElementById(btn.dataset.from):null;
+ const txt=btn.dataset.t ?? src.textContent;
+ const done=()=>{const o=btn.textContent;btn.textContent='Copiado';setTimeout(()=>btn.textContent=o,1400)};
+ navigator.clipboard.writeText(txt).then(done).catch(()=>{if(src){const r=document.createRange();r.selectNodeContents(src);const s=getSelection();s.removeAllRanges();s.addRange(r);btn.textContent='Seleccionado'}});
+}));
+</script>
+</body>
+</html>
