@@ -1,3 +1,4 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
 <title>Manual TryingPoker</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -40,7 +41,9 @@ a{color:var(--naranja)}
 /* portada */
 .portada{padding-block:56px 72px;border-bottom:1px solid var(--linea)}
 .portada .grid{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
-.portada h1{font-size:clamp(64px,12vw,148px)}
+.portada .grid > *{min-width:0}
+.portada h1{font-size:clamp(46px,7.4vw,100px);white-space:nowrap}
+.portada .grid{grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr)}
 .portada .sub{font-size:20px;color:var(--gris);margin-top:20px}
 .portada .meta{display:flex;flex-wrap:wrap;gap:10px 28px;margin-top:32px}
 .portada .meta div{display:flex;flex-direction:column}
@@ -111,6 +114,32 @@ td code,code{font-family:ui-monospace,Menlo,monospace;font-size:.88em;color:var(
 .mal-uso .lamina{min-height:190px;padding:20px}
 .mal-uso .lamina img{max-height:140px}
 .mal-uso .lamina::before{content:"";position:absolute;inset:0;background:linear-gradient(to top right,transparent calc(50% - 1.5px),rgba(229,72,77,.85) 50%,transparent calc(50% + 1.5px));z-index:2;pointer-events:none}
+
+/* logotipo solo palabra */
+.lt{display:block;width:100%;max-width:440px;height:auto}
+.cols2 > *,.cols3 > *,.cols4 > *{min-width:0}
+.lamina img{max-width:100%;object-fit:contain}
+.lamina.hueso{background:var(--hueso)}
+.lamina.verde{background:var(--verde-oscuro)}
+.versiones{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.versiones .lamina{min-height:170px;padding:28px}
+.versiones .lamina img{max-height:none;width:100%}
+.constr{position:relative;display:inline-block;padding:7.5%;outline:1px dashed var(--naranja);outline-offset:-1px;width:min(100%,560px)}
+.constr img{display:block;width:100%;outline:1px solid rgba(247,150,26,.35)}
+.constr .x{position:absolute;font-family:var(--f-etiqueta);font-weight:700;color:var(--naranja);font-size:13px}
+.matriz{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.matriz .lamina{min-height:120px;padding:20px}
+.matriz .lamina img{width:100%;max-height:none}
+.apps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;align-items:start}
+.apps .eti{display:block;margin-top:12px}
+.apps p{font-size:14.5px;color:#CFCAC2;margin-top:4px}
+.mock{position:relative;width:100%;overflow:hidden;border-radius:8px;border:1px solid var(--linea);background:var(--negro);container-type:inline-size}
+.mock img.wm{position:absolute;height:auto}
+.descargas{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 24px}
+.descargas a{display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px solid var(--linea);text-decoration:none;color:var(--hueso);font-size:15px}
+.descargas a span{font-family:var(--f-etiqueta);font-weight:700;letter-spacing:.1em;font-size:13px;color:var(--naranja);white-space:nowrap}
+@media (max-width:860px){.versiones,.apps{grid-template-columns:repeat(2,minmax(0,1fr))}.matriz{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:520px){.versiones,.apps,.descargas{grid-template-columns:1fr}}
 
 /* color */
 .paleta{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
@@ -242,7 +271,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;
 
 <header class="portada"><div class="wrap grid">
   <div>
-    <span class="eti">Manual de marca · versión 1.0 · noviembre 2026</span>
+    <span class="eti">Manual de marca · versión 1.1 · noviembre 2026</span>
     <h1 style="margin-top:14px">Trying<span class="grad">Poker</span></h1>
     <p class="sub">Cómo se ve, cómo suena y cómo se arma cada pieza de Toni Vázquez. Todo lo que se diseñe para la marca sale de acá: reels, carruseles, historias, miniaturas y web.</p>
     <div class="meta">
@@ -358,22 +387,22 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;
 
 <!-- 03 LOGO -->
 <section id="logo"><div class="wrap">
-  <div class="cab"><div class="num">03</div><div><h2>Logo</h2><p>El logo es la ilustración de Toni: es reconocible, cálido y ya lo asocia su público. El sistema suma un logotipo tipográfico para los tamaños donde la ilustración no se lee.</p></div></div>
+  <div class="cab"><div class="num">03</div><div><h2>Logo</h2><p>El logo es la ilustración de Toni: es reconocible, cálido y ya lo asocia su público. Para los tamaños y soportes donde la ilustración no se lee, el sistema tiene un logotipo (solo la palabra, con las mismas letras del logo) y un isologo tipográfico (TP).</p></div></div>
 
   <div class="cols2">
     <div><div class="lamina" style="min-height:360px"><img src="logo.png" alt="Logo principal" style="max-height:300px"></div>
       <p class="pie"><b>Principal</b> Ilustración completa. Avatar de redes, portada de YouTube, cierres de vídeo, web.</p></div>
     <div style="display:grid;gap:20px">
-      <div><div class="lamina" style="min-height:170px"><span class="wordmark">Trying<span class="grad">Poker</span></span></div>
-        <p class="pie"><b>Logotipo</b> Anton, "Trying" en hueso y "Poker" en el degradado. Para firmas, pies de carrusel, marcas de agua y tamaños chicos.</p></div>
-      <div><div class="lamina" style="min-height:120px;gap:24px;grid-auto-flow:column"><span class="wm-chico">T<span class="n">P</span></span><span class="wm-chico" style="font-size:18px">@tryingpoker</span></div>
-        <p class="pie"><b>Monograma y usuario</b> "TP" o @tryingpoker en esquinas de reels y en historias.</p></div>
+      <div><div class="lamina" style="min-height:170px"><img class="lt" src="logo/logotipo-degradado.svg" alt="Logotipo TryingPoker, solo la palabra en naranja degradado"></div>
+        <p class="pie"><b>Logotipo</b> La palabra del logo, sin el personaje, las cartas ni las fichas. Firmas, pies de carrusel, marcas de agua, merchandising y tamaños chicos.</p></div>
+      <div><div class="lamina" style="min-height:120px;gap:24px;grid-auto-flow:column"><img src="logo/isologo-tp-circulo.svg" alt="Isologo TP" style="height:72px;width:auto"><span class="wm-chico" style="font-size:18px">@tryingpoker</span></div>
+        <p class="pie"><b>Isologo y usuario</b> "TP" en círculo, o @tryingpoker, en esquinas de reels, favicon e historias.</p></div>
     </div>
   </div>
 
   <div class="bloque cols2">
     <div>
-      <span class="eti" style="display:block;margin-bottom:16px">Área de seguridad</span>
+      <span class="eti" style="display:block;margin-bottom:16px">Ilustración · Área de seguridad</span>
       <div class="lamina" style="min-height:300px">
         <div class="seguridad"><img src="logo.png" alt="Logo con área de seguridad marcada"><span class="x" style="top:8px;left:50%;transform:translateX(-50%)">X</span><span class="x" style="bottom:8px;left:50%;transform:translateX(-50%)">X</span><span class="x" style="left:12px;top:50%;transform:translateY(-50%)">X</span><span class="x" style="right:12px;top:50%;transform:translateY(-50%)">X</span></div>
       </div>
@@ -384,15 +413,16 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;
       <div class="tabla"><table style="min-width:0">
         <tr><th>Versión</th><th>Pantalla</th><th>Impreso</th></tr>
         <tr><td>Logo principal</td><td>120 px de ancho</td><td>25 mm</td></tr>
-        <tr><td>Logotipo Anton</td><td>80 px de ancho</td><td>18 mm</td></tr>
-        <tr><td>Monograma TP</td><td>24 px</td><td>6 mm</td></tr>
+        <tr><td>Logotipo</td><td>90 px de ancho</td><td>20 mm</td></tr>
+        <tr><td>Logotipo con contorno</td><td>120 px de ancho</td><td>28 mm</td></tr>
+        <tr><td>Isologo TP en círculo</td><td>24 px</td><td>6 mm</td></tr>
       </table></div>
       <p class="nota">Por debajo de 120 px la cara deja de leerse: usar el logotipo. En las piezas de 1080 px, el logo va entre 140 y 180 px de ancho.</p>
     </div>
   </div>
 
   <div class="bloque">
-    <span class="eti">Fondos permitidos</span>
+    <span class="eti">Ilustración · Fondos permitidos</span>
     <div class="cols4">
       <div><div class="lamina" style="min-height:180px"><img src="logo.png" alt="" style="max-height:130px"></div><p class="pie ok"><b>Sí</b> Negro</p></div>
       <div><div class="lamina carbon" style="min-height:180px"><img src="logo.png" alt="" style="max-height:130px"></div><p class="pie ok"><b>Sí</b> Carbón</p></div>
@@ -402,7 +432,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;
   </div>
 
   <div class="bloque">
-    <span class="eti">Usos incorrectos</span>
+    <span class="eti">Ilustración · Usos incorrectos</span>
     <div class="mal-uso">
       <div><div class="lamina"><img src="logo.png" alt="" style="transform:scaleX(1.5)"></div><p class="pie ko"><b>No</b> deformar</p></div>
       <div><div class="lamina"><img src="logo.png" alt="" style="filter:hue-rotate(150deg)"></div><p class="pie ko"><b>No</b> recolorear</p></div>
@@ -413,9 +443,171 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;
     </div>
   </div>
 
+  <!-- LOGOTIPO SOLO PALABRA -->
+  <div class="bloque" id="logotipo">
+    <span class="eti">Logotipo · versión simplificada (solo la palabra)</span>
+    <p>Son las mismas letras del logo, sacadas de la ilustración y redibujadas en vector: sin el personaje, sin la bola, sin cartas ni fichas. Mantiene la identidad (la inclinación, los cortes en las esquinas, la T y la P más altas y la base curva) y se lee bien en cualquier tamaño. Esta versión reemplaza al logotipo en Anton: Anton queda solo para titulares.</p>
+    <div class="versiones" style="margin-top:24px">
+      <div><div class="lamina"><img src="logo/logotipo-degradado.svg" alt="Logotipo en degradado naranja"></div><p class="pie"><b>Principal</b> Degradado naranja, como en el logo. Sobre negro o carbón.</p></div>
+      <div><div class="lamina"><img src="logo/logotipo-bicolor.svg" alt="Logotipo bicolor"></div><p class="pie"><b>Bicolor</b> "Trying" en hueso y "Poker" en degradado. Cuando el naranja tiene que destacar poco.</p></div>
+      <div><div class="lamina foto"><img src="logo/logotipo-contorno.svg" alt="Logotipo con contorno negro" style="position:relative;z-index:1"></div><p class="pie"><b>Con contorno</b> Degradado con trazo negro. Sobre fotos y miniaturas de YouTube.</p></div>
+      <div><div class="lamina carbon"><img src="logo/logotipo-hueso.svg" alt="Logotipo monocromo hueso"></div><p class="pie"><b>Hueso</b> Marca de agua, bordado y serigrafía a una tinta sobre prendas oscuras.</p></div>
+      <div><div class="lamina hueso"><img src="logo/logotipo-negro.svg" alt="Logotipo monocromo negro"></div><p class="pie"><b>Negro</b> Fondos claros, impresión en blanco y negro, documentos y facturas.</p></div>
+      <div><div class="lamina naranja"><img src="logo/logotipo-negro.svg" alt="Logotipo negro sobre naranja"></div><p class="pie"><b>Negro sobre naranja</b> Etiquetas, stickers y banners de color de marca.</p></div>
+    </div>
+  </div>
+
+  <div class="bloque cols2">
+    <div style="min-width:0">
+      <span class="eti" style="display:block;margin-bottom:16px">Logotipo · Construcción y área de seguridad</span>
+      <div class="lamina" style="min-height:240px">
+        <div class="constr"><img src="logo/logotipo-degradado.svg" alt="Logotipo con su área de seguridad"><span class="x" style="top:4px;left:50%;transform:translateX(-50%)">½X</span><span class="x" style="bottom:4px;left:50%;transform:translateX(-50%)">½X</span><span class="x" style="left:6px;top:50%;transform:translateY(-50%)">½X</span><span class="x" style="right:6px;top:50%;transform:translateY(-50%)">½X</span></div>
+      </div>
+      <p class="nota">X es el alto de la "O". Alrededor del logotipo queda siempre medio X libre. Proporción fija de 4,7 a 1 (ancho por alto): se escala siempre desde una esquina, sin estirar.</p>
+    </div>
+    <div style="min-width:0">
+      <span class="eti" style="display:block;margin-bottom:16px">Cuándo usar cada pieza</span>
+      <div class="tabla"><table style="min-width:0">
+        <tr><th>Situación</th><th>Pieza</th></tr>
+        <tr><td>Avatar, cierre de vídeo, portada de YouTube</td><td>Ilustración</td></tr>
+        <tr><td>Pie de carrusel, cabecera web, firma de email</td><td>Logotipo</td></tr>
+        <tr><td>Marca de agua en reels y vídeos</td><td>Logotipo hueso al 60 %</td></tr>
+        <tr><td>Miniatura de YouTube, encima de foto</td><td>Logotipo con contorno</td></tr>
+        <tr><td>Merchandising (remera, gorra, taza)</td><td>Logotipo a una tinta</td></tr>
+        <tr><td>Menos de 90 px, favicon, sello</td><td>Isologo TP</td></tr>
+      </table></div>
+    </div>
+  </div>
+
+  <div class="bloque">
+    <span class="eti">Logotipo · Fondos</span>
+    <div class="matriz">
+      <div><div class="lamina"><img src="logo/logotipo-degradado.svg" alt=""></div><p class="pie ok"><b>Sí</b> Degradado sobre negro</p></div>
+      <div><div class="lamina verde"><img src="logo/logotipo-hueso.svg" alt=""></div><p class="pie ok"><b>Sí</b> Hueso sobre verde oscuro</p></div>
+      <div><div class="lamina blanco"><img src="logo/logotipo-negro.svg" alt=""></div><p class="pie ok"><b>Sí</b> Negro sobre blanco</p></div>
+      <div><div class="lamina foto"><img src="logo/logotipo-contorno.svg" alt="" style="position:relative;z-index:1"></div><p class="pie ok"><b>Sí</b> Contorno sobre foto</p></div>
+      <div><div class="lamina blanco"><img src="logo/logotipo-degradado.svg" alt=""></div><p class="pie ko"><b>No</b> Degradado sobre blanco</p></div>
+      <div><div class="lamina naranja"><img src="logo/logotipo-degradado.svg" alt=""></div><p class="pie ko"><b>No</b> Naranja sobre naranja</p></div>
+      <div><div class="lamina" style="background:var(--verde)"><img src="logo/logotipo-degradado.svg" alt=""></div><p class="pie ko"><b>No</b> Sobre verde ficha</p></div>
+      <div><div class="lamina" style="background:url(foto-mesa.jpg) center/cover"><img src="logo/logotipo-degradado.svg" alt=""></div><p class="pie ko"><b>No</b> Sin contorno sobre foto clara</p></div>
+    </div>
+  </div>
+
+  <div class="bloque">
+    <span class="eti">Logotipo · Aplicaciones</span>
+    <div class="apps">
+      <div>
+        <div class="mock" style="aspect-ratio:4/5">
+          <span style="position:absolute;top:7cqw;left:8cqw;font-family:var(--f-etiqueta);font-weight:700;text-transform:uppercase;letter-spacing:.12em;font-size:3.6cqw;padding:1cqw 2.4cqw;border-radius:2px;background:var(--naranja);color:var(--negro)">El proceso real</span>
+          <div style="position:absolute;top:24cqw;left:8cqw;right:8cqw;font-family:var(--f-display);text-transform:uppercase;font-size:13cqw;line-height:.95">Mi octubre en <span class="grad">números</span></div>
+          <img class="wm" src="logo/logotipo-bicolor.svg" alt="" style="left:8cqw;bottom:7cqw;width:30cqw">
+          <span style="position:absolute;right:8cqw;bottom:7.4cqw;font-family:var(--f-etiqueta);font-weight:700;letter-spacing:.1em;font-size:3.6cqw" class="n">DESLIZA →</span>
+        </div>
+        <span class="eti">Pie de carrusel</span><p>Bicolor, abajo a la izquierda, 260 px de ancho en piezas de 1080.</p>
+      </div>
+      <div>
+        <div class="mock" style="aspect-ratio:9/16;background:url(foto-camara.jpg) center 30%/cover;max-width:72%;margin:0 auto">
+          <img class="wm" src="logo/logotipo-hueso.svg" alt="" style="top:6cqw;left:6cqw;width:34cqw;opacity:.6">
+          <div style="position:absolute;left:8cqw;right:8cqw;bottom:40cqw;text-align:center;font-family:var(--f-display);text-transform:uppercase;font-size:7.5cqw;line-height:1;color:#fff;-webkit-text-stroke:.5cqw #000;paint-order:stroke fill">Y aun así fue mi <span class="n">mejor</span> mes</div>
+        </div>
+        <span class="eti">Marca de agua en reel</span><p>Hueso al 60 %, arriba a la izquierda, 360 px de ancho. Protege el vídeo cuando lo comparten.</p>
+      </div>
+      <div>
+        <div class="mock" style="aspect-ratio:16/9">
+          <div style="position:absolute;inset:0 0 0 50%;background:url(foto-camara.jpg) center 25%/cover"></div>
+          <div style="position:absolute;inset:0;background:linear-gradient(90deg,var(--negro) 45%,rgba(11,11,11,0) 72%)"></div>
+          <img class="wm" src="logo/logotipo-contorno.svg" alt="" style="top:5cqw;left:4cqw;width:28cqw">
+          <div style="position:absolute;top:17cqw;left:4cqw;right:48%;font-family:var(--f-display);text-transform:uppercase;font-size:7.6cqw;line-height:.95">30.000 manos para <span class="n">0 €</span></div>
+        </div>
+        <span class="eti">Miniatura de YouTube</span><p>Con contorno, arriba a la izquierda. Reemplaza a la ilustración, que en miniatura no se lee.</p>
+      </div>
+      <div>
+        <div class="mock" style="aspect-ratio:1;background:var(--carbon);display:grid;place-items:center">
+          <svg viewBox="0 0 200 200" style="width:78%;height:auto" aria-hidden="true"><path d="M62 22 L84 14 Q100 28 116 14 L138 22 L180 52 L162 80 L146 70 L146 186 L54 186 L54 70 L38 80 L20 52 Z" fill="#0B0B0B" stroke="#2A2A2A" stroke-width="1.5"/><image href="logo/logotipo-degradado.svg" x="66" y="52" width="68" height="15"/></svg>
+        </div>
+        <span class="eti">Merchandising</span><p>Remera o buzo negro: logotipo de 22 a 26 cm en el pecho. En serigrafía de una tinta, la versión hueso o naranja.</p>
+      </div>
+      <div>
+        <div class="mock" style="aspect-ratio:16/9;display:grid;place-items:center">
+          <div style="position:absolute;inset:36% 0;border-top:1px dashed rgba(247,150,26,.6);border-bottom:1px dashed rgba(247,150,26,.6)"></div>
+          <div style="text-align:center;position:relative">
+            <img src="logo/logotipo-degradado.svg" alt="" style="width:46cqw;height:auto;display:block">
+            <div style="font-family:var(--f-etiqueta);font-weight:700;letter-spacing:.16em;font-size:2.6cqw;color:var(--gris);margin-top:1.6cqw;text-transform:uppercase">PLO · el proceso real · cada mes</div>
+          </div>
+        </div>
+        <span class="eti">Portada del canal</span><p>Centrado dentro de la franja segura de 1546 × 423 px, con una línea en Barlow Condensed debajo.</p>
+      </div>
+      <div>
+        <div class="mock" style="aspect-ratio:16/9;background:var(--hueso);color:var(--negro);padding:7cqw;display:flex;flex-direction:column;justify-content:center;gap:2.4cqw">
+          <div style="font-family:var(--f-texto);font-weight:700;font-size:4.4cqw">Toni Vázquez</div>
+          <div style="font-family:var(--f-texto);font-size:3.4cqw;color:var(--gris-osc)">Jugador de PLO · Madrid</div>
+          <div style="height:1px;background:#D9D4CB;margin:1cqw 0"></div>
+          <img src="logo/logotipo-negro.svg" alt="" style="width:34cqw;height:auto">
+        </div>
+        <span class="eti">Firma de email y documentos</span><p>Versión negra sobre fondo claro, 180 px de ancho en la firma.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="bloque">
+    <span class="eti">Logotipo · Usos incorrectos</span>
+    <div class="mal-uso">
+      <div><div class="lamina"><img src="logo/logotipo-degradado.svg" alt="" style="width:80%;max-height:none;transform:scaleY(1.7)"></div><p class="pie ko"><b>No</b> estirar ni comprimir</p></div>
+      <div><div class="lamina"><img src="logo/logotipo-degradado.svg" alt="" style="width:80%;max-height:none;filter:hue-rotate(110deg)"></div><p class="pie ko"><b>No</b> cambiar los colores</p></div>
+      <div><div class="lamina"><span style="font-family:var(--f-display);font-size:40px;text-transform:uppercase">Trying<span class="grad">Poker</span></span></div><p class="pie ko"><b>No</b> reescribirlo con Anton u otra fuente</p></div>
+      <div><div class="lamina"><img src="logo/logotipo-degradado.svg" alt="" style="width:80%;max-height:none;filter:drop-shadow(0 0 14px #F7961A) drop-shadow(0 6px 0 #3DB14F)"></div><p class="pie ko"><b>No</b> agregar brillos, sombras o 3D</p></div>
+      <div><div class="lamina" style="flex-direction:column;display:flex;justify-content:center;align-items:center;gap:6px"><img src="logo/logotipo-degradado.svg" alt="" style="width:62%;max-height:none"><span style="font-size:26px;line-height:1">♠ 🔥</span></div><p class="pie ko"><b>No</b> sumarle palos, emojis o la bola</p></div>
+      <div><div class="lamina"><img src="logo/logotipo-degradado.svg" alt="" style="width:80%;max-height:none;transform:rotate(-12deg)"></div><p class="pie ko"><b>No</b> rotar ni poner en vertical</p></div>
+    </div>
+  </div>
+
+    <div class="bloque" id="isologo">
+    <span class="eti">Isologo tipográfico TP</span>
+    <p>Pieza aparte del logotipo: el logotipo "TryingPoker" y sus seis versiones se mantienen igual. El isologo son las iniciales, rectas y con el mismo corte: la T blanca y la P en el degradado de marca. Es la pieza para los espacios chicos y cuadrados, donde no entra la palabra completa. Archivo original: <code>isologo-tipografico.ai</code>.</p>
+    <div class="versiones" style="margin-top:24px">
+      <div><div class="lamina" style="min-height:220px"><img src="logo/isologo-tp-circulo.svg" alt="Isologo TP en círculo con aro naranja" style="width:auto;height:170px;max-height:none"></div><p class="pie"><b>En círculo</b> Versión principal. Avatar, favicon, sello y portadas de historias destacadas.</p></div>
+      <div><div class="lamina" style="min-height:220px"><img src="logo/isologo-tp.svg" alt="Isologo TP sin círculo" style="width:auto;height:110px;max-height:none"></div><p class="pie"><b>Solo letras</b> Sobre negro o carbón: esquinas de reels, pie de piezas, merchandising.</p></div>
+      <div><div class="lamina foto" style="min-height:220px"><img src="logo/isologo-tp-blanco.svg" alt="Isologo TP en blanco" style="width:auto;height:110px;max-height:none;position:relative;z-index:1"></div><p class="pie"><b>Blanco</b> Marca de agua sobre vídeo o foto, bordado y serigrafía a una tinta.</p></div>
+      <div><div class="lamina hueso" style="min-height:220px"><img src="logo/isologo-tp-negro.svg" alt="Isologo TP en negro" style="width:auto;height:110px;max-height:none"></div><p class="pie"><b>Negro</b> Fondos claros e impresión en blanco y negro.</p></div>
+      <div><div class="lamina naranja" style="min-height:220px"><img src="logo/isologo-tp-negro.svg" alt="Isologo TP negro sobre naranja" style="width:auto;height:110px;max-height:none"></div><p class="pie"><b>Negro sobre naranja</b> Stickers, etiquetas y fondos del color de marca.</p></div>
+      <div><div class="lamina" style="min-height:220px;grid-auto-flow:column;gap:22px;align-items:end"><img src="logo/isologo-tp-circulo.svg" alt="" style="width:auto;height:96px;max-height:none"><img src="logo/isologo-tp-circulo.svg" alt="" style="width:auto;height:48px;max-height:none"><img src="logo/isologo-tp-circulo.svg" alt="" style="width:auto;height:24px;max-height:none"></div><p class="pie"><b>Escala</b> Se lee hasta 24 px. Por debajo, solo letras sin círculo.</p></div>
+    </div>
+    <ul class="lista no" style="margin-top:22px">
+      <li>No usar en el isologo la T inclinada: aquí las dos letras son rectas. La T inclinada sigue siendo la del logotipo de la palabra, que no cambia.</li>
+      <li>No cambiar el orden de color (T blanca, P naranja) ni ponerlas las dos en degradado.</li>
+      <li>No separar ni juntar las letras: el espacio entre T y P es fijo, como viene en el archivo.</li>
+    </ul>
+  </div>
+
+<div class="bloque">
+    <span class="eti">Descargas del logotipo e isologo</span>
+    <div class="descargas">
+      <a href="logo/logotipo-degradado.svg" download>Logotipo principal (degradado)<span>SVG</span></a>
+      <a href="logo/logotipo-degradado.png" download>Logotipo principal (degradado) · 3000 px<span>PNG</span></a>
+      <a href="logo/logotipo-bicolor.svg" download>Logotipo bicolor<span>SVG</span></a>
+      <a href="logo/logotipo-bicolor.png" download>Logotipo bicolor · 3000 px<span>PNG</span></a>
+      <a href="logo/logotipo-contorno.svg" download>Logotipo con contorno<span>SVG</span></a>
+      <a href="logo/logotipo-contorno.png" download>Logotipo con contorno · 3000 px<span>PNG</span></a>
+      <a href="logo/logotipo-hueso.svg" download>Logotipo hueso<span>SVG</span></a>
+      <a href="logo/logotipo-hueso.png" download>Logotipo hueso · 3000 px<span>PNG</span></a>
+      <a href="logo/logotipo-negro.svg" download>Logotipo negro<span>SVG</span></a>
+      <a href="logo/logotipo-negro.png" download>Logotipo negro · 3000 px<span>PNG</span></a>
+      <a href="logo/logotipo-naranja.svg" download>Logotipo naranja plano (una tinta)<span>SVG</span></a>
+      <a href="logo/logotipo-naranja.png" download>Logotipo naranja plano · 3000 px<span>PNG</span></a>
+      <a href="logo/isologo-tp-circulo.svg" download>Isologo TP en círculo<span>SVG</span></a>
+      <a href="logo/isologo-tp-circulo.png" download>Isologo TP en círculo · 2000 px<span>PNG</span></a>
+      <a href="logo/isologo-tp.svg" download>Isologo TP, solo letras<span>SVG</span></a>
+      <a href="logo/isologo-tp.png" download>Isologo TP, solo letras · 1600 px<span>PNG</span></a>
+      <a href="logo/isologo-tp-blanco.svg" download>Isologo TP blanco<span>SVG</span></a>
+      <a href="logo/isologo-tp-negro.svg" download>Isologo TP negro<span>SVG</span></a>
+    </div>
+    <p class="nota">PNG con fondo transparente. Para web, Canva y Figma, mejor el SVG: no pierde calidad a ningún tamaño.</p>
+    <p class="nota" id="dl-estado" aria-live="polite"></p>
+  </div>
+
   <div class="bloque pendiente">
     <span class="eti n">A resolver con Toni</span>
-    <p style="margin-top:6px">Hoy conviven dos logos: esta ilustración y un logotipo verde en cursiva con una pica, que aparece en algunas miniaturas. Este manual deja <b>solo la ilustración y el logotipo Anton</b>. Conviene pedirle el archivo original de la ilustración en alta (el que tenemos sale del avatar, a 1004 px) para vectorizarlo. La bola de dragón forma parte del dibujo y puede quedarse ahí, pero no se usa suelta como recurso gráfico: es un personaje con derechos de autor de otra marca.</p>
+    <p style="margin-top:6px">Hoy conviven dos logos: esta ilustración y un logotipo verde en cursiva con una pica, que aparece en algunas miniaturas. Este manual deja <b>solo la ilustración, el logotipo de la palabra y el isologo TP</b>; el verde en cursiva se retira. El logotipo se redibujó a partir del logo que tenemos (700 px), así que es una versión de trabajo: si Toni tiene el archivo original del diseñador, conviene rehacer el vector desde ahí para afinar cada esquina. La bola de dragón forma parte del dibujo y puede quedarse ahí, pero no se usa suelta como recurso gráfico: es un personaje con derechos de autor de otra marca.</p>
   </div>
 </div></section>
 
@@ -566,7 +758,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;
         <div class="velo"></div>
         <span class="pil" style="top:5cqw;right:5cqw">El proceso real</span>
         <div class="titulo" style="bottom:28cqw;font-size:15cqw">Mi octubre en <span class="grad">números</span></div>
-        <div style="position:absolute;bottom:18cqw;left:7cqw;font-family:var(--f-display);font-size:5cqw;letter-spacing:.02em">TRYING<span class="n">POKER</span></div>
+        <img src="logo/logotipo-bicolor.svg" alt="" style="position:absolute;bottom:18cqw;left:7cqw;width:30cqw;height:auto">
         <div class="zona" style="top:12.5%;bottom:12.5%;height:auto"><span>Recorte 3:4 de la grilla</span></div>
       </div>
       <span class="eti">Portada de reel · 1080 × 1920</span>
@@ -591,7 +783,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;
         <div class="contador">1/7</div>
         <div class="titulo" style="top:26cqw;font-size:14cqw;left:8cqw">Rakeback en Winamax, <span class="grad">explicado</span></div>
         <div class="txt" style="top:82cqw">Si estás empezando, esto es dinero que te dejas en la mesa cada mes.</div>
-        <div style="position:absolute;bottom:7cqw;left:8cqw;right:8cqw;display:flex;justify-content:space-between;align-items:center;font-family:var(--f-etiqueta);font-weight:700;letter-spacing:.1em;font-size:3.6cqw"><span>TRYING<span class="n">POKER</span></span><span class="n">DESLIZA →</span></div>
+        <div style="position:absolute;bottom:7cqw;left:8cqw;right:8cqw;display:flex;justify-content:space-between;align-items:center;font-family:var(--f-etiqueta);font-weight:700;letter-spacing:.1em;font-size:3.6cqw"><img src="logo/logotipo-bicolor.svg" alt="" style="width:30cqw;height:auto"><span class="n">DESLIZA →</span></div>
       </div>
       <span class="eti">Carrusel · portada · 1080 × 1350</span>
       <p>Etiqueta del pilar, contador, titular grande y una frase que promete. Márgenes de 88 px. Logotipo y "Desliza" en el pie.</p>
@@ -631,12 +823,12 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;
       <div class="pz h">
         <div class="foto" style="background-image:url(foto-camara.jpg);left:52%;background-position:center 25%"></div>
         <div style="position:absolute;inset:0;background:linear-gradient(90deg,var(--negro) 45%,rgba(11,11,11,0) 70%)"></div>
-        <img src="logo.png" alt="" style="position:absolute;top:4cqw;left:4cqw;width:9cqw">
+        <img src="logo/logotipo-contorno.svg" alt="" style="position:absolute;top:4cqw;left:4cqw;width:24cqw">
         <div class="titulo" style="top:15cqw;left:4cqw;right:48%;font-size:7.6cqw;-webkit-text-stroke:.4cqw #000;paint-order:stroke fill">30.000 manos para <span class="n">0 €</span></div>
         <div style="position:absolute;left:4cqw;bottom:6cqw;display:flex;gap:1.5cqw"><span class="pil" style="position:static;font-size:2cqw">Mes 10 · 2026</span></div>
       </div>
       <span class="eti">Miniatura de YouTube · 1280 × 720</span>
-      <p>Puede ser más ruidosa que Instagram: más contraste, trazo negro y cara expresiva. Pero siempre con negro, naranja, Anton y el logo arriba a la izquierda. Máximo 4 palabras. La cara a la derecha, mirando hacia el texto.</p>
+      <p>Puede ser más ruidosa que Instagram: más contraste, trazo negro y cara expresiva. Pero siempre con negro, naranja, Anton y el logotipo con contorno arriba a la izquierda. Máximo 4 palabras. La cara a la derecha, mirando hacia el texto.</p>
     </div>
   </div>
 
@@ -658,7 +850,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;
     <div style="display:flex;gap:22px;flex-wrap:wrap">
       <div style="text-align:center"><div style="width:76px;height:76px;border-radius:50%;background:var(--carbon);border:2px solid var(--naranja);display:grid;place-items:center;font-size:30px">♠</div><div class="eti" style="margin-top:8px">Empieza</div></div>
       <div style="text-align:center"><div style="width:76px;height:76px;border-radius:50%;background:var(--carbon);border:2px solid var(--naranja);display:grid;place-items:center;font-family:var(--f-display);font-size:24px" class="v">+€</div><div class="eti" style="margin-top:8px">Resultados</div></div>
-      <div style="text-align:center"><div style="width:76px;height:76px;border-radius:50%;background:var(--carbon);border:2px solid var(--naranja);display:grid;place-items:center;font-family:var(--f-display);font-size:26px">TP</div><div class="eti" style="margin-top:8px">Mi historia</div></div>
+      <div style="text-align:center"><div style="width:76px;height:76px;border-radius:50%;background:var(--carbon);border:2px solid var(--naranja);display:grid;place-items:center;overflow:hidden"><img src="logo/isologo-tp.svg" alt="" style="width:46px;height:auto"></div><div class="eti" style="margin-top:8px">Mi historia</div></div>
       <div style="text-align:center"><div style="width:76px;height:76px;border-radius:50%;background:var(--carbon);border:2px solid var(--naranja);display:grid;place-items:center;font-family:var(--f-display);font-size:26px" class="n">%</div><div class="eti" style="margin-top:8px">Códigos</div></div>
       <p style="flex:1;min-width:240px;color:#CFCAC2;font-size:15px;align-self:center">Fondo carbón, borde naranja y un símbolo en Anton o un palo de la baraja. Siempre los mismos cuatro, en este orden.</p>
     </div>
@@ -712,7 +904,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;
   <div class="cab"><div class="num">11</div><div><h2>Marcas y afiliados</h2><p>TryingPoker convive con salas y herramientas (Winamax, MentoPoker, Hand2Note). La regla es que la pieza siga siendo de Toni.</p></div></div>
   <div class="cols2">
     <div class="caja"><span class="eti">Co-branding</span>
-      <div style="display:flex;align-items:center;gap:16px;margin:16px 0;flex-wrap:wrap"><span class="wm-chico">Trying<span class="n">Poker</span></span><span style="color:var(--gris);font-size:22px">×</span><span style="font-family:var(--f-display);font-size:26px;color:var(--gris);letter-spacing:.02em">MARCA</span></div>
+      <div style="display:flex;align-items:center;gap:16px;margin:16px 0;flex-wrap:wrap"><img src="logo/logotipo-bicolor.svg" alt="TryingPoker" style="height:30px;width:auto"><span style="color:var(--gris);font-size:22px">×</span><span style="font-family:var(--f-display);font-size:26px;color:var(--gris);letter-spacing:.02em">MARCA</span></div>
       <ul class="lista"><li>Nuestro logo a la izquierda, el de la marca a la derecha, separados por "×"</li><li>Los dos a la misma altura óptica</li><li>Se respeta el color de la marca dentro de su logo; el resto de la pieza sigue en negro y naranja</li><li>Una pieza de Winamax puede usar su rojo como acento en la miniatura, nunca como fondo de la grilla</li></ul></div>
     <div class="caja"><span class="eti">Códigos y transparencia</span><ul class="lista" style="margin-top:12px"><li>Código en Barlow Condensed dentro de una caja con borde naranja: <span style="font-family:var(--f-etiqueta);font-weight:700;letter-spacing:.12em;border:1.5px solid var(--naranja);padding:2px 10px;border-radius:3px">CÓDIGO TRYING</span></li><li>Una sola marca por pieza</li><li>Si es contenido pagado, se indica con la etiqueta "Colaboración pagada" de Instagram o "Publi" en el copy</li><li>Todo contenido sobre salas lleva "+18 · Juega con responsabilidad" en el pie</li><li>No usar colores ni estética de PsicoPoker o MentoPoker como propios</li></ul></div>
   </div>
@@ -771,17 +963,34 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;
     </div>
     <div style="display:grid;gap:16px;align-content:start">
       <div class="caja"><span class="eti">Fuentes</span><p style="margin-top:8px">Anton, Barlow y Barlow Condensed en <a href="https://fonts.google.com/?query=Barlow" target="_blank" rel="noopener">fonts.google.com</a>. Licencia OFL, uso comercial libre.</p></div>
-      <div class="caja"><span class="eti">Archivos</span><ul class="lista" style="margin-top:10px;font-size:15px"><li><code>Identidad/logo-tryingpoker.png</code>: logo principal, fondo transparente</li><li><code>Identidad/DESIGN.md</code>: este manual en texto, para producción</li><li><code>Identidad/ref/</code>: miniaturas y portadas actuales de referencia</li></ul></div>
-      <div class="pendiente"><span class="eti n">Pendiente de Toni</span><ul class="lista" style="margin-top:10px;font-size:15px"><li>Archivo original del logo en alta resolución</li><li>Validar el logotipo Anton y retirar el logo verde en cursiva</li><li>Confirmar público: ¿solo España o también Latinoamérica?</li><li>Sesión de fotos de una tarde: setup, mesa, ciudad (20 fotos de banco propio)</li></ul></div>
+      <div class="caja"><span class="eti">Archivos</span><ul class="lista" style="margin-top:10px;font-size:15px"><li><code>Identidad/logo-tryingpoker.png</code>: logo principal, fondo transparente</li><li><code>Identidad/logotipo/</code>: logotipo en 6 versiones (SVG y PNG) e isologo TP (4 versiones). Descargas en la <a href="#logotipo">sección 03</a></li><li><code>Identidad/DESIGN.md</code>: este manual en texto, para producción</li><li><code>Identidad/ref/</code>: miniaturas y portadas actuales de referencia</li></ul></div>
+      <div class="pendiente"><span class="eti n">Pendiente de Toni</span><ul class="lista" style="margin-top:10px;font-size:15px"><li>Archivo original del logo en alta resolución</li><li>Validar el logotipo de la palabra y retirar el logo verde en cursiva</li><li>Archivo original del diseñador, si existe, para afinar el vector del logotipo</li><li>Confirmar público: ¿solo España o también Latinoamérica?</li><li>Sesión de fotos de una tarde: setup, mesa, ciudad (20 fotos de banco propio)</li></ul></div>
     </div>
   </div>
 </div></section>
 
 </main>
 
-<footer><div class="wrap"><span>Manual de marca TryingPoker · v1.0 · noviembre 2026</span><span class="wm-chico" style="font-size:20px">Trying<span class="n">Poker</span></span></div></footer>
+<footer><div class="wrap"><span>Manual de marca TryingPoker · v1.1 · noviembre 2026</span><img src="logo/logotipo-bicolor.svg" alt="TryingPoker" style="height:26px;width:auto"></div></footer>
 
 <script>
+(function(){
+  var links=[].slice.call(document.querySelectorAll('.descargas a'));
+  var estado=document.getElementById('dl-estado');
+  var dl=null;
+  function msg(t){if(estado)estado.textContent=t;}
+  links.forEach(function(a){a.addEventListener('click',function(e){
+    e.preventDefault();
+    if(!dl){msg('Las descargas no están disponibles en esta vista.');return;}
+    var url=a.getAttribute('href'),name='tryingpoker-'+url.split('/').pop();
+    msg('Preparando '+name+'…');
+    fetch(url).then(function(r){if(!r.ok)throw new Error();return r.blob();})
+      .then(function(b){return dl.save({filename:name,data:b});})
+      .then(function(){msg('Descargado: '+name);})
+      .catch(function(err){msg(err&&err.code==='declined'?'Descarga cancelada.':'No se pudo descargar '+name+'.');});
+  });});
+  try{window.claude&&window.claude.use&&window.claude.use('downloads').then(function(d){dl=d;}).catch(function(){});}catch(e){}
+})();
 document.getElementById('copiar').addEventListener('click',function(){
   var b=this,t=document.getElementById('tokens').textContent;
   var ok=function(){b.textContent='Copiado';setTimeout(function(){b.textContent='Copiar tokens CSS'},1600)};
@@ -789,3 +998,5 @@ document.getElementById('copiar').addEventListener('click',function(){
   function sel(){var r=document.createRange();r.selectNodeContents(document.getElementById('tokens'));var s=getSelection();s.removeAllRanges();s.addRange(r);b.textContent='Seleccionado: copia con Cmd+C'}
 });
 </script>
+
+</body></html>
