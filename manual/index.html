@@ -1,0 +1,791 @@
+<title>Manual TryingPoker</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Barlow+Condensed:wght@500;600;700&display=swap">
+<style>
+/* Layout: libro de marca oscuro, una columna ancha con secciones numeradas (el orden es el de lectura del manual), láminas tipo "mesa" para ejemplos */
+:root{
+  --negro:#0B0B0B; --carbon:#161616; --mesa:#1E1E1E; --linea:#2A2A2A;
+  --naranja:#F7961A; --naranja-claro:#FFB23E; --naranja-oscuro:#E0690A;
+  --verde:#3DB14F; --verde-oscuro:#1F6B2D; --rojo:#E5484D;
+  --hueso:#F5F2EC; --gris:#9A968F; --gris-osc:#5E5B56;
+  --f-display:"Anton","Impact","Haettenschweiler","Arial Narrow Bold",sans-serif;
+  --f-texto:"Barlow","Helvetica Neue",Arial,sans-serif;
+  --f-etiqueta:"Barlow Condensed","Arial Narrow",Arial,sans-serif;
+  --grad:linear-gradient(180deg,var(--naranja-claro) 0%,var(--naranja) 45%,var(--naranja-oscuro) 100%);
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--negro);color:var(--hueso);font-family:var(--f-texto);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1120px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--f-display);font-weight:400;text-transform:uppercase;line-height:.95;letter-spacing:.005em;text-wrap:balance;margin:0}
+h2{font-size:clamp(40px,7vw,76px)}
+h3{font-size:clamp(24px,3vw,30px);line-height:1.05}
+p{margin:0;max-width:66ch}
+.eti{font-family:var(--f-etiqueta);font-weight:600;text-transform:uppercase;letter-spacing:.14em;font-size:13px;color:var(--gris)}
+.n{color:var(--naranja)}
+.v{color:var(--verde)}
+.grad{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+a{color:var(--naranja)}
+:focus-visible{outline:2px solid var(--naranja);outline-offset:3px}
+
+/* nav */
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:rgba(11,11,11,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--linea)}
+.nav .wrap{display:flex;gap:18px;align-items:center;padding-block:10px;overflow-x:auto;scrollbar-width:none}
+.nav a{font-family:var(--f-etiqueta);font-weight:600;text-transform:uppercase;letter-spacing:.1em;font-size:13px;color:var(--gris);text-decoration:none;white-space:nowrap}
+.nav a:hover{color:var(--hueso)}
+.nav .marca{font-family:var(--f-display);font-size:18px;letter-spacing:.02em;color:var(--naranja)}
+
+/* portada */
+.portada{padding-block:56px 72px;border-bottom:1px solid var(--linea)}
+.portada .grid{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
+.portada h1{font-size:clamp(64px,12vw,148px)}
+.portada .sub{font-size:20px;color:var(--gris);margin-top:20px}
+.portada .meta{display:flex;flex-wrap:wrap;gap:10px 28px;margin-top:32px}
+.portada .meta div{display:flex;flex-direction:column}
+.portada .meta b{font-family:var(--f-etiqueta);font-weight:600;font-size:18px}
+.portada img{width:100%;max-width:460px;justify-self:center;filter:drop-shadow(0 30px 60px rgba(247,150,26,.12))}
+
+/* secciones */
+section{padding-block:80px;border-bottom:1px solid var(--linea)}
+.cab{display:grid;grid-template-columns:120px 1fr;gap:24px;margin-bottom:44px}
+.cab .num{font-family:var(--f-display);font-size:72px;line-height:.9;color:var(--naranja)}
+.cab p{color:var(--gris);margin-top:14px;font-size:18px}
+.bloque{margin-top:56px}
+.bloque > .eti{display:block;margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid var(--linea)}
+.cols2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.cols3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.cols4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.caja{background:var(--carbon);border:1px solid var(--linea);border-radius:6px;padding:24px;min-width:0}
+.caja h3{margin-bottom:10px}
+.caja p{color:#CFCAC2;font-size:16px}
+ul.lista{margin:0;padding:0;list-style:none;display:grid;gap:10px}
+ul.lista li{padding-left:26px;position:relative}
+ul.lista li::before{content:"♠";position:absolute;left:0;color:var(--naranja);font-size:14px;top:2px}
+ul.lista.no li::before{content:"✕";color:var(--rojo)}
+ul.lista.si li::before{content:"✓";color:var(--verde)}
+.cita{font-family:var(--f-display);text-transform:uppercase;font-size:clamp(30px,4.6vw,52px);line-height:1.02;max-width:20ch}
+.nota{font-size:14px;color:var(--gris);margin-top:14px}
+.tabla{overflow-x:auto;border:1px solid var(--linea);border-radius:6px}
+table{border-collapse:collapse;width:100%;min-width:620px;font-size:15px}
+th{font-family:var(--f-etiqueta);text-transform:uppercase;letter-spacing:.1em;font-weight:600;color:var(--gris);text-align:left;font-size:13px;background:var(--carbon)}
+th,td{padding:12px 16px;border-bottom:1px solid var(--linea);vertical-align:top}
+tr:last-child td{border-bottom:0}
+td code,code{font-family:ui-monospace,Menlo,monospace;font-size:.88em;color:var(--naranja-claro)}
+
+/* personalidad */
+.escala{display:grid;gap:14px}
+.escala .fila{display:grid;grid-template-columns:150px 1fr 150px;gap:14px;align-items:center;font-family:var(--f-etiqueta);font-weight:600;text-transform:uppercase;letter-spacing:.06em;font-size:15px}
+.escala .fila span:last-child{text-align:right}
+.escala .barra{height:6px;background:var(--linea);border-radius:3px;position:relative}
+.escala .barra i{position:absolute;top:50%;width:16px;height:16px;border-radius:50%;background:var(--naranja);transform:translate(-50%,-50%);box-shadow:0 0 0 4px var(--negro)}
+
+/* voz */
+.par{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--linea);border-radius:6px;overflow:hidden}
+.par > div{padding:18px 20px;min-width:0}
+.par .mal{background:#1A1212;border-right:1px solid var(--linea)}
+.par .bien{background:#111A12}
+.par .eti{display:block;margin-bottom:6px}
+.par .mal .eti{color:var(--rojo)} .par .bien .eti{color:var(--verde)}
+.pares{display:grid;gap:14px}
+
+/* logo */
+.lamina{background:var(--negro);border:1px solid var(--linea);border-radius:6px;display:grid;place-items:center;padding:32px;min-height:260px;position:relative;overflow:hidden}
+.lamina img{max-height:220px;width:auto}
+.lamina.carbon{background:var(--carbon)}
+.lamina.foto{background:url(foto-mesa.jpg) center/cover}
+.lamina.foto::after{content:"";position:absolute;inset:0;background:rgba(0,0,0,.55)}
+.lamina.foto img{position:relative;z-index:1}
+.lamina.naranja{background:var(--naranja)}
+.lamina.blanco{background:#fff}
+.pie{font-size:14px;color:var(--gris);margin-top:10px;display:flex;gap:8px;align-items:baseline}
+.pie b{font-family:var(--f-etiqueta);text-transform:uppercase;letter-spacing:.08em;color:var(--hueso);font-weight:600}
+.pie.ok b{color:var(--verde)} .pie.ko b{color:var(--rojo)}
+.seguridad{position:relative;display:inline-block;padding:36px;outline:1px dashed var(--naranja);outline-offset:-1px}
+.seguridad img{display:block;max-height:180px}
+.seguridad .x{position:absolute;font-family:var(--f-etiqueta);font-weight:700;color:var(--naranja);font-size:14px}
+.wordmark{font-family:var(--f-display);font-size:clamp(44px,8vw,84px);line-height:1;text-transform:uppercase;letter-spacing:.01em}
+.wm-chico{font-family:var(--f-display);font-size:26px;text-transform:uppercase}
+.mal-uso{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.mal-uso .lamina{min-height:190px;padding:20px}
+.mal-uso .lamina img{max-height:140px}
+.mal-uso .lamina::before{content:"";position:absolute;inset:0;background:linear-gradient(to top right,transparent calc(50% - 1.5px),rgba(229,72,77,.85) 50%,transparent calc(50% + 1.5px));z-index:2;pointer-events:none}
+
+/* color */
+.paleta{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.chip{border:1px solid var(--linea);border-radius:6px;overflow:hidden;background:var(--carbon);min-width:0}
+.chip .m{height:130px;display:flex;align-items:flex-end;padding:12px;font-family:var(--f-display);font-size:22px;text-transform:uppercase}
+.chip .d{padding:14px;font-size:13.5px;line-height:1.5}
+.chip .d b{font-family:var(--f-etiqueta);font-weight:700;text-transform:uppercase;letter-spacing:.06em;font-size:16px;display:block;margin-bottom:4px}
+.chip .d span{color:var(--gris);display:block;font-variant-numeric:tabular-nums}
+.chip .d p{margin-top:8px;color:#CFCAC2}
+.chip.grande{grid-column:span 2}
+.chip.grande .m{height:180px}
+.proporcion{display:flex;height:64px;border-radius:6px;overflow:hidden;border:1px solid var(--linea)}
+.proporcion div{display:flex;align-items:center;padding:0 14px;font-family:var(--f-etiqueta);font-weight:700;font-size:15px;letter-spacing:.06em;white-space:nowrap;overflow:hidden}
+.contraste{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.contraste > div{border-radius:6px;padding:18px;border:1px solid var(--linea)}
+.contraste .t{font-family:var(--f-display);font-size:30px;text-transform:uppercase;line-height:1}
+.contraste .r{font-family:var(--f-etiqueta);font-weight:600;font-size:14px;letter-spacing:.06em;margin-top:8px;opacity:.85}
+
+/* tipografía */
+.espec{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:24px;align-items:end;padding-block:28px;border-bottom:1px solid var(--linea)}
+.espec:last-child{border-bottom:0}
+.espec .muestra{font-size:clamp(64px,10vw,120px);line-height:.9}
+.espec .abc{font-size:20px;color:var(--gris);margin-top:12px;word-break:break-word}
+.espec dl{display:grid;grid-template-columns:auto 1fr;gap:6px 16px;margin:0;font-size:15px}
+.espec dt{font-family:var(--f-etiqueta);font-weight:600;text-transform:uppercase;letter-spacing:.1em;color:var(--gris);font-size:13px;padding-top:2px}
+.espec dd{margin:0}
+.jerarquia{background:var(--carbon);border:1px solid var(--linea);border-radius:6px;padding:28px;display:grid;gap:14px}
+.jerarquia .row{display:grid;grid-template-columns:170px 1fr;gap:20px;align-items:baseline;border-bottom:1px solid var(--linea);padding-bottom:14px}
+.jerarquia .row:last-child{border-bottom:0;padding-bottom:0}
+.jerarquia .row > span{font-family:var(--f-etiqueta);font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--gris);line-height:1.4}
+
+/* elementos */
+.palos{display:flex;gap:18px;font-size:44px;line-height:1}
+.ficha{width:84px;height:84px;border-radius:50%;background:
+  repeating-conic-gradient(var(--verde) 0 30deg,#fff 30deg 36deg);display:grid;place-items:center;position:relative}
+.ficha::after{content:"";position:absolute;inset:12px;border-radius:50%;background:var(--verde);border:3px dashed rgba(255,255,255,.75)}
+.ficha span{position:relative;z-index:1;font-family:var(--f-display);color:#fff;font-size:20px}
+.dato{display:inline-flex;flex-direction:column;background:var(--carbon);border:1px solid var(--linea);border-radius:6px;padding:14px 18px}
+.dato b{font-family:var(--f-display);font-weight:400;font-size:44px;line-height:1}
+.dato small{font-family:var(--f-etiqueta);text-transform:uppercase;letter-spacing:.12em;font-weight:600;color:var(--gris);font-size:12px;margin-top:6px}
+.etiqueta-pilar{display:inline-flex;align-items:center;gap:8px;font-family:var(--f-etiqueta);font-weight:700;text-transform:uppercase;letter-spacing:.12em;font-size:13px;padding:6px 12px;border-radius:3px;background:var(--naranja);color:var(--negro)}
+.etiqueta-pilar.sec{background:transparent;color:var(--hueso);border:1.5px solid var(--hueso)}
+.subrayado{position:relative;display:inline-block}
+.subrayado::after{content:"";position:absolute;left:-2%;right:-2%;bottom:-.08em;height:.14em;background:var(--naranja);transform:skewX(-12deg)}
+.carta{width:64px;height:90px;border-radius:7px;background:#F7F5F0;color:#111;display:flex;flex-direction:column;justify-content:space-between;padding:6px 8px;font-family:var(--f-display);font-size:22px;line-height:1;box-shadow:0 6px 16px rgba(0,0,0,.4)}
+.carta.r{color:#C8282E}
+.carta span:last-child{align-self:flex-end;font-size:26px}
+.mano{display:flex;gap:-10px}
+.mano .carta:not(:first-child){margin-left:-14px}
+.mano .carta:nth-child(1){transform:rotate(-8deg)} .mano .carta:nth-child(2){transform:rotate(-3deg)} .mano .carta:nth-child(3){transform:rotate(3deg)} .mano .carta:nth-child(4){transform:rotate(8deg)}
+.grafica{background:var(--carbon);border:1px solid var(--linea);border-radius:6px;padding:20px}
+.grafica svg{width:100%;height:auto;display:block}
+
+/* foto */
+.fotos{display:grid;grid-template-columns:1.3fr 1fr;gap:20px}
+.fotos figure{margin:0}
+.fotos img{width:100%;border-radius:6px;display:block;border:1px solid var(--linea)}
+.fotos figcaption{font-size:14px;color:var(--gris);margin-top:8px}
+.grade{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.grade img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:6px}
+.grade .bueno{filter:contrast(1.12) saturate(.88) sepia(.12) brightness(.96)}
+.grade .malo{filter:saturate(1.9) contrast(.85) brightness(1.15) hue-rotate(-8deg)}
+
+/* formatos (maquetas) */
+.formatos{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:28px;align-items:start}
+.formato .eti{display:block;margin-top:12px}
+.formato p{font-size:14.5px;color:#CFCAC2;margin-top:4px}
+.pz{position:relative;width:100%;max-width:100%;overflow:hidden;border-radius:8px;background:var(--negro);border:1px solid var(--linea);container-type:inline-size}
+.pz.v{aspect-ratio:9/16}.pz.c{aspect-ratio:4/5}.pz.h{aspect-ratio:16/9}
+.pz .foto{position:absolute;inset:0;background-size:cover;background-position:center}
+.pz .velo{position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,11,11,0) 30%,rgba(11,11,11,.92) 68%,var(--negro) 100%)}
+.pz .logo{position:absolute;width:15cqw;top:5cqw;left:5cqw}
+.pz .titulo{position:absolute;left:7cqw;right:7cqw;font-family:var(--f-display);text-transform:uppercase;line-height:.95;color:var(--hueso)}
+.pz .zona{position:absolute;left:0;right:0;border-top:1px dashed rgba(247,150,26,.7);border-bottom:1px dashed rgba(247,150,26,.7);pointer-events:none}
+.pz .zona span{position:absolute;right:4px;top:2px;font-family:var(--f-etiqueta);font-size:10px;color:var(--naranja);letter-spacing:.08em;text-transform:uppercase}
+.pz .pil{position:absolute;font-family:var(--f-etiqueta);font-weight:700;text-transform:uppercase;letter-spacing:.12em;font-size:3.6cqw;padding:1cqw 2.4cqw;border-radius:2px;background:var(--naranja);color:var(--negro)}
+.pz .txt{position:absolute;left:8cqw;right:8cqw;font-size:4.4cqw;line-height:1.4;color:#D8D3CB}
+.pz .contador{position:absolute;top:6cqw;right:7cqw;font-family:var(--f-etiqueta);font-weight:600;font-size:4cqw;letter-spacing:.1em;color:var(--gris)}
+.pz .sub{position:absolute;left:8cqw;right:8cqw;text-align:center;font-family:var(--f-display);text-transform:uppercase;font-size:7.5cqw;line-height:1;color:#fff;-webkit-text-stroke:.5cqw #000;paint-order:stroke fill}
+
+/* motion */
+.curva{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.curva .caja{position:relative}
+.curva .pista{height:6px;background:var(--linea);border-radius:3px;margin-top:18px;position:relative}
+.curva .pista i{position:absolute;top:50%;left:0;width:18px;height:18px;margin-top:-9px;border-radius:50%;background:var(--naranja);animation:mover 2.4s infinite}
+.curva .c1 i{animation-timing-function:cubic-bezier(.22,1,.36,1);animation-duration:2.2s}
+.curva .c2 i{animation-timing-function:cubic-bezier(.34,1.56,.64,1);animation-duration:2.2s}
+.curva .c3 i{animation-timing-function:steps(1);animation-duration:1.6s}
+@keyframes mover{0%,15%{left:0}55%,100%{left:calc(100% - 18px)}}
+@media (prefers-reduced-motion:reduce){.curva .pista i{animation:none;left:calc(100% - 18px)}}
+
+/* check */
+.check{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 28px}
+.check label{display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--linea);cursor:pointer;font-size:16px}
+.check input{accent-color:var(--naranja);width:18px;height:18px;margin-top:3px;flex:none}
+pre.tokens{background:var(--carbon);border:1px solid var(--linea);border-radius:6px;padding:20px;overflow-x:auto;font-size:13.5px;line-height:1.6;color:#D8D3CB;margin:0}
+.copiar{font-family:var(--f-etiqueta);font-weight:700;text-transform:uppercase;letter-spacing:.1em;font-size:13px;background:var(--naranja);color:var(--negro);border:0;border-radius:3px;padding:8px 14px;cursor:pointer;margin-bottom:12px}
+.pendiente{border-left:3px solid var(--naranja);background:var(--carbon);padding:16px 20px;border-radius:0 6px 6px 0}
+footer{padding-block:48px 64px;color:var(--gris);font-size:14px}
+footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:center}
+
+@media (max-width:860px){
+  .portada .grid,.cols2,.cols3,.fotos{grid-template-columns:1fr}
+  .cols4,.paleta{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .chip.grande{grid-column:span 2}
+  .cab{grid-template-columns:1fr;gap:8px}
+  .cab .num{font-size:52px}
+  .espec{grid-template-columns:1fr}
+  .mal-uso,.contraste,.curva{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .check{grid-template-columns:1fr}
+  .portada img{max-width:320px}
+}
+@media (max-width:520px){
+  .paleta,.cols4,.mal-uso,.contraste,.curva{grid-template-columns:1fr}
+  .chip.grande{grid-column:auto}
+  .par{grid-template-columns:1fr}
+  .par .mal{border-right:0;border-bottom:1px solid var(--linea)}
+  .escala .fila{grid-template-columns:1fr 1fr;}
+  .escala .barra{grid-column:1/-1;grid-row:2}
+  .jerarquia .row{grid-template-columns:1fr;gap:4px}
+  section{padding-block:56px}
+}
+</style>
+
+<nav class="nav"><div class="wrap">
+  <span class="marca">TryingPoker</span>
+  <a href="#esencia">Esencia</a><a href="#voz">Voz</a><a href="#logo">Logo</a><a href="#color">Color</a><a href="#tipo">Tipografía</a><a href="#elementos">Elementos</a><a href="#foto">Foto y vídeo</a><a href="#formatos">Formatos</a><a href="#motion">Motion</a><a href="#datos">Datos</a><a href="#marcas">Marcas</a><a href="#check">Checklist</a><a href="#recursos">Recursos</a>
+</div></nav>
+
+<header class="portada"><div class="wrap grid">
+  <div>
+    <span class="eti">Manual de marca · versión 1.0 · noviembre 2026</span>
+    <h1 style="margin-top:14px">Trying<span class="grad">Poker</span></h1>
+    <p class="sub">Cómo se ve, cómo suena y cómo se arma cada pieza de Toni Vázquez. Todo lo que se diseñe para la marca sale de acá: reels, carruseles, historias, miniaturas y web.</p>
+    <div class="meta">
+      <div><span class="eti">Quién</span><b>Toni Vázquez · Madrid</b></div>
+      <div><span class="eti">Juego</span><b>PLO (Omaha)</b></div>
+      <div><span class="eti">Canales</span><b>Instagram · YouTube · Shorts</b></div>
+      <div><span class="eti">Idioma</span><b>Español de España</b></div>
+    </div>
+  </div>
+  <img src="logo.png" alt="Logo de TryingPoker: ilustración de Toni con brazos cruzados entre fichas verdes, cartas y una bola naranja, con el texto TryingPoker en naranja">
+</div></header>
+
+<main>
+
+<!-- 01 ESENCIA -->
+<section id="esencia"><div class="wrap">
+  <div class="cab"><div class="num">01</div><div><h2>Esencia</h2><p>Antes de elegir un color hay que saber qué tiene que transmitir. Esta sección es la que se consulta cuando una pieza "no termina de cerrar".</p></div></div>
+
+  <p class="cita">El jugador que se está haciendo <span class="n">profesional</span> mientras trabaja, y te enseña el proceso real, con <span class="v">números</span>.</p>
+  <p class="nota">Posicionamiento. Toni no es el gurú que ya llegó: va dos pasos por delante del que empieza. El nombre lo dice: <em>Trying</em>Poker, el que lo está intentando.</p>
+
+  <div class="bloque cols3">
+    <div class="caja"><span class="eti">Misión</span><h3 style="margin-top:8px">Que el que empieza no se sienta solo</h3><p>Enseñar el camino real hacia el PLO profesional, con trabajo, malas rachas y meses en negativo incluidos.</p></div>
+    <div class="caja"><span class="eti">Promesa</span><h3 style="margin-top:8px">Sin filtro, cada mes</h3><p>Resultados reales, gráficas reales y lo que aprendió. Si el mes fue malo, también se cuenta.</p></div>
+    <div class="caja"><span class="eti">Para quién</span><h3 style="margin-top:8px">El jugador que empieza</h3><p>Hombre de 22 a 40 años, España (y Latinoamérica como segundo público), juega online, tiene trabajo y quiere tomarse el póker en serio.</p></div>
+  </div>
+
+  <div class="bloque">
+    <span class="eti">Valores</span>
+    <div class="cols4">
+      <div class="caja"><h3 class="n">Honestidad</h3><p>Los números se enseñan aunque duelan. Nunca se maquillan resultados.</p></div>
+      <div class="caja"><h3 class="n">Constancia</h3><p>El póker es a largo plazo, y la marca también. Series fijas, misma estética, mismo día.</p></div>
+      <div class="caja"><h3 class="n">De igual a igual</h3><p>Habla como un compañero de mesa, no como un profesor. Comparte, no sermonea.</p></div>
+      <div class="caja"><h3 class="n">Humor</h3><p>Se ríe del tilt, de los tipos de jugadores y de sí mismo. Aligera un camino duro.</p></div>
+    </div>
+  </div>
+
+  <div class="bloque">
+    <span class="eti">Personalidad · dónde se ubica la marca</span>
+    <div class="escala">
+      <div class="fila"><span>Cercano</span><div class="barra"><i style="left:22%"></i></div><span>Distante</span></div>
+      <div class="fila"><span>Divertido</span><div class="barra"><i style="left:38%"></i></div><span>Serio</span></div>
+      <div class="fila"><span>Aprendiz</span><div class="barra"><i style="left:40%"></i></div><span>Experto</span></div>
+      <div class="fila"><span>Crudo</span><div class="barra"><i style="left:35%"></i></div><span>Pulido</span></div>
+      <div class="fila"><span>Calmo</span><div class="barra"><i style="left:58%"></i></div><span>Intenso</span></div>
+    </div>
+  </div>
+
+  <div class="bloque cols2">
+    <div class="caja"><span class="eti" style="color:var(--verde)">La marca es</span><ul class="lista si" style="margin-top:12px">
+      <li>Un compañero que va un poco más adelante</li><li>Transparente con el dinero y las rachas</li><li>Deportiva, de grind y disciplina</li><li>Madrileña, natural, con humor</li></ul></div>
+    <div class="caja"><span class="eti" style="color:var(--rojo)">La marca no es</span><ul class="lista no" style="margin-top:12px">
+      <li>Un gurú que vende el éxito fácil</li><li>Un canal de códigos de afiliado</li><li>Lujo, coches y fajos de billetes</li><li>Casino, ruleta o apuestas deportivas</li></ul></div>
+  </div>
+</div></section>
+
+<!-- 02 VOZ -->
+<section id="voz"><div class="wrap">
+  <div class="cab"><div class="num">02</div><div><h2>Voz y tono</h2><p>La voz es siempre la misma; el tono cambia según el pilar. Todo se escribe en español de España: "vosotros", "tío", euros, "vale".</p></div></div>
+
+  <div class="cols3">
+    <div class="caja"><h3>Directa</h3><p>Frases cortas. Una idea por frase. El dato primero, la explicación después.</p></div>
+    <div class="caja"><h3>Honesta</h3><p>Se dice "perdí" y "no lo sé". La vulnerabilidad es la marca, no un recurso.</p></div>
+    <div class="caja"><h3>Útil</h3><p>Cada pieza deja algo: un dato, un número, un paso. Si no enseña nada, que haga reír.</p></div>
+  </div>
+
+  <div class="bloque">
+    <span class="eti">Así sí, así no</span>
+    <div class="pares">
+      <div class="par"><div class="mal"><span class="eti">Así no</span>¡¡Descubre el secreto para ganar al póker que los pros no quieren que sepas!! 🔥🔥</div><div class="bien"><span class="eti">Así sí</span>30.000 manos para acabar en 0 €. Esto es lo que nadie te cuenta del PLO.</div></div>
+      <div class="par"><div class="mal"><span class="eti">Así no</span>¿A vosotros también os pasa? 😅</div><div class="bien"><span class="eti">Así sí</span>Comenta BANKROLL y te mando por DM cómo organizo el mío.</div></div>
+      <div class="par"><div class="mal"><span class="eti">Así no</span>Si quieres mejorar, usa mi código MENTO10 en MentoPoker y TRY20 en Hand2Note…</div><div class="bien"><span class="eti">Así sí</span>Las herramientas que uso están en mi bio. Hoy quiero hablarte de otra cosa.</div></div>
+      <div class="par"><div class="mal"><span class="eti">Así no</span>Hoy os voy a enseñar a dominar las mesas de PLO.</div><div class="bien"><span class="eti">Así sí</span>Tres errores que cometía cuando empecé en PLO y me costaron dinero.</div></div>
+    </div>
+  </div>
+
+  <div class="bloque">
+    <span class="eti">Tono por pilar de contenido</span>
+    <div class="tabla"><table>
+      <tr><th>Pilar</th><th>Tono</th><th>Ejemplo de gancho</th></tr>
+      <tr><td><b>El proceso real</b></td><td>Sobrio, transparente, con datos</td><td>"Trabajo 8 horas y juego al PLO. Este fue mi octubre."</td></tr>
+      <tr><td><b>Lo que te pasa es normal</b></td><td>Empático, cercano, tranquilizador</td><td>"Si llevas tres meses en negativo, escucha esto."</td></tr>
+      <tr><td><b>Empieza bien</b></td><td>Claro, didáctico, paso a paso</td><td>"Rakeback en Winamax explicado si estás empezando."</td></tr>
+      <tr><td><b>Vida de jugador</b></td><td>Humor, ritmo, personalidad</td><td>"Los 3 tipos de jugadores que te encuentras en PLO."</td></tr>
+    </table></div>
+  </div>
+
+  <div class="bloque cols2">
+    <div class="caja"><span class="eti">Vocabulario propio</span><ul class="lista" style="margin-top:12px">
+      <li><b>Grindear, sesión, volumen, bankroll, downswing</b>: se usan tal cual, son la jerga del público</li>
+      <li><b>"Sin filtro"</b> para los resultados mensuales</li>
+      <li><b>"El proceso"</b> en vez de "el éxito"</li>
+      <li>Cifras siempre exactas: "12.430 manos", no "un montón de manos"</li></ul></div>
+    <div class="caja"><span class="eti">Evitar</span><ul class="lista no" style="margin-top:12px">
+      <li>Voseo o giros argentinos ("vos", "che", "laburo")</li>
+      <li>Promesas de dinero: "gana", "hazte rico", "fácil", "garantizado"</li>
+      <li>Más de un emoji por frase y emojis como viñetas en piezas gráficas</li>
+      <li>Mayúsculas sostenidas en el copy (las mayúsculas son para la tipografía de titulares)</li></ul></div>
+  </div>
+
+  <div class="bloque">
+    <span class="eti">Estructura del copy de Instagram</span>
+    <div class="tabla"><table>
+      <tr><th>Parte</th><th>Regla</th><th>Ejemplo</th></tr>
+      <tr><td>Primera línea</td><td>Máximo 125 caracteres. Tiene que sobrevivir al corte de "… más"</td><td>Octubre: 18.200 manos y −340 €. Y aun así fue mi mejor mes.</td></tr>
+      <tr><td>Cuerpo</td><td>3 a 6 líneas cortas, con espacios. Un aprendizaje concreto</td><td>Por qué: jugué menos mesas, revisé cada sesión y no subí de límite en tilt.</td></tr>
+      <tr><td>Una sola acción</td><td>Comentar una palabra, guardar o ir al YouTube. Nunca tres a la vez</td><td>Comenta PLAN y te paso mi plantilla de seguimiento.</td></tr>
+      <tr><td>Hashtags</td><td>3, al final, del nicho</td><td>#poker #plo #pokerespañol</td></tr>
+    </table></div>
+    <p class="nota">Los códigos de afiliado no van en el copy de cada reel. Viven en la bio, en la historia destacada "Códigos" y en historias puntuales.</p>
+  </div>
+</div></section>
+
+<!-- 03 LOGO -->
+<section id="logo"><div class="wrap">
+  <div class="cab"><div class="num">03</div><div><h2>Logo</h2><p>El logo es la ilustración de Toni: es reconocible, cálido y ya lo asocia su público. El sistema suma un logotipo tipográfico para los tamaños donde la ilustración no se lee.</p></div></div>
+
+  <div class="cols2">
+    <div><div class="lamina" style="min-height:360px"><img src="logo.png" alt="Logo principal" style="max-height:300px"></div>
+      <p class="pie"><b>Principal</b> Ilustración completa. Avatar de redes, portada de YouTube, cierres de vídeo, web.</p></div>
+    <div style="display:grid;gap:20px">
+      <div><div class="lamina" style="min-height:170px"><span class="wordmark">Trying<span class="grad">Poker</span></span></div>
+        <p class="pie"><b>Logotipo</b> Anton, "Trying" en hueso y "Poker" en el degradado. Para firmas, pies de carrusel, marcas de agua y tamaños chicos.</p></div>
+      <div><div class="lamina" style="min-height:120px;gap:24px;grid-auto-flow:column"><span class="wm-chico">T<span class="n">P</span></span><span class="wm-chico" style="font-size:18px">@tryingpoker</span></div>
+        <p class="pie"><b>Monograma y usuario</b> "TP" o @tryingpoker en esquinas de reels y en historias.</p></div>
+    </div>
+  </div>
+
+  <div class="bloque cols2">
+    <div>
+      <span class="eti" style="display:block;margin-bottom:16px">Área de seguridad</span>
+      <div class="lamina" style="min-height:300px">
+        <div class="seguridad"><img src="logo.png" alt="Logo con área de seguridad marcada"><span class="x" style="top:8px;left:50%;transform:translateX(-50%)">X</span><span class="x" style="bottom:8px;left:50%;transform:translateX(-50%)">X</span><span class="x" style="left:12px;top:50%;transform:translateY(-50%)">X</span><span class="x" style="right:12px;top:50%;transform:translateY(-50%)">X</span></div>
+      </div>
+      <p class="nota">X es el alto de la letra "T" de TryingPoker dentro del logo. Nada (texto, bordes, otros logos) entra en ese margen.</p>
+    </div>
+    <div>
+      <span class="eti" style="display:block;margin-bottom:16px">Tamaños mínimos</span>
+      <div class="tabla"><table style="min-width:0">
+        <tr><th>Versión</th><th>Pantalla</th><th>Impreso</th></tr>
+        <tr><td>Logo principal</td><td>120 px de ancho</td><td>25 mm</td></tr>
+        <tr><td>Logotipo Anton</td><td>80 px de ancho</td><td>18 mm</td></tr>
+        <tr><td>Monograma TP</td><td>24 px</td><td>6 mm</td></tr>
+      </table></div>
+      <p class="nota">Por debajo de 120 px la cara deja de leerse: usar el logotipo. En las piezas de 1080 px, el logo va entre 140 y 180 px de ancho.</p>
+    </div>
+  </div>
+
+  <div class="bloque">
+    <span class="eti">Fondos permitidos</span>
+    <div class="cols4">
+      <div><div class="lamina" style="min-height:180px"><img src="logo.png" alt="" style="max-height:130px"></div><p class="pie ok"><b>Sí</b> Negro</p></div>
+      <div><div class="lamina carbon" style="min-height:180px"><img src="logo.png" alt="" style="max-height:130px"></div><p class="pie ok"><b>Sí</b> Carbón</p></div>
+      <div><div class="lamina foto" style="min-height:180px"><img src="logo.png" alt="" style="max-height:130px"></div><p class="pie ok"><b>Sí</b> Foto oscurecida al 55 %</p></div>
+      <div><div class="lamina blanco" style="min-height:180px"><img src="logo.png" alt="" style="max-height:130px"></div><p class="pie ko"><b>No</b> Fondos claros</p></div>
+    </div>
+  </div>
+
+  <div class="bloque">
+    <span class="eti">Usos incorrectos</span>
+    <div class="mal-uso">
+      <div><div class="lamina"><img src="logo.png" alt="" style="transform:scaleX(1.5)"></div><p class="pie ko"><b>No</b> deformar</p></div>
+      <div><div class="lamina"><img src="logo.png" alt="" style="filter:hue-rotate(150deg)"></div><p class="pie ko"><b>No</b> recolorear</p></div>
+      <div><div class="lamina"><img src="logo.png" alt="" style="transform:rotate(-14deg)"></div><p class="pie ko"><b>No</b> rotar</p></div>
+      <div><div class="lamina"><img src="logo.png" alt="" style="filter:drop-shadow(0 0 18px #3DB14F) drop-shadow(0 0 8px #3DB14F)"></div><p class="pie ko"><b>No</b> agregar brillos ni sombras</p></div>
+      <div><div class="lamina naranja"><img src="logo.png" alt=""></div><p class="pie ko"><b>No</b> sobre naranja o colores de la marca</p></div>
+      <div><div class="lamina"><span style="font-family:'Brush Script MT',cursive;font-size:42px;color:#3DB14F">♠ TryingPoker</span></div><p class="pie ko"><b>No</b> rehacer el logotipo con otra fuente</p></div>
+    </div>
+  </div>
+
+  <div class="bloque pendiente">
+    <span class="eti n">A resolver con Toni</span>
+    <p style="margin-top:6px">Hoy conviven dos logos: esta ilustración y un logotipo verde en cursiva con una pica, que aparece en algunas miniaturas. Este manual deja <b>solo la ilustración y el logotipo Anton</b>. Conviene pedirle el archivo original de la ilustración en alta (el que tenemos sale del avatar, a 1004 px) para vectorizarlo. La bola de dragón forma parte del dibujo y puede quedarse ahí, pero no se usa suelta como recurso gráfico: es un personaje con derechos de autor de otra marca.</p>
+  </div>
+</div></section>
+
+<!-- 04 COLOR -->
+<section id="color"><div class="wrap">
+  <div class="cab"><div class="num">04</div><div><h2>Color</h2><p>Los colores salen del logo: el círculo negro, el naranja del texto y el verde de las fichas. El negro manda, el naranja señala y el verde aparece cuando algo sale bien.</p></div></div>
+
+  <div class="paleta">
+    <div class="chip grande"><div class="m" style="background:var(--negro);border-bottom:1px solid var(--linea)">Negro mesa</div><div class="d"><b>Negro</b><span>#0B0B0B · RGB 11 11 11</span><span>CMYK 70 60 60 90</span><p>Fondo de todas las piezas. Es el círculo del logo.</p></div></div>
+    <div class="chip grande"><div class="m" style="background:var(--naranja);color:var(--negro)">Naranja Trying</div><div class="d"><b>Naranja</b><span>#F7961A · RGB 247 150 26</span><span>CMYK 0 47 95 0 · Pantone 137 C aprox.</span><p>Color de marca. Palabra clave del titular, números importantes, botones y etiquetas.</p></div></div>
+    <div class="chip"><div class="m" style="background:var(--verde);color:var(--negro)">Verde ficha</div><div class="d"><b>Verde</b><span>#3DB14F · RGB 61 177 79</span><span>CMYK 72 0 85 0</span><p>Ganancias, crecimiento, "esto funciona". Acento, nunca fondo grande.</p></div></div>
+    <div class="chip"><div class="m" style="background:var(--hueso);color:var(--negro)">Hueso</div><div class="d"><b>Hueso</b><span>#F5F2EC · RGB 245 242 236</span><span>CMYK 2 3 6 0</span><p>Texto principal. Más cálido que el blanco puro, como los naipes del logo.</p></div></div>
+    <div class="chip"><div class="m" style="background:var(--carbon)">Carbón</div><div class="d"><b>Carbón</b><span>#161616 · RGB 22 22 22</span><p>Tarjetas y cajas sobre el negro.</p></div></div>
+    <div class="chip"><div class="m" style="background:var(--rojo)">Rojo pérdida</div><div class="d"><b>Rojo</b><span>#E5484D · RGB 229 72 77</span><p>Solo pérdidas y errores. Poco y con motivo.</p></div></div>
+  </div>
+
+  <div class="bloque cols3">
+    <div class="caja" style="padding:0;overflow:hidden"><div style="height:90px;background:var(--grad)"></div><div style="padding:16px"><b class="eti" style="color:var(--hueso)">Degradado de marca</b><p style="margin-top:6px;font-size:14px"><code>#FFB23E → #F7961A → #E0690A</code>, de arriba hacia abajo, igual que el texto del logo. Solo en palabras grandes de titulares.</p></div></div>
+    <div class="caja"><b class="eti" style="color:var(--hueso)">Neutros de apoyo</b><div style="display:flex;gap:8px;margin:12px 0"><span style="flex:1;height:44px;border-radius:4px;background:var(--mesa);border:1px solid var(--linea)"></span><span style="flex:1;height:44px;border-radius:4px;background:var(--linea)"></span><span style="flex:1;height:44px;border-radius:4px;background:var(--gris-osc)"></span><span style="flex:1;height:44px;border-radius:4px;background:var(--gris)"></span></div><p style="font-size:14px"><code>#1E1E1E</code> mesa · <code>#2A2A2A</code> línea · <code>#5E5B56</code> · <code>#9A968F</code> texto secundario.</p></div>
+    <div class="caja"><b class="eti" style="color:var(--hueso)">Variantes</b><div style="display:flex;gap:8px;margin:12px 0"><span style="flex:1;height:44px;border-radius:4px;background:var(--naranja-claro)"></span><span style="flex:1;height:44px;border-radius:4px;background:var(--naranja-oscuro)"></span><span style="flex:1;height:44px;border-radius:4px;background:var(--verde-oscuro)"></span></div><p style="font-size:14px"><code>#FFB23E</code> naranja claro · <code>#E0690A</code> naranja oscuro · <code>#1F6B2D</code> verde oscuro (fondos de datos positivos).</p></div>
+  </div>
+
+  <div class="bloque">
+    <span class="eti">Proporción en cada pieza</span>
+    <div class="proporcion">
+      <div style="flex:70;background:var(--negro)">NEGRO 70 %</div>
+      <div style="flex:20;background:var(--hueso);color:var(--negro)">HUESO 20 %</div>
+      <div style="flex:8;background:var(--naranja);color:var(--negro)">8 %</div>
+      <div style="flex:2;background:var(--verde)"></div>
+    </div>
+    <p class="nota">Si una pieza se ve "naranja", hay demasiado naranja. El naranja tiene que ser lo primero que se mira, y eso funciona solo si es escaso.</p>
+  </div>
+
+  <div class="bloque">
+    <span class="eti">Combinaciones de texto y contraste</span>
+    <div class="contraste">
+      <div style="background:var(--negro);color:var(--hueso)"><div class="t">Hueso sobre negro</div><div class="r">17,4 : 1 · Todo uso</div></div>
+      <div style="background:var(--negro);color:var(--naranja)"><div class="t">Naranja sobre negro</div><div class="r">8,4 : 1 · Titulares y datos</div></div>
+      <div style="background:var(--naranja);color:var(--negro)"><div class="t">Negro sobre naranja</div><div class="r">8,4 : 1 · Etiquetas y botones</div></div>
+      <div style="background:var(--negro);color:var(--verde)"><div class="t">Verde sobre negro</div><div class="r">7,1 : 1 · Cifras positivas</div></div>
+      <div style="background:var(--negro);color:var(--gris)"><div class="t">Gris sobre negro</div><div class="r">6,6 : 1 · Texto secundario</div></div>
+      <div style="background:var(--naranja);color:#fff;position:relative"><div class="t">Blanco sobre naranja</div><div class="r">2,1 : 1 · Prohibido: no se lee</div></div>
+    </div>
+  </div>
+</div></section>
+
+<!-- 05 TIPOGRAFÍA -->
+<section id="tipo"><div class="wrap">
+  <div class="cab"><div class="num">05</div><div><h2>Tipografía</h2><p>Tres fuentes de una misma familia de espíritu: condensadas, deportivas, de marcador. Todas son gratuitas en Google Fonts, así que funcionan en Canva, CapCut, Figma, Premiere y web.</p></div></div>
+
+  <div class="espec">
+    <div><div class="muestra" style="font-family:var(--f-display);text-transform:uppercase">Anton</div><div class="abc" style="font-family:var(--f-display)">ABCDEFGHIJKLMNÑOPQRSTUVWXYZ 0123456789 € % +−</div></div>
+    <dl><dt>Rol</dt><dd>Titulares, números grandes, portadas</dd><dt>Peso</dt><dd>Regular (es la única, ya es muy pesada)</dd><dt>Caja</dt><dd>Siempre en mayúsculas</dd><dt>Interlínea</dt><dd>0,92 a 1,0</dd><dt>Tracking</dt><dd>0 a +1 %</dd><dt>Por qué</dt><dd>Es la más cercana al texto del logo: alta, condensada y con fuerza.</dd></dl>
+  </div>
+  <div class="espec">
+    <div><div class="muestra" style="font-family:var(--f-texto);font-weight:600;font-size:clamp(56px,9vw,104px)">Barlow</div><div class="abc">Regular 400 · <b style="font-weight:500">Medium 500</b> · <b style="font-weight:600">SemiBold 600</b> · <b style="font-weight:700">Bold 700</b> · <i>Itálica</i></div></div>
+    <dl><dt>Rol</dt><dd>Texto de carruseles, subtítulos largos, web</dd><dt>Caja</dt><dd>Oración (mayúscula inicial)</dd><dt>Interlínea</dt><dd>1,35 en piezas, 1,6 en web</dd><dt>Por qué</dt><dd>Sobria y legible, con el mismo aire de rótulo deportivo que Anton.</dd></dl>
+  </div>
+  <div class="espec">
+    <div><div class="muestra" style="font-family:var(--f-etiqueta);font-weight:700;text-transform:uppercase;letter-spacing:.06em;font-size:clamp(48px,8vw,92px)">Barlow Condensed</div><div class="abc" style="font-family:var(--f-etiqueta);font-weight:600;text-transform:uppercase;letter-spacing:.12em">Etiquetas · Pilares · 1/7 · BB/100 · Octubre 2026</div></div>
+    <dl><dt>Rol</dt><dd>Etiquetas, antetítulos, datos chicos, contadores de carrusel</dd><dt>Peso</dt><dd>SemiBold 600 y Bold 700</dd><dt>Caja</dt><dd>Mayúsculas con tracking +10 a +14 %</dd></dl>
+  </div>
+
+  <div class="bloque">
+    <span class="eti">Jerarquía en piezas de 1080 px de ancho</span>
+    <div class="jerarquia">
+      <div class="row"><span>Titular portada<br>Anton 120–160 px</span><div style="font-family:var(--f-display);font-size:clamp(34px,6vw,64px);text-transform:uppercase;line-height:.95">Mi mes en <span class="grad">números</span></div></div>
+      <div class="row"><span>Titular interior<br>Anton 80–96 px</span><div style="font-family:var(--f-display);font-size:clamp(26px,4vw,40px);text-transform:uppercase;line-height:1">El bankroll no es tu sueldo</div></div>
+      <div class="row"><span>Dato destacado<br>Anton 160–240 px</span><div style="font-family:var(--f-display);font-size:clamp(40px,7vw,72px);line-height:1" class="v">+1.240 €</div></div>
+      <div class="row"><span>Texto<br>Barlow 500 · 40–46 px</span><div style="font-size:18px;font-weight:500;color:#D8D3CB">Separa el dinero del póker del de casa. Si lo mezclas, cada mala racha se convierte en un problema personal.</div></div>
+      <div class="row"><span>Etiqueta<br>Barlow Cond. 700 · 28–32 px</span><div><span class="etiqueta-pilar">Empieza bien</span></div></div>
+    </div>
+  </div>
+
+  <div class="bloque cols2">
+    <div class="caja"><span class="eti">Reglas</span><ul class="lista" style="margin-top:12px">
+      <li>Máximo 7 palabras por titular. Si no entra, sobran palabras.</li>
+      <li>Una sola palabra (o número) en naranja o degradado por titular.</li>
+      <li>Titulares alineados a la izquierda. Centrado solo en subtítulos de vídeo y cierres.</li>
+      <li>Nunca Anton en minúsculas ni en párrafos.</li></ul></div>
+    <div class="caja"><span class="eti">Sustitutas si no está la fuente</span><ul class="lista" style="margin-top:12px">
+      <li><b>Anton</b> → Bebas Neue o League Gothic (en CapCut: "Anton" existe; si no, "Bebas")</li>
+      <li><b>Barlow</b> → Inter o Arial</li>
+      <li><b>Barlow Condensed</b> → Roboto Condensed</li>
+      <li>Para miniaturas de YouTube muy estridentes se permite Anton con trazo negro de 6–10 px</li></ul></div>
+  </div>
+</div></section>
+
+<!-- 06 ELEMENTOS -->
+<section id="elementos"><div class="wrap">
+  <div class="cab"><div class="num">06</div><div><h2>Elementos gráficos</h2><p>Un juego chico de recursos que salen del mundo del póker y del propio logo. Se usan de a uno o dos por pieza, como detalle.</p></div></div>
+
+  <div class="cols3">
+    <div class="caja"><span class="eti">Palos</span><div class="palos" style="margin:16px 0"><span>♠</span><span class="n">♥</span><span class="n">♦</span><span>♣</span></div><p>Picas y tréboles en hueso, corazones y diamantes en naranja (no en rojo: el rojo es de las pérdidas). Sirven de viñeta y de separador.</p></div>
+    <div class="caja"><span class="eti">Ficha verde</span><div style="margin:16px 0"><div class="ficha"><span>TP</span></div></div><p>La ficha del logo. Sello para "consejo", "dato" o el contador de un carrusel. Plana, sin brillos 3D.</p></div>
+    <div class="caja"><span class="eti">Mano de PLO</span><div class="mano" style="margin:16px 0 18px"><div class="carta"><span>A</span><span>♠</span></div><div class="carta r"><span>K</span><span>♥</span></div><div class="carta r"><span>Q</span><span>♦</span></div><div class="carta"><span>A</span><span>♣</span></div></div><p>Cuatro cartas (PLO), nunca dos. Para enseñar manos se usa este dibujo plano, no fotos de naipes.</p></div>
+    <div class="caja"><span class="eti">Dato</span><div style="margin:16px 0;display:flex;gap:10px;flex-wrap:wrap"><div class="dato"><b class="n">18.200</b><small>manos</small></div><div class="dato"><b class="v">+6,2</b><small>BB/100</small></div></div><p>Caja de cifra: número en Anton y unidad en Barlow Condensed. Es la firma visual del pilar "El proceso real".</p></div>
+    <div class="caja"><span class="eti">Etiqueta de pilar</span><div style="margin:16px 0;display:flex;gap:10px;flex-wrap:wrap"><span class="etiqueta-pilar">El proceso real</span><span class="etiqueta-pilar sec">Vida de jugador</span></div><p>Arriba a la izquierda en portadas y carruseles. Rellena para pilares de valor, con borde para humor y vida.</p></div>
+    <div class="caja"><span class="eti">Subrayado</span><div style="margin:16px 0;font-family:var(--f-display);font-size:34px;text-transform:uppercase;line-height:1">Lo que <span class="subrayado">nadie</span> cuenta</div><p>Barra naranja inclinada debajo de una palabra. Alternativa al degradado; nunca los dos juntos.</p></div>
+  </div>
+
+  <div class="bloque cols2">
+    <div class="caja"><span class="eti">Iconos</span><p style="margin-top:10px">Línea de 2 px, puntas redondeadas, en hueso o naranja. Familia de referencia: <b>Lucide</b> (gratis). Nada de iconos 3D, emojis en las piezas gráficas ni clipart de casino.</p></div>
+    <div class="caja"><span class="eti">Texturas y fondos</span><p style="margin-top:10px">Negro liso por defecto. Como variación: una viñeta suave hacia los bordes o un grano fino del 3 %. Si se quiere sugerir una mesa, usar <code>#1E1E1E</code> con la forma ovalada, nunca el tapete verde.</p></div>
+  </div>
+</div></section>
+
+<!-- 07 FOTO Y VIDEO -->
+<section id="foto"><div class="wrap">
+  <div class="cab"><div class="num">07</div><div><h2>Foto y vídeo</h2><p>Toni es la marca. Las imágenes lo muestran en su contexto real: la mesa, el setup, la ciudad. Nada de bancos de imágenes.</p></div></div>
+
+  <div class="fotos">
+    <figure><img src="foto-mesa.jpg" alt="Toni sentado en la mesa final del PLO Championship del circuito WSOP"><figcaption>Así sí. Contexto real (WSOP Circuit, PLO Championship), ropa negra, gesto natural. Esta foto vale más que diez miniaturas con cara de sorpresa.</figcaption></figure>
+    <div style="display:grid;gap:16px;align-content:start">
+      <div class="grade"><div><img src="foto-cara.jpg" alt="" class="bueno"><p class="pie ok"><b>Sí</b> Cálido, negros profundos</p></div><div><img src="foto-cara.jpg" alt="" class="malo"><p class="pie ko"><b>No</b> Saturado y lavado</p></div></div>
+      <div class="caja"><span class="eti">Etalonaje</span><p style="margin-top:6px">Contraste +10, saturación −10, temperatura un poco cálida, negros profundos y altas luces sin quemar. Piel natural. Una única LUT para todo el contenido.</p></div>
+    </div>
+  </div>
+
+  <div class="bloque cols3">
+    <div class="caja"><h3>Encuadre</h3><ul class="lista" style="margin-top:10px"><li>Plano medio corto, ojos en el tercio superior</li><li>Cámara a la altura de los ojos, nunca desde abajo</li><li>En vertical, dejar libre el tercio inferior para subtítulos</li></ul></div>
+    <div class="caja"><h3>Luz y fondo</h3><ul class="lista" style="margin-top:10px"><li>Luz de ventana o panel a 45°, de frente</li><li>Fondo oscuro con un punto de luz cálida (lámpara, tira LED naranja)</li><li>Evitar el fondo de pared blanca y el contraluz</li></ul></div>
+    <div class="caja"><h3>Vestuario</h3><ul class="lista" style="margin-top:10px"><li>Negro o gris oscuro liso, como en el logo</li><li>Sin logos de otras marcas, salvo acuerdo</li><li>Los auriculares y el micro sí: son parte del grinder</li></ul></div>
+  </div>
+
+  <div class="bloque">
+    <span class="eti">Formato "pantalla primero"</span>
+    <div class="cols2">
+      <div class="pz h" style="background:var(--mesa)">
+        <div style="position:absolute;inset:6% 6% 6% 6%;border:1px solid var(--linea);border-radius:6px;background:#121212;display:grid;grid-template-columns:1fr 1fr;gap:4%;padding:4%">
+          <div style="border-radius:40%/50%;background:#1E2A1E;border:2px solid #2A3A2A"></div><div style="border-radius:40%/50%;background:#1E2A1E;border:2px solid #2A3A2A"></div>
+        </div>
+        <div style="position:absolute;right:4%;bottom:6%;width:22%;aspect-ratio:1;border-radius:50%;background:url(foto-camara.jpg) center/cover;border:3px solid var(--naranja)"></div>
+      </div>
+      <div><p>Para los días que Toni no quiere salir a cámara: la grabación de las mesas o de la gráfica ocupa la pantalla y su cara va en un círculo con borde naranja de 6 px, en la esquina inferior derecha (en vertical, arriba a la derecha, para no tapar los subtítulos). Su voz en off lleva el vídeo.</p></div>
+    </div>
+  </div>
+</div></section>
+
+<!-- 08 FORMATOS -->
+<section id="formatos"><div class="wrap">
+  <div class="cab"><div class="num">08</div><div><h2>Formatos</h2><p>Una plantilla fija por formato. La grilla de Instagram se tiene que reconocer de lejos como una sola marca.</p></div></div>
+
+  <div class="formatos">
+    <div class="formato">
+      <div class="pz v">
+        <div class="foto" style="background-image:url(foto-camara.jpg);background-position:center 20%;bottom:35%"></div>
+        <div class="velo"></div>
+        <span class="pil" style="top:5cqw;right:5cqw">El proceso real</span>
+        <div class="titulo" style="bottom:28cqw;font-size:15cqw">Mi octubre en <span class="grad">números</span></div>
+        <div style="position:absolute;bottom:18cqw;left:7cqw;font-family:var(--f-display);font-size:5cqw;letter-spacing:.02em">TRYING<span class="n">POKER</span></div>
+        <div class="zona" style="top:12.5%;bottom:12.5%;height:auto"><span>Recorte 3:4 de la grilla</span></div>
+      </div>
+      <span class="eti">Portada de reel · 1080 × 1920</span>
+      <p>Foto de Toni arriba, fundido a negro, titular de 2 o 3 líneas con una palabra en degradado. Todo lo importante dentro de la franja central de 1080 × 1440 (lo que muestra la grilla).</p>
+    </div>
+
+    <div class="formato">
+      <div class="pz v">
+        <div class="foto" style="background-image:url(foto-camara.jpg);background-position:center 30%"></div>
+        <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 50%,rgba(0,0,0,.6))"></div>
+        <div class="sub" style="bottom:42cqw">Y aun así fue mi <span class="n">mejor</span> mes</div>
+        <div style="position:absolute;top:5cqw;left:5cqw;font-family:var(--f-etiqueta);font-weight:700;letter-spacing:.1em;font-size:4cqw;opacity:.85">@TRYINGPOKER</div>
+        <div class="zona" style="top:auto;bottom:0;height:20%;border-bottom:0"><span>Zona de la interfaz</span></div>
+      </div>
+      <span class="eti">Reel en curso · subtítulos</span>
+      <p>Anton blanco con trazo negro, 2 a 4 palabras por línea, la palabra clave en naranja. Por encima del 20 % inferior que tapa la interfaz de Instagram.</p>
+    </div>
+
+    <div class="formato">
+      <div class="pz c">
+        <span class="pil" style="top:7cqw;left:8cqw">Empieza bien</span>
+        <div class="contador">1/7</div>
+        <div class="titulo" style="top:26cqw;font-size:14cqw;left:8cqw">Rakeback en Winamax, <span class="grad">explicado</span></div>
+        <div class="txt" style="top:82cqw">Si estás empezando, esto es dinero que te dejas en la mesa cada mes.</div>
+        <div style="position:absolute;bottom:7cqw;left:8cqw;right:8cqw;display:flex;justify-content:space-between;align-items:center;font-family:var(--f-etiqueta);font-weight:700;letter-spacing:.1em;font-size:3.6cqw"><span>TRYING<span class="n">POKER</span></span><span class="n">DESLIZA →</span></div>
+      </div>
+      <span class="eti">Carrusel · portada · 1080 × 1350</span>
+      <p>Etiqueta del pilar, contador, titular grande y una frase que promete. Márgenes de 88 px. Logotipo y "Desliza" en el pie.</p>
+    </div>
+
+    <div class="formato">
+      <div class="pz c">
+        <div class="contador" style="left:8cqw;right:auto">03</div>
+        <div class="titulo" style="top:20cqw;font-size:9.5cqw;left:8cqw">Separa el dinero del póker</div>
+        <div class="txt" style="top:44cqw">Una cuenta solo para jugar. Lo que hay ahí es tu bankroll, lo de casa no se toca.</div>
+        <div style="position:absolute;left:8cqw;top:78cqw;display:flex;gap:3cqw">
+          <div class="dato" style="padding:3cqw 4cqw"><b class="n" style="font-size:11cqw">50</b><small style="font-size:3cqw">buy-ins mínimo</small></div>
+          <div class="dato" style="padding:3cqw 4cqw"><b class="v" style="font-size:11cqw">5 %</b><small style="font-size:3cqw">por sesión</small></div>
+        </div>
+        <div style="position:absolute;bottom:7cqw;left:8cqw;right:8cqw;display:flex;justify-content:space-between;font-family:var(--f-etiqueta);font-weight:700;letter-spacing:.1em;font-size:3.6cqw;color:var(--gris)"><span>@TRYINGPOKER</span><span>3/7</span></div>
+      </div>
+      <span class="eti">Carrusel · interior</span>
+      <p>Número de paso en Barlow Condensed, titular Anton de 80 a 96 px, texto Barlow y, si hay, una caja de dato o una captura con borde <code>#2A2A2A</code>.</p>
+    </div>
+
+    <div class="formato">
+      <div class="pz v">
+        <div class="zona" style="top:0;height:13%;border-top:0"><span>250 px libres</span></div>
+        <div class="titulo" style="top:24cqw;font-size:11cqw;left:8cqw">¿Cuántos meses llevas jugando?</div>
+        <div style="position:absolute;top:66cqw;left:8cqw;right:8cqw;display:grid;gap:3cqw">
+          <div style="background:var(--carbon);border:1px solid var(--linea);border-radius:3cqw;padding:4cqw;font-weight:600;font-size:4.6cqw">Menos de 6 meses</div>
+          <div style="background:var(--naranja);color:var(--negro);border-radius:3cqw;padding:4cqw;font-weight:700;font-size:4.6cqw">Entre 6 meses y 2 años</div>
+          <div style="background:var(--carbon);border:1px solid var(--linea);border-radius:3cqw;padding:4cqw;font-weight:600;font-size:4.6cqw">Más de 2 años</div>
+        </div>
+        <div class="zona" style="top:auto;bottom:0;height:13%;border-bottom:0"><span>250 px libres</span></div>
+      </div>
+      <span class="eti">Historia · 1080 × 1920</span>
+      <p>Fondo negro, pregunta en Anton y el sticker nativo encima. 250 px libres arriba y abajo. Sin logo: en historias ya se ve el avatar.</p>
+    </div>
+
+    <div class="formato" style="grid-column:span 2;min-width:0">
+      <div class="pz h">
+        <div class="foto" style="background-image:url(foto-camara.jpg);left:52%;background-position:center 25%"></div>
+        <div style="position:absolute;inset:0;background:linear-gradient(90deg,var(--negro) 45%,rgba(11,11,11,0) 70%)"></div>
+        <img src="logo.png" alt="" style="position:absolute;top:4cqw;left:4cqw;width:9cqw">
+        <div class="titulo" style="top:15cqw;left:4cqw;right:48%;font-size:7.6cqw;-webkit-text-stroke:.4cqw #000;paint-order:stroke fill">30.000 manos para <span class="n">0 €</span></div>
+        <div style="position:absolute;left:4cqw;bottom:6cqw;display:flex;gap:1.5cqw"><span class="pil" style="position:static;font-size:2cqw">Mes 10 · 2026</span></div>
+      </div>
+      <span class="eti">Miniatura de YouTube · 1280 × 720</span>
+      <p>Puede ser más ruidosa que Instagram: más contraste, trazo negro y cara expresiva. Pero siempre con negro, naranja, Anton y el logo arriba a la izquierda. Máximo 4 palabras. La cara a la derecha, mirando hacia el texto.</p>
+    </div>
+  </div>
+
+  <div class="bloque">
+    <span class="eti">Medidas y zonas seguras</span>
+    <div class="tabla"><table>
+      <tr><th>Pieza</th><th>Tamaño</th><th>Márgenes y zona segura</th><th>Exportar</th></tr>
+      <tr><td>Reel y portada</td><td>1080 × 1920</td><td>Contenido clave entre y = 240 y y = 1680. Subtítulos sobre y = 1500</td><td>MP4 H.264, 30 fps, 15–20 Mbps · portada JPG</td></tr>
+      <tr><td>Carrusel</td><td>1080 × 1350</td><td>88 px por lado. Pie a 80 px del borde inferior</td><td>PNG o JPG al 90 %</td></tr>
+      <tr><td>Historia</td><td>1080 × 1920</td><td>250 px libres arriba y abajo; 64 px a los lados</td><td>PNG o MP4</td></tr>
+      <tr><td>Miniatura YouTube</td><td>1280 × 720</td><td>Esquina inferior derecha libre (duración del vídeo)</td><td>JPG, menos de 2 MB</td></tr>
+      <tr><td>Portada del canal</td><td>2560 × 1440</td><td>Todo lo importante en 1546 × 423 al centro</td><td>JPG</td></tr>
+      <tr><td>Avatar</td><td>1080 × 1080</td><td>Logo principal centrado, con aire alrededor del círculo</td><td>PNG</td></tr>
+    </table></div>
+  </div>
+
+  <div class="bloque">
+    <span class="eti">Historias destacadas</span>
+    <div style="display:flex;gap:22px;flex-wrap:wrap">
+      <div style="text-align:center"><div style="width:76px;height:76px;border-radius:50%;background:var(--carbon);border:2px solid var(--naranja);display:grid;place-items:center;font-size:30px">♠</div><div class="eti" style="margin-top:8px">Empieza</div></div>
+      <div style="text-align:center"><div style="width:76px;height:76px;border-radius:50%;background:var(--carbon);border:2px solid var(--naranja);display:grid;place-items:center;font-family:var(--f-display);font-size:24px" class="v">+€</div><div class="eti" style="margin-top:8px">Resultados</div></div>
+      <div style="text-align:center"><div style="width:76px;height:76px;border-radius:50%;background:var(--carbon);border:2px solid var(--naranja);display:grid;place-items:center;font-family:var(--f-display);font-size:26px">TP</div><div class="eti" style="margin-top:8px">Mi historia</div></div>
+      <div style="text-align:center"><div style="width:76px;height:76px;border-radius:50%;background:var(--carbon);border:2px solid var(--naranja);display:grid;place-items:center;font-family:var(--f-display);font-size:26px" class="n">%</div><div class="eti" style="margin-top:8px">Códigos</div></div>
+      <p style="flex:1;min-width:240px;color:#CFCAC2;font-size:15px;align-self:center">Fondo carbón, borde naranja y un símbolo en Anton o un palo de la baraja. Siempre los mismos cuatro, en este orden.</p>
+    </div>
+  </div>
+</div></section>
+
+<!-- 09 MOTION -->
+<section id="motion"><div class="wrap">
+  <div class="cab"><div class="num">09</div><div><h2>Motion</h2><p>El movimiento es seco y con intención, como poner fichas en el bote. Corto, firme y sin rebotes infantiles.</p></div></div>
+
+  <div class="curva">
+    <div class="caja c1"><span class="eti">Entrada de textos</span><div class="pista"><i></i></div><p style="margin-top:14px">Sube 40 px y aparece. 0,35 s, curva de salida rápida <code>cubic-bezier(.22,1,.36,1)</code>. Palabra por palabra en titulares.</p></div>
+    <div class="caja c2"><span class="eti">Datos y fichas</span><div class="pista"><i></i></div><p style="margin-top:14px">Los números cuentan de 0 a la cifra en 0,8 s y cierran con un pequeño rebote (escala 1,08 → 1). Solo para cifras.</p></div>
+    <div class="caja c3"><span class="eti">Cortes</span><div class="pista"><i></i></div><p style="margin-top:14px">Corte seco al ritmo de la voz. Zoom de 100 a 110 % para énfasis. Nada de transiciones de plantilla (cubos, remolinos, brillos).</p></div>
+  </div>
+
+  <div class="bloque cols2">
+    <div class="caja"><span class="eti">Subtítulos dinámicos</span><ul class="lista" style="margin-top:12px"><li>Anton, 72–84 px, blanco con trazo negro de 8 px</li><li>La palabra que se dice en ese momento se pinta de naranja</li><li>Entrada de 0,1 s por palabra, sin efectos de pop exagerados</li><li>Cifras de dinero positivas en verde, negativas en rojo</li></ul></div>
+    <div class="caja"><span class="eti">Apertura y cierre</span><ul class="lista" style="margin-top:12px"><li>Sin intro: el gancho va en el primer segundo</li><li>Cierre de 1,5 s: logo principal sobre negro + una sola acción ("Comenta PLAN")</li><li>Sonido: un "chip" de ficha como golpe de marca, siempre el mismo</li><li>Música lo-fi o hip-hop instrumental a −20 dB bajo la voz</li></ul></div>
+  </div>
+</div></section>
+
+<!-- 10 DATOS -->
+<section id="datos"><div class="wrap">
+  <div class="cab"><div class="num">10</div><div><h2>Datos y resultados</h2><p>Los números son el producto de TryingPoker. Se muestran siempre igual para que la serie mensual se reconozca al instante.</p></div></div>
+
+  <div class="cols2">
+    <div class="grafica">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:12px"><span class="eti">Ejemplo · ganancias octubre 2026</span><span style="font-family:var(--f-display);font-size:28px" class="v">+1.240 €</span></div>
+      <svg viewBox="0 0 400 200" role="img" aria-label="Gráfica de ejemplo: ganancias acumuladas que bajan a mitad de mes y terminan en más 1.240 euros">
+        <g stroke="#2A2A2A" stroke-width="1"><line x1="40" y1="20" x2="390" y2="20"/><line x1="40" y1="80" x2="390" y2="80"/><line x1="40" y1="140" x2="390" y2="140"/></g>
+        <line x1="40" y1="110" x2="390" y2="110" stroke="#5E5B56" stroke-dasharray="4 4"/>
+        <g fill="#9A968F" font-family="Barlow Condensed, Arial Narrow, sans-serif" font-size="12" text-anchor="end"><text x="34" y="24">1.500 €</text><text x="34" y="84">500 €</text><text x="34" y="114">0 €</text><text x="34" y="144">−500 €</text></g>
+        <path d="M40 110 L75 98 L110 104 L145 88 L180 120 L215 142 L250 126 L285 96 L320 70 L355 52 L390 36 L390 180 L40 180Z" fill="#3DB14F" opacity=".12"/>
+        <path d="M40 110 L75 98 L110 104 L145 88 L180 120 L215 142 L250 126 L285 96 L320 70 L355 52 L390 36" fill="none" stroke="#3DB14F" stroke-width="3" stroke-linejoin="round"/>
+        <circle cx="215" cy="142" r="5" fill="#E5484D"/><text x="215" y="166" fill="#E5484D" font-family="Barlow Condensed, Arial Narrow, sans-serif" font-size="12" text-anchor="middle">−600 € el día 16</text>
+        <circle cx="390" cy="36" r="6" fill="#3DB14F" stroke="#0B0B0B" stroke-width="2"/>
+      </svg>
+      <p class="nota">Cifras de ejemplo. Línea verde de 3 px con relleno al 12 %, rejilla en <code>#2A2A2A</code>, el peor momento marcado en rojo y el punto final destacado.</p>
+    </div>
+    <div style="display:grid;gap:16px;align-content:start">
+      <div class="caja"><span class="eti">Formato de números (España)</span><ul class="lista" style="margin-top:12px"><li>Miles con punto, decimales con coma: <b>12.430 manos</b>, <b>6,2 BB/100</b></li><li>Euro detrás y con espacio: <b>1.240 €</b></li><li>Signo siempre visible: <b class="v">+1.240 €</b> · <b style="color:var(--rojo)">−340 €</b></li><li>Meses con nombre: "Octubre 2026", no "10/26"</li></ul></div>
+      <div class="caja"><span class="eti">Las 4 cifras de la serie mensual</span><div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:12px"><div class="dato"><b class="n">18.200</b><small>Manos</small></div><div class="dato"><b class="v">+1.240 €</b><small>Resultado</small></div><div class="dato"><b>42 h</b><small>Horas de juego</small></div><div class="dato"><b>NL50</b><small>Límite</small></div></div></div>
+    </div>
+  </div>
+  <div class="bloque pendiente"><span class="eti n">Regla de oro</span><p style="margin-top:6px">Los meses malos se publican igual que los buenos, con la misma plantilla. Si solo aparecen los meses verdes, la marca pierde lo único que la diferencia.</p></div>
+</div></section>
+
+<!-- 11 MARCAS -->
+<section id="marcas"><div class="wrap">
+  <div class="cab"><div class="num">11</div><div><h2>Marcas y afiliados</h2><p>TryingPoker convive con salas y herramientas (Winamax, MentoPoker, Hand2Note). La regla es que la pieza siga siendo de Toni.</p></div></div>
+  <div class="cols2">
+    <div class="caja"><span class="eti">Co-branding</span>
+      <div style="display:flex;align-items:center;gap:16px;margin:16px 0;flex-wrap:wrap"><span class="wm-chico">Trying<span class="n">Poker</span></span><span style="color:var(--gris);font-size:22px">×</span><span style="font-family:var(--f-display);font-size:26px;color:var(--gris);letter-spacing:.02em">MARCA</span></div>
+      <ul class="lista"><li>Nuestro logo a la izquierda, el de la marca a la derecha, separados por "×"</li><li>Los dos a la misma altura óptica</li><li>Se respeta el color de la marca dentro de su logo; el resto de la pieza sigue en negro y naranja</li><li>Una pieza de Winamax puede usar su rojo como acento en la miniatura, nunca como fondo de la grilla</li></ul></div>
+    <div class="caja"><span class="eti">Códigos y transparencia</span><ul class="lista" style="margin-top:12px"><li>Código en Barlow Condensed dentro de una caja con borde naranja: <span style="font-family:var(--f-etiqueta);font-weight:700;letter-spacing:.12em;border:1.5px solid var(--naranja);padding:2px 10px;border-radius:3px">CÓDIGO TRYING</span></li><li>Una sola marca por pieza</li><li>Si es contenido pagado, se indica con la etiqueta "Colaboración pagada" de Instagram o "Publi" en el copy</li><li>Todo contenido sobre salas lleva "+18 · Juega con responsabilidad" en el pie</li><li>No usar colores ni estética de PsicoPoker o MentoPoker como propios</li></ul></div>
+  </div>
+</div></section>
+
+<!-- 12 CHECKLIST -->
+<section id="check"><div class="wrap">
+  <div class="cab"><div class="num">12</div><div><h2>Antes de publicar</h2><p>Diez preguntas para revisar cada pieza. Si alguna da "no", se corrige antes de subir.</p></div></div>
+  <div class="check">
+    <label><input type="checkbox" id="c1">El fondo es negro o una foto oscurecida.</label>
+    <label><input type="checkbox" id="c2">Hay una sola palabra o número en naranja.</label>
+    <label><input type="checkbox" id="c3">El titular tiene 7 palabras o menos, en Anton y mayúsculas.</label>
+    <label><input type="checkbox" id="c4">El texto está en español de España (sin voseo).</label>
+    <label><input type="checkbox" id="c5">Lo importante está dentro de la zona segura del formato.</label>
+    <label><input type="checkbox" id="c6">Lleva la etiqueta del pilar correcta.</label>
+    <label><input type="checkbox" id="c7">El logo o @tryingpoker aparece, sin deformar.</label>
+    <label><input type="checkbox" id="c8">Las cifras siguen el formato español (1.240 €, +6,2).</label>
+    <label><input type="checkbox" id="c9">El copy tiene una sola acción y 3 hashtags.</label>
+    <label><input type="checkbox" id="c10">No hay bloque de códigos de afiliado en el copy.</label>
+  </div>
+</div></section>
+
+<!-- 13 RECURSOS -->
+<section id="recursos"><div class="wrap">
+  <div class="cab"><div class="num">13</div><div><h2>Recursos</h2><p>Tokens listos para web, Remotion o HyperFrames, y la lista de archivos de la marca.</p></div></div>
+  <div class="cols2">
+    <div style="min-width:0">
+      <button class="copiar" id="copiar" type="button">Copiar tokens CSS</button>
+      <pre class="tokens" id="tokens">:root {
+  /* Color */
+  --tp-negro: #0B0B0B;
+  --tp-carbon: #161616;
+  --tp-mesa: #1E1E1E;
+  --tp-linea: #2A2A2A;
+  --tp-naranja: #F7961A;
+  --tp-naranja-claro: #FFB23E;
+  --tp-naranja-oscuro: #E0690A;
+  --tp-verde: #3DB14F;
+  --tp-verde-oscuro: #1F6B2D;
+  --tp-rojo: #E5484D;
+  --tp-hueso: #F5F2EC;
+  --tp-gris: #9A968F;
+  --tp-degradado: linear-gradient(180deg,
+    #FFB23E 0%, #F7961A 45%, #E0690A 100%);
+
+  /* Tipografía */
+  --tp-display: "Anton", Impact, sans-serif;
+  --tp-texto: "Barlow", Arial, sans-serif;
+  --tp-etiqueta: "Barlow Condensed", "Arial Narrow", sans-serif;
+
+  /* Forma */
+  --tp-radio: 6px;
+  --tp-margen-1080: 88px;
+  --tp-ease: cubic-bezier(.22, 1, .36, 1);
+}</pre>
+    </div>
+    <div style="display:grid;gap:16px;align-content:start">
+      <div class="caja"><span class="eti">Fuentes</span><p style="margin-top:8px">Anton, Barlow y Barlow Condensed en <a href="https://fonts.google.com/?query=Barlow" target="_blank" rel="noopener">fonts.google.com</a>. Licencia OFL, uso comercial libre.</p></div>
+      <div class="caja"><span class="eti">Archivos</span><ul class="lista" style="margin-top:10px;font-size:15px"><li><code>Identidad/logo-tryingpoker.png</code>: logo principal, fondo transparente</li><li><code>Identidad/DESIGN.md</code>: este manual en texto, para producción</li><li><code>Identidad/ref/</code>: miniaturas y portadas actuales de referencia</li></ul></div>
+      <div class="pendiente"><span class="eti n">Pendiente de Toni</span><ul class="lista" style="margin-top:10px;font-size:15px"><li>Archivo original del logo en alta resolución</li><li>Validar el logotipo Anton y retirar el logo verde en cursiva</li><li>Confirmar público: ¿solo España o también Latinoamérica?</li><li>Sesión de fotos de una tarde: setup, mesa, ciudad (20 fotos de banco propio)</li></ul></div>
+    </div>
+  </div>
+</div></section>
+
+</main>
+
+<footer><div class="wrap"><span>Manual de marca TryingPoker · v1.0 · noviembre 2026</span><span class="wm-chico" style="font-size:20px">Trying<span class="n">Poker</span></span></div></footer>
+
+<script>
+document.getElementById('copiar').addEventListener('click',function(){
+  var b=this,t=document.getElementById('tokens').textContent;
+  var ok=function(){b.textContent='Copiado';setTimeout(function(){b.textContent='Copiar tokens CSS'},1600)};
+  try{navigator.clipboard.writeText(t).then(ok,function(){sel()})}catch(e){sel()}
+  function sel(){var r=document.createRange();r.selectNodeContents(document.getElementById('tokens'));var s=getSelection();s.removeAllRanges();s.addRange(r);b.textContent='Seleccionado: copia con Cmd+C'}
+});
+</script>
