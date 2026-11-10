@@ -1,0 +1,565 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Los Danis de TryingPoker</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Barlow+Condensed:wght@500;600;700&display=swap">
+<style>
+/* Layout: landing de una columna que baja por la "escalera" de límites. Marca TryingPoker (manual v1.1): negro mesa, naranja Trying, verde ficha, Anton + Barlow. Look oscuro único, a propósito. */
+:root{
+  --negro:#0B0B0B; --carbon:#161616; --mesa:#1E1E1E; --linea:#2A2A2A;
+  --naranja:#F7961A; --naranja-claro:#FFB23E; --naranja-oscuro:#E0690A;
+  --verde:#3DB14F; --verde-oscuro:#1F6B2D; --rojo:#E5484D;
+  --hueso:#F5F2EC; --gris:#9A968F; --gris-osc:#5E5B56; --texto2:#CFCAC2;
+  --f-display:"Anton","Impact","Arial Narrow Bold",sans-serif;
+  --f-texto:"Barlow","Helvetica Neue",Arial,sans-serif;
+  --f-etiqueta:"Barlow Condensed","Arial Narrow",Arial,sans-serif;
+  --grad:linear-gradient(180deg,var(--naranja-claro) 0%,var(--naranja) 45%,var(--naranja-oscuro) 100%);
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--negro);color:var(--hueso);font-family:var(--f-texto);font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--negro)}
+.wrap{max-width:1140px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--f-display);font-weight:400;text-transform:uppercase;line-height:.95;margin:0;text-wrap:balance}
+h2{font-size:clamp(40px,7vw,80px)}
+h3{font-size:clamp(24px,3vw,32px);line-height:1}
+p{margin:0}
+.eti{font-family:var(--f-etiqueta);font-weight:600;text-transform:uppercase;letter-spacing:.14em;font-size:13px;color:var(--gris)}
+.n{color:var(--naranja)} .v{color:var(--verde)} .r{color:var(--rojo)}
+.grad{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+:focus-visible{outline:2px solid var(--naranja);outline-offset:3px}
+section{padding-block:84px;border-bottom:1px solid var(--linea)}
+.cab{display:grid;gap:14px;margin-bottom:40px;max-width:760px}
+.cab p{color:var(--gris);font-size:19px}
+
+/* nav */
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:rgba(11,11,11,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--linea)}
+.nav .wrap{display:flex;gap:20px;align-items:center;padding-block:10px;overflow-x:auto;scrollbar-width:none}
+.nav img{height:20px;width:auto;flex:none}
+.nav a{font-family:var(--f-etiqueta);font-weight:600;text-transform:uppercase;letter-spacing:.1em;font-size:13px;color:var(--gris);text-decoration:none;white-space:nowrap}
+.nav a:hover{color:var(--hueso)}
+
+/* hero */
+.hero{padding-block:48px 72px;border-bottom:1px solid var(--linea);overflow:hidden}
+.hero .grid{display:grid;grid-template-columns:1.15fr .85fr;gap:32px;align-items:center}
+.hero .grid > *{min-width:0}
+.hero h1{font-size:clamp(64px,13vw,172px);line-height:.86}
+.hero .sub{font-size:21px;color:var(--texto2);margin-top:22px;max-width:34ch}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:26px}
+.chip{font-family:var(--f-etiqueta);font-weight:700;text-transform:uppercase;letter-spacing:.1em;font-size:13px;padding:7px 12px;border:1.5px solid var(--linea);border-radius:3px;color:var(--hueso);background:var(--carbon)}
+.chip.on{background:var(--naranja);border-color:var(--naranja);color:var(--negro)}
+.retrato{position:relative;justify-self:center;width:100%;max-width:420px}
+.retrato img{width:100%;height:auto;display:block;filter:drop-shadow(0 30px 50px rgba(247,150,26,.14))}
+.bocadillo{position:absolute;top:2%;left:-4%;max-width:62%;background:var(--hueso);color:var(--negro);font-family:var(--f-display);text-transform:uppercase;font-size:clamp(18px,2.4vw,26px);line-height:1;padding:12px 16px;border-radius:14px;transform:rotate(-4deg);box-shadow:0 10px 24px rgba(0,0,0,.45)}
+.bocadillo::after{content:"";position:absolute;bottom:-12px;right:26px;border:12px solid transparent;border-top-color:var(--hueso);border-bottom:0}
+@media (prefers-reduced-motion:no-preference){
+  .bocadillo{animation:pop .6s cubic-bezier(.34,1.56,.64,1) .3s both}
+  @keyframes pop{from{transform:rotate(-4deg) scale(.85)}to{transform:rotate(-4deg) scale(1)}}
+}
+
+/* carnet */
+.carnet{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:var(--linea);border:1px solid var(--linea);border-radius:8px;overflow:hidden}
+.carnet > div{background:var(--carbon);padding:18px 18px 20px;min-width:0}
+.carnet b{display:block;font-family:var(--f-etiqueta);font-weight:700;font-size:20px;letter-spacing:.02em;margin-top:4px;line-height:1.2}
+.carnet small{display:block;color:var(--gris);font-size:14px;margin-top:4px;line-height:1.4}
+.carnet .secreto{background:#1A1208}
+.carnet .secreto b{color:var(--naranja)}
+
+/* escalera */
+.escalera{position:relative;border:1px solid var(--linea);border-radius:10px;background:radial-gradient(120% 80% at 80% 0%,#1d1407 0%,var(--negro) 60%);padding:24px;overflow-x:auto}
+.escalera-in{min-width:760px;display:grid;grid-template-columns:repeat(6,1fr);align-items:end;gap:10px;height:400px}
+.peldano{position:relative;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;height:100%}
+.peldano .bloque{width:100%;background:var(--mesa);border:1px solid var(--linea);border-bottom:0;border-radius:6px 6px 0 0;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding-top:10px}
+.peldano .lim{font-family:var(--f-display);font-size:26px;line-height:1}
+.peldano .ciegas{font-family:var(--f-etiqueta);font-weight:600;font-size:13px;color:var(--gris);letter-spacing:.06em}
+.peldano .quien{position:absolute;left:50%;transform:translateX(-50%);width:110px;display:flex;flex-direction:column;align-items:center;text-align:center}
+.peldano .quien svg,.peldano .quien img{width:104px;height:auto;display:block}
+.peldano .quien span{font-family:var(--f-etiqueta);font-weight:700;text-transform:uppercase;letter-spacing:.08em;font-size:12px;margin-top:4px;background:var(--negro);padding:2px 6px;border-radius:3px}
+.peldano.tony .bloque{background:linear-gradient(180deg,#3a2408,var(--mesa));border-color:var(--naranja)}
+.peldano.meta .bloque{background:repeating-linear-gradient(45deg,var(--mesa) 0 8px,#191919 8px 16px)}
+.nota{font-size:14px;color:var(--gris);margin-top:14px;max-width:80ch}
+
+/* personajes */
+.personajes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px}
+.pj{background:var(--carbon);border:1px solid var(--linea);border-radius:10px;overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.pj.centro{border-color:var(--naranja)}
+.pj-top{display:grid;grid-template-columns:150px 1fr;gap:18px;align-items:end;padding:20px 22px 0;position:relative}
+.pj-foto{position:relative;width:150px;align-self:end}
+.pj-foto::before{content:"";position:absolute;left:4%;right:4%;bottom:0;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 50% 40%,color-mix(in srgb,var(--disco) 70%,#F7961A 30%),var(--disco) 70%)}
+.pj-foto img{position:relative;display:block;width:100%;height:auto}
+.pj-top .nombre{padding-bottom:18px;min-width:0}
+.pj-top h3{font-size:clamp(28px,3.4vw,38px)}
+.pj-top .lim{display:inline-block;font-family:var(--f-etiqueta);font-weight:700;letter-spacing:.12em;font-size:13px;padding:4px 10px;border-radius:3px;background:var(--naranja);color:var(--negro);margin-bottom:10px}
+.pj-top .datos{color:var(--gris);font-size:15px;margin-top:8px}
+.pj-frase{margin:0 22px;padding:16px 18px;background:var(--hueso);color:var(--negro);border-radius:12px 12px 12px 2px;font-weight:600;font-size:17px;line-height:1.35;position:relative}
+.pj-body{padding:20px 22px 24px;display:grid;gap:18px;flex:1}
+.stats{display:grid;gap:8px}
+.stat{display:grid;grid-template-columns:92px 1fr 34px;gap:10px;align-items:center;font-family:var(--f-etiqueta);font-weight:600;text-transform:uppercase;letter-spacing:.08em;font-size:13px;color:var(--gris)}
+.stat .barra{display:grid;grid-template-columns:repeat(5,1fr);gap:3px}
+.stat .barra i{height:10px;border-radius:2px;background:var(--linea)}
+.stat .barra i.on{background:var(--naranja)}
+.stat.malo .barra i.on{background:var(--rojo)}
+.stat em{font-style:normal;color:var(--hueso);text-align:right;font-variant-numeric:tabular-nums}
+.pj-dos{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.pj-dos > div{min-width:0}
+.pj-dos p{font-size:15.5px;color:var(--texto2);margin-top:4px;line-height:1.45}
+.gancho{border-top:1px dashed var(--linea);padding-top:14px}
+.gancho p{font-family:var(--f-display);text-transform:uppercase;font-size:22px;line-height:1.05;margin-top:6px}
+
+/* martes */
+.dia{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:10px;overflow-x:auto}
+.hora{background:var(--carbon);border:1px solid var(--linea);border-radius:8px;padding:14px;display:flex;flex-direction:column;gap:10px;min-width:130px}
+.hora .h{font-family:var(--f-display);font-size:30px;line-height:1}
+.hora p{font-size:14.5px;color:var(--texto2);line-height:1.4;flex:1}
+.bateria{display:flex;align-items:center;gap:6px;font-family:var(--f-etiqueta);font-weight:700;font-size:13px;letter-spacing:.06em}
+.bateria .cuerpo{flex:1;height:14px;border:1.5px solid var(--gris-osc);border-radius:3px;padding:2px;position:relative}
+.bateria .cuerpo::after{content:"";position:absolute;right:-5px;top:3px;width:3px;height:5px;background:var(--gris-osc);border-radius:0 1px 1px 0}
+.bateria .carga{height:100%;border-radius:1px}
+.hora.critica{border-color:var(--rojo);background:#1A1010}
+.patron{margin-top:22px;display:flex;gap:14px;align-items:flex-start;background:var(--carbon);border-left:3px solid var(--naranja);padding:16px 20px;border-radius:0 8px 8px 0}
+.patron p{color:var(--texto2)}
+
+/* dolores */
+.filtros{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px}
+.filtros button{font:inherit;cursor:pointer;font-family:var(--f-etiqueta);font-weight:700;text-transform:uppercase;letter-spacing:.1em;font-size:13px;padding:8px 14px;border:1.5px solid var(--linea);border-radius:3px;color:var(--hueso);background:var(--carbon)}
+.filtros button[aria-pressed="true"]{background:var(--naranja);border-color:var(--naranja);color:var(--negro)}
+.chat{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;align-items:start}
+.msg{background:var(--mesa);border:1px solid var(--linea);border-radius:16px 16px 16px 4px;padding:14px 16px;min-width:0}
+.msg p{font-size:17px;font-weight:500;line-height:1.4}
+.msg .de{display:flex;justify-content:space-between;gap:8px;margin-top:10px}
+.msg .de span{font-family:var(--f-etiqueta);font-weight:600;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--gris)}
+.msg.miedo{grid-column:1/-1;background:#1A1010;border-color:#4A2224;border-radius:16px}
+.msg.miedo p{font-family:var(--f-display);text-transform:uppercase;font-size:clamp(24px,3.6vw,36px);line-height:1.02;font-weight:400}
+
+/* desea */
+.desea{display:grid;gap:12px}
+.fila-d{display:grid;grid-template-columns:1fr 1fr 1.2fr;border:1px solid var(--linea);border-radius:8px;overflow:hidden}
+.fila-d > div{padding:16px 18px;min-width:0;display:flex;flex-direction:column;gap:4px}
+.fila-d .q{background:var(--carbon)}
+.fila-d .b{background:#191212;border-left:1px solid var(--linea)}
+.fila-d .t{background:#121A13;border-left:1px solid var(--linea)}
+.fila-d b{font-family:var(--f-etiqueta);font-weight:700;font-size:19px;line-height:1.2}
+.fila-d .b i{font-style:normal;color:#E9B7B8}
+.fila-d .eti{font-size:11px}
+.fila-d .b .eti{color:var(--rojo)} .fila-d .t .eti{color:var(--verde)}
+
+/* canales */
+.canales{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.canal{background:var(--carbon);border:1px solid var(--linea);border-radius:8px;padding:18px;min-width:0;display:flex;flex-direction:column;gap:8px}
+.canal .rol{align-self:flex-start;font-family:var(--f-etiqueta);font-weight:700;letter-spacing:.1em;text-transform:uppercase;font-size:11px;padding:3px 8px;border-radius:3px}
+.rol.puerta{background:var(--naranja);color:var(--negro)}
+.rol.casa{background:var(--verde);color:var(--negro)}
+.rol.apoyo{border:1px solid var(--gris-osc);color:var(--gris)}
+.canal h3{font-size:24px}
+.canal p{font-size:14.5px;color:var(--texto2);line-height:1.4}
+.canal p b{color:var(--hueso);font-weight:600}
+.engancha{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:18px}
+.engancha > div{border-radius:8px;padding:18px 20px;min-width:0}
+.engancha .si{background:#121A13;border:1px solid #23402A}
+.engancha .no{background:#1A1212;border:1px solid #4A2224}
+
+/* voz */
+.voz{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--linea);border:1px solid var(--linea);border-radius:8px;overflow:hidden}
+.voz > div{background:var(--carbon);padding:12px 18px;min-width:0;font-size:16px}
+.voz .h{font-family:var(--f-etiqueta);font-weight:700;text-transform:uppercase;letter-spacing:.12em;font-size:13px}
+.voz .h.si{color:var(--verde)} .voz .h.no{color:var(--rojo)}
+.voz .no-t{color:var(--gris);text-decoration:line-through;text-decoration-color:rgba(229,72,77,.6)}
+.reels{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:28px}
+.reel{aspect-ratio:9/16;width:100%;max-width:100%;min-width:0;border-radius:10px;border:1px solid var(--linea);background:linear-gradient(180deg,#1b1b1b 0%,var(--negro) 70%);position:relative;overflow:hidden;container-type:inline-size}
+.reel .in{position:absolute;inset:0;padding:9cqw 8cqw;display:flex;flex-direction:column;justify-content:flex-end}
+.reel .num{position:absolute;top:7cqw;left:8cqw;font-family:var(--f-etiqueta);font-weight:700;letter-spacing:.1em;font-size:6cqw;color:var(--gris)}
+.reel .para{position:absolute;top:7cqw;right:8cqw;font-family:var(--f-etiqueta);font-weight:700;letter-spacing:.1em;font-size:5.4cqw;padding:1cqw 2.6cqw;border-radius:2px;background:var(--naranja);color:var(--negro);text-transform:uppercase}
+.reel p{font-family:var(--f-display);text-transform:uppercase;font-size:11.5cqw;line-height:.98}
+.reel img{width:42cqw;height:auto;margin-top:8cqw}
+
+/* checklist */
+.check{display:grid;gap:10px;max-width:820px}
+.check label{display:grid;grid-template-columns:30px 1fr;gap:14px;align-items:start;padding:14px 16px;background:var(--carbon);border:1px solid var(--linea);border-radius:8px;cursor:pointer}
+.check input{accent-color:var(--naranja);width:20px;height:20px;margin-top:3px}
+.check b{font-family:var(--f-etiqueta);font-weight:700;font-size:19px;display:block}
+.check span{color:var(--gris);font-size:15px}
+.marcador{display:flex;align-items:center;gap:18px;margin-top:20px;flex-wrap:wrap}
+.marcador .fichas{display:flex;gap:6px}
+.marcador .fichas i{width:30px;height:30px;border-radius:50%;background:var(--linea);border:3px dashed #3a3a3a;transition:background .2s}
+.marcador .fichas i.on{background:var(--verde);border-color:rgba(255,255,255,.7)}
+.marcador .veredicto{font-family:var(--f-display);text-transform:uppercase;font-size:28px;line-height:1}
+
+/* validar */
+.validar{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.validar > div{min-width:0}
+.pasos{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.pasos li{display:grid;grid-template-columns:36px 1fr;gap:12px;align-items:start;padding:12px 0;border-bottom:1px solid var(--linea);color:var(--texto2)}
+.pasos li span{font-family:var(--f-display);font-size:24px;line-height:1;color:var(--naranja)}
+footer{padding-block:44px 60px;color:var(--gris);font-size:14px}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:center}
+
+@media (max-width:900px){
+  .hero .grid,.personajes,.validar{grid-template-columns:1fr}
+  .carnet,.canales,.reels{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .chat{grid-template-columns:1fr 1fr}
+  .dia{grid-template-columns:repeat(7,150px)}
+  .retrato{max-width:340px}
+}
+@media (max-width:560px){
+  section{padding-block:56px}
+  .carnet,.chat,.engancha,.canales{grid-template-columns:1fr}
+  .pj-top{grid-template-columns:110px 1fr;gap:12px;padding:16px 16px 0}
+  .pj-foto{width:110px}
+  .pj-frase{margin:0 16px}
+  .pj-body{padding:18px 16px 20px}
+  .pj-dos{grid-template-columns:1fr}
+  .fila-d{grid-template-columns:1fr}
+  .fila-d .b,.fila-d .t{border-left:0;border-top:1px solid var(--linea)}
+  .voz{grid-template-columns:1fr}
+  .voz .h.no,.voz .no-t{display:none}
+  .bocadillo{left:0}
+}
+</style>
+
+<nav class="nav" aria-label="Secciones"><div class="wrap">
+  <img src="logo/logotipo-bicolor.svg" alt="TryingPoker">
+  <a href="#ficha">Ficha</a><a href="#escalera">La escalera</a><a href="#personajes">Los 4 Danis</a><a href="#martes">Un martes</a><a href="#dolores">Lo que dice</a><a href="#desea">Lo que quiere</a><a href="#canales">Dónde está</a><a href="#hablar">Cómo le hablamos</a><a href="#check">Checklist</a>
+</div></nav>
+
+<header class="hero"><div class="wrap grid">
+  <div>
+    <span class="eti">Avatar de TryingPoker · noviembre 2026</span>
+    <h1 style="margin-top:14px">Este es<br><span class="grad">Dani</span></h1>
+    <p class="sub">34 años, trabaja 8 horas, tiene un crío pequeño y juega PLO10 a las once de la noche. Cada reel de Tony le habla a él.</p>
+    <div class="chips"><span class="chip on">PLO5 – PLO50</span><span class="chip">5–10 h por semana</span><span class="chip">Curro formal</span><span class="chip">Padre o casi</span><span class="chip">Juega cansado</span></div>
+  </div>
+  <div class="retrato">
+    <div class="bocadillo">Con el curro y el niño no me da la vida</div>
+    <div data-pj="ratito" data-size="hero"></div>
+  </div>
+</div></header>
+
+<main>
+
+<!-- FICHA -->
+<section id="ficha"><div class="wrap">
+  <div class="cab"><span class="eti">La ficha</span><h2>El carnet de <span class="n">jugador</span></h2><p>Es la versión de Tony de hace unos años. Si un contenido no le sirve a este tío, no es para la cuenta.</p></div>
+  <div class="carnet">
+    <div><span class="eti">Edad</span><b>28–42 años</b><small>El centro, 34</small></div>
+    <div><span class="eti">Quién</span><b>Hombre</b><small>La gran mayoría del póker online</small></div>
+    <div><span class="eti">Dónde</span><b>España</b><small>Winamax o PokerStars; también Latinoamérica</small></div>
+    <div><span class="eti">Trabajo</span><b>Empleo formal</b><small>Oficina, comercio, logística o turnos. Sueldo medio y estable</small></div>
+    <div><span class="eti">Familia</span><b>En pareja</b><small>Con un hijo pequeño o con planes de tenerlo</small></div>
+    <div><span class="eti">Experiencia</span><b>1 a 4 años</b><small>Viene del Hold'em, se pasó al Omaha "porque hay más acción"</small></div>
+    <div><span class="eti">Horas de juego</span><b>5–10 h / semana</b><small>De noche o el finde, a veces desde el móvil</small></div>
+    <div><span class="eti">Estudio</span><b>Casi nada</b><small>Vídeos de YouTube y algún grupo de Telegram o Discord</small></div>
+    <div><span class="eti">Bankroll</span><b class="r">Mezclado con casa</b><small>Pequeño. Ha recargado más de una vez</small></div>
+    <div><span class="eti">Cuerpo</span><b class="r">En reserva</b><small>Come lo que pilla, no entrena, duerme poco</small></div>
+    <div><span class="eti">Meta en voz alta</span><b>"Un dinerito extra"</b><small>Lo que le cuenta a su pareja</small></div>
+    <div class="secreto"><span class="eti">Meta en secreto</span><b>Vivir del póker</b><small>Dejar el trabajo, como quiere hacer Tony</small></div>
+  </div>
+</div></section>
+
+<!-- ESCALERA -->
+<section id="escalera"><div class="wrap">
+  <div class="cab"><span class="eti">La escalera</span><h2>Dani abajo, <span class="n">Tony</span> unos peldaños arriba</h2><p>Tony está en PLO100 y a punto de subir a PLO200: lo bastante arriba para enseñar y lo bastante cerca para que Dani lo sienta alcanzable.</p></div>
+  <div class="escalera"><div class="escalera-in" id="escaleraIn"></div></div>
+  <p class="nota">Ciegas orientativas con buy-in de 100 ciegas grandes; cada sala nombra sus límites a su manera (confirmar con Tony los de Winamax). Regla de contenido: hablar de lo que Dani vive en PLO5–PLO50 y usar lo que Tony ya pasó ahí como prueba. PLO100 y PLO200 enseñan hacia dónde va el camino; no son el tema.</p>
+</div></section>
+
+<!-- PERSONAJES -->
+<section id="personajes"><div class="wrap">
+  <div class="cab"><span class="eti">Los 4 Danis</span><h2>Un avatar, <span class="n">cuatro peldaños</span></h2><p>Dani no es igual en PLO5 que en PLO50. Estos cuatro personajes son el mismo avatar en momentos distintos, para escribir cada pieza pensando en uno concreto.</p></div>
+  <div class="personajes" id="personajesGrid"></div>
+  <p class="nota">Las barras son una estimación para dar vida a cada perfil, no datos medidos. Los nombres y detalles de cada personaje son de trabajo; se ajustan cuando lleguen las respuestas reales de los seguidores.</p>
+</div></section>
+
+<!-- MARTES -->
+<section id="martes"><div class="wrap">
+  <div class="cab"><span class="eti">Un martes cualquiera</span><h2>La batería de <span class="n">Dani</span></h2><p>El póker le entra en los huecos que le sobran del día, con la cabeza y el cuerpo ya gastados. Ahí es donde el contenido más le llega.</p></div>
+  <div class="dia" id="dia"></div>
+  <div class="patron"><span class="eti n" style="white-space:nowrap">Lo que se repite</span><p>Juega cansado, sin calentar ni revisar manos, y el resultado de la sesión le cambia el humor del día siguiente.</p></div>
+</div></section>
+
+<!-- DOLORES -->
+<section id="dolores"><div class="wrap">
+  <div class="cab"><span class="eti">Dolores y miedos, en sus palabras</span><h2>Lo que <span class="n">escribe</span> en los grupos</h2><p>Siente que se esfuerza y no avanza, sin saber si el problema es el póker, el tiempo o él mismo. Estas frases se usan tal cual en ganchos y textos.</p></div>
+  <div class="filtros" role="group" aria-label="Filtrar frases">
+    <button type="button" data-f="todo" aria-pressed="true">Todo</button>
+    <button type="button" data-f="juego" aria-pressed="false">El juego</button>
+    <button type="button" data-f="tiempo" aria-pressed="false">Tiempo y familia</button>
+    <button type="button" data-f="dinero" aria-pressed="false">Dinero</button>
+    <button type="button" data-f="yo" aria-pressed="false">Él mismo</button>
+  </div>
+  <div class="chat" id="chat"></div>
+</div></section>
+
+<!-- DESEA -->
+<section id="desea"><div class="wrap">
+  <div class="cab"><span class="eti">Lo que desea y lo que cree que se lo impide</span><h2>Quiere un <span class="n">camino</span>, no hacerse rico</h2><p>Quiere ver que hay un camino real, con pasos y números, que se puede recorrer con trabajo y familia.</p></div>
+  <div class="desea" id="deseaList"></div>
+  <p class="nota" style="font-size:16px;color:var(--texto2)">La promesa de la cuenta sale de aquí: <b class="n">un camino real hacia profesional, mientras trabajas, con números.</b></p>
+</div></section>
+
+<!-- CANALES -->
+<section id="canales"><div class="wrap">
+  <div class="cab"><span class="eti">Dónde está y qué consume</span><h2>En el <span class="n">móvil</span>, en ratos muertos</h2><p>Instagram y los shorts son la puerta. El vídeo largo y el directo, el sitio donde se queda.</p></div>
+  <div class="canales" id="canalesGrid"></div>
+  <div class="engancha">
+    <div class="si"><span class="eti v">Le engancha</span><p style="margin-top:6px">Números reales, humor de jugador, "esto te pasa a ti también", trucos de dinero (rakeback, bonos).</p></div>
+    <div class="no"><span class="eti r">Le aleja</span><p style="margin-top:6px">Teoría densa de solver, lujo y vida de crack, anuncios en cada post.</p></div>
+  </div>
+</div></section>
+
+<!-- HABLAR -->
+<section id="hablar"><div class="wrap">
+  <div class="cab"><span class="eti">Cómo le hablamos</span><h2>Como un <span class="n">compañero</span> que va por delante</h2><p>De tú, directo, con humor y con números. Admite los meses malos. Cuenta lo que hace Tony, no lo que "hay que hacer".</p></div>
+  <div class="voz" id="voz"></div>
+  <div class="reels" id="reels"></div>
+</div></section>
+
+<!-- CHECK -->
+<section id="check"><div class="wrap">
+  <div class="cab"><span class="eti">Antes de publicar</span><h2>¿Le llega a <span class="n">Dani</span>?</h2><p>Si una pieza no pasa al menos 4 de estos 5 puntos, se reescribe. Marca los que cumple la pieza que tienes entre manos.</p></div>
+  <div class="check" id="checkList"></div>
+  <div class="marcador"><div class="fichas" id="fichas" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div><div class="veredicto" id="veredicto" aria-live="polite">0 de 5 · se reescribe</div></div>
+</div></section>
+
+<!-- VALIDAR -->
+<section id="validar"><div class="wrap">
+  <div class="cab"><span class="eti">Fuentes y cómo validarlo</span><h2>Dani es una <span class="n">hipótesis</span></h2><p>Sale de lo que Tony contó sobre su público, de las propuestas de TryingPoker (perfil y estrategia) y de conocimiento general del póker online. No hay datos externos citados: las cifras son aproximadas.</p></div>
+  <div class="validar">
+    <div><span class="eti">Para validarlo el primer mes</span>
+      <ol class="pasos" style="margin-top:12px">
+        <li><span>1</span>Preguntar en historias: "¿Qué límite juegas?", "¿Trabajas además de jugar?", "¿Cuántas horas a la semana juegas?"</li>
+        <li><span>2</span>Revisar en Instagram la edad, el género y el país de los seguidores</li>
+        <li><span>3</span>Guardar las frases textuales de comentarios y mensajes directos y sumarlas a "Lo que escribe"</li>
+        <li><span>4</span>Hablar 15 minutos con 3 seguidores que encajen y ajustar los 4 personajes</li>
+      </ol>
+    </div>
+    <div class="patron" style="margin-top:0;flex-direction:column;align-self:start"><span class="eti n">El miedo de fondo</span><p style="font-family:var(--f-display);text-transform:uppercase;font-size:clamp(26px,3.4vw,36px);line-height:1.02;color:var(--hueso)">Quedarse para siempre en un trabajo que no le llena, y que el póker se quede en un hobby caro.</p></div>
+  </div>
+</div></section>
+
+</main>
+
+<footer><div class="wrap"><span>Avatar TryingPoker · basado en el documento "Avatar TryingPoker" · noviembre 2026</span><img src="logo/logotipo-bicolor.svg" alt="TryingPoker" style="height:24px;width:auto"></div></footer>
+
+<script>
+/* ---------- personajes dibujados (SVG plano, sin librerías) ---------- */
+var PJ={
+  novato:{nombre:"El recién llegado",real:"Álex",lim:"PLO5",edad:"28",piel:"#E8B48F",pelo:"#2B1D14",peinado:"gorra",gorra:"#3DB14F",barba:"ninguna",ropa:"#2E4A7A",fondo:"#14243A",ojeras:0,boca:"sonrisa",gafas:false,prop:"movil"},
+  ratito:{nombre:"El del ratito",real:"Dani",lim:"PLO10",edad:"34",piel:"#D9A07A",pelo:"#1E1612",peinado:"corto",barba:"sombra",ropa:"#3A3A3A",fondo:"#2A1A08",ojeras:2,boca:"plana",gafas:false,prop:"cafe"},
+  atascado:{nombre:"El atascado",real:"Rubén",lim:"PLO20",edad:"37",piel:"#C98E68",pelo:"#3A2A20",peinado:"despeinado",barba:"corta",ropa:"#5A2E2E",fondo:"#2A1212",ojeras:2,boca:"preocupado",gafas:true,prop:"cartas"},
+  casi:{nombre:"El que casi llega",real:"Javi",lim:"PLO50",edad:"41",piel:"#B97F5B",pelo:"#151515",peinado:"entradas",barba:"completa",ropa:"#1F3A26",fondo:"#10200F",ojeras:1,boca:"sonrisa",gafas:false,prop:"auris"}
+};
+function svgPJ(p,opts){
+  opts=opts||{};
+  var s='<svg viewBox="0 0 200 220" role="img" aria-label="Ilustración de '+p.real+', '+p.nombre.toLowerCase()+'" xmlns="http://www.w3.org/2000/svg">';
+  if(!opts.sinFondo) s+='<circle cx="100" cy="112" r="92" fill="'+p.fondo+'"/>';
+  // cuerpo
+  s+='<path d="M28 220 C30 172 58 150 100 150 C142 150 170 172 172 220 Z" fill="'+p.ropa+'"/>';
+  s+='<path d="M82 150 L100 172 L118 150 Z" fill="rgba(0,0,0,.25)"/>';
+  // cuello
+  s+='<rect x="86" y="126" width="28" height="30" rx="8" fill="'+p.piel+'"/>';
+  s+='<rect x="86" y="140" width="28" height="8" fill="rgba(0,0,0,.12)"/>';
+  // orejas y cabeza
+  s+='<ellipse cx="62" cy="98" rx="8" ry="11" fill="'+p.piel+'"/><ellipse cx="138" cy="98" rx="8" ry="11" fill="'+p.piel+'"/>';
+  s+='<path d="M64 84 C64 52 82 40 100 40 C118 40 136 52 136 84 L136 104 C136 126 120 140 100 140 C80 140 64 126 64 104 Z" fill="'+p.piel+'"/>';
+  // pelo
+  if(p.peinado==="corto") s+='<path d="M62 86 C60 52 80 34 102 34 C124 34 140 50 138 86 C134 70 128 60 116 58 C104 62 86 62 74 58 C68 66 64 74 62 86 Z" fill="'+p.pelo+'"/>';
+  if(p.peinado==="despeinado") s+='<path d="M60 88 C56 50 78 30 100 32 C112 26 124 30 128 38 C142 44 144 66 140 88 C136 72 130 64 122 62 L118 54 L110 62 L100 54 L92 64 L84 56 L78 64 C70 66 64 74 60 88 Z" fill="'+p.pelo+'"/>';
+  if(p.peinado==="entradas") s+='<path d="M62 90 C60 60 70 44 84 40 C80 52 82 58 90 56 C96 50 104 50 110 56 C118 58 120 52 116 40 C130 44 140 60 138 90 C134 78 130 72 126 70 L126 60 C116 66 84 66 74 60 L74 70 C70 72 66 78 62 90 Z" fill="'+p.pelo+'"/>';
+  if(p.peinado==="gorra"){
+    s+='<path d="M64 84 C64 60 70 54 76 52 L124 52 C132 54 136 62 136 84 Z" fill="'+p.pelo+'"/>';
+    s+='<path d="M60 74 C60 44 80 30 100 30 C122 30 140 44 140 74 Z" fill="'+p.gorra+'"/>';
+    s+='<path d="M58 72 C80 66 120 66 142 72 L150 80 C120 74 82 74 56 80 Z" fill="'+p.gorra+'" opacity=".85"/>';
+    s+='<circle cx="100" cy="31" r="4" fill="rgba(0,0,0,.25)"/><path d="M92 46 h16 v12 h-16 z" fill="#F5F2EC" opacity=".9"/><text x="100" y="56" text-anchor="middle" font-family="Anton,Impact,sans-serif" font-size="10" fill="#0B0B0B">♠</text>';
+  }
+  // cejas
+  var cejaY=p.boca==="preocupado"?80:82;
+  if(p.boca==="preocupado"){s+='<path d="M76 84 L92 79" stroke="'+p.pelo+'" stroke-width="4" stroke-linecap="round"/><path d="M124 84 L108 79" stroke="'+p.pelo+'" stroke-width="4" stroke-linecap="round"/>';}
+  else s+='<path d="M76 '+cejaY+' Q84 78 92 '+cejaY+'" stroke="'+p.pelo+'" stroke-width="4" fill="none" stroke-linecap="round"/><path d="M108 '+cejaY+' Q116 78 124 '+cejaY+'" stroke="'+p.pelo+'" stroke-width="4" fill="none" stroke-linecap="round"/>';
+  // ojos
+  var oj=p.ojeras>=2?'<ellipse cx="84" cy="94" rx="5" ry="3.4" fill="#1A1A1A"/><ellipse cx="116" cy="94" rx="5" ry="3.4" fill="#1A1A1A"/><path d="M78 89 h12 M110 89 h12" stroke="'+p.piel+'" stroke-width="3.2"/>':'<circle cx="84" cy="93" r="4.4" fill="#1A1A1A"/><circle cx="116" cy="93" r="4.4" fill="#1A1A1A"/><circle cx="85.4" cy="91.6" r="1.3" fill="#fff"/><circle cx="117.4" cy="91.6" r="1.3" fill="#fff"/>';
+  s+=oj;
+  if(p.ojeras){var o=p.ojeras===2?.45:.25;s+='<path d="M77 101 Q84 106 91 101 M109 101 Q116 106 123 101" stroke="#6B3F5A" stroke-opacity="'+o+'" stroke-width="3" fill="none" stroke-linecap="round"/>';}
+  if(p.gafas) s+='<g fill="none" stroke="#111" stroke-width="3"><rect x="72" y="85" width="24" height="17" rx="5"/><rect x="104" y="85" width="24" height="17" rx="5"/><path d="M96 92 h8 M72 91 l-8 -2 M128 91 l8 -2"/></g><g fill="#fff" opacity=".18"><rect x="74" y="87" width="8" height="5" rx="2"/><rect x="106" y="87" width="8" height="5" rx="2"/></g>';
+  // nariz
+  s+='<path d="M100 98 Q104 110 98 113" stroke="rgba(0,0,0,.28)" stroke-width="2.5" fill="none" stroke-linecap="round"/>';
+  // barba
+  if(p.barba==="sombra") s+='<path d="M68 106 C70 128 84 140 100 140 C116 140 130 128 132 106 C128 120 116 128 100 128 C84 128 72 120 68 106 Z" fill="'+p.pelo+'" opacity=".35"/>';
+  if(p.barba==="corta") s+='<path d="M66 102 C66 130 82 142 100 142 C118 142 134 130 134 102 C130 118 120 124 112 122 C104 118 96 118 88 122 C80 124 70 118 66 102 Z" fill="'+p.pelo+'" opacity=".8"/>';
+  if(p.barba==="completa") s+='<path d="M64 98 C62 134 80 150 100 150 C120 150 138 134 136 98 C132 116 122 122 114 120 C106 114 94 114 86 120 C78 122 68 116 64 98 Z" fill="'+p.pelo+'"/><path d="M90 119 Q100 114 110 119" stroke="'+p.pelo+'" stroke-width="5" fill="none"/>';
+  // boca
+  var bc=p.barba==="completa"?"#E7C9B5":"#7A3A2E";
+  if(p.boca==="sonrisa") s+='<path d="M88 121 Q100 131 112 121" stroke="'+bc+'" stroke-width="3.5" fill="none" stroke-linecap="round"/>';
+  if(p.boca==="plana") s+='<path d="M90 123 Q100 125 110 122" stroke="'+bc+'" stroke-width="3.5" fill="none" stroke-linecap="round"/>';
+  if(p.boca==="preocupado") s+='<path d="M89 126 Q100 118 111 126" stroke="'+bc+'" stroke-width="3.5" fill="none" stroke-linecap="round"/>';
+  // props
+  if(p.prop==="movil") s+='<g transform="translate(128 160) rotate(12)"><rect x="0" y="0" width="30" height="52" rx="5" fill="#111" stroke="#444" stroke-width="2"/><rect x="3" y="5" width="24" height="40" rx="2" fill="#1F6B2D"/><text x="15" y="30" text-anchor="middle" font-family="Anton,Impact,sans-serif" font-size="11" fill="#F5F2EC">PLO</text></g><ellipse cx="138" cy="205" rx="13" ry="9" fill="'+p.piel+'"/>';
+  if(p.prop==="cafe") s+='<g transform="translate(126 166)"><path d="M0 0 h32 l-3 40 h-26 z" fill="#F5F2EC"/><path d="M32 8 c10 0 10 16 0 16" stroke="#F5F2EC" stroke-width="4" fill="none"/><rect x="2" y="14" width="28" height="9" fill="#F7961A"/><path d="M10 -6 q4 -6 0 -12 M20 -6 q4 -6 0 -12" stroke="#9A968F" stroke-width="2" fill="none" stroke-linecap="round"/></g><ellipse cx="132" cy="196" rx="12" ry="9" fill="'+p.piel+'"/>';
+  if(p.prop==="cartas"){var cs=['A♠','K♥','Q♦','J♣'];for(var i=0;i<4;i++){var rot=-24+i*16;s+='<g transform="translate(140 196) rotate('+rot+')"><rect x="-11" y="-46" width="24" height="34" rx="3" fill="#F7F5F0" stroke="#999" stroke-width="1"/><text x="-7" y="-34" font-family="Anton,Impact,sans-serif" font-size="9" fill="'+(i%3===1||i===2?'#C8282E':'#111')+'">'+cs[i]+'</text></g>';}s+='<ellipse cx="140" cy="200" rx="13" ry="9" fill="'+p.piel+'"/>';}
+  if(p.prop==="auris") s+='<path d="M60 92 C58 44 142 44 140 92" stroke="#111" stroke-width="7" fill="none"/><rect x="52" y="84" width="14" height="24" rx="6" fill="#F7961A"/><rect x="134" y="84" width="14" height="24" rx="6" fill="#F7961A"/><path d="M58 108 q4 18 24 20" stroke="#111" stroke-width="3" fill="none"/><circle cx="84" cy="128" r="3.5" fill="#111"/>';
+  s+='</svg>';
+  return s;
+}
+function imgPJ(k,extra){var p=PJ[k];return '<img src="pj/'+k+'.webp" alt="Ilustración de '+p.real+', '+p.nombre.toLowerCase()+'" loading="lazy"'+(extra||'')+'>';}
+document.querySelectorAll('[data-pj]').forEach(function(el){el.innerHTML=imgPJ(el.getAttribute('data-pj'),' loading="eager"');});
+
+/* ---------- escalera ---------- */
+var ESC=[
+  {lim:"PLO5",ciegas:"0,02/0,05 €",bi:"5 €",h:18,pj:"novato",tag:"Álex"},
+  {lim:"PLO10",ciegas:"0,05/0,10 €",bi:"10 €",h:30,pj:"ratito",tag:"Dani"},
+  {lim:"PLO20",ciegas:"0,10/0,20 €",bi:"20 €",h:42,pj:"atascado",tag:"Rubén"},
+  {lim:"PLO50",ciegas:"0,25/0,50 €",bi:"50 €",h:54,pj:"casi",tag:"Javi"},
+  {lim:"PLO100",ciegas:"0,50/1 €",bi:"100 €",h:66,tony:true,tag:"Tony hoy"},
+  {lim:"PLO200",ciegas:"1/2 €",bi:"200 €",h:78,meta:true,tag:"Su siguiente paso"}
+];
+document.getElementById('escaleraIn').innerHTML=ESC.map(function(e){
+  var quien=e.tony?'<img src="logo.png" alt="Tony, del logo de TryingPoker" style="width:104px">':(e.meta?'<div style="width:70px;height:70px;border-radius:50%;border:2px dashed var(--naranja);display:grid;place-items:center;font-family:var(--f-display);font-size:30px;color:var(--naranja)">?</div>':imgPJ(e.pj));
+  return '<div class="peldano'+(e.tony?' tony':'')+(e.meta?' meta':'')+'"><div class="quien" style="bottom:calc('+e.h+'% + 6px)">'+quien+'<span'+(e.tony?' class="n"':'')+'>'+e.tag+'</span></div><div class="bloque" style="height:'+e.h+'%"><span class="lim'+(e.tony?' n':'')+'">'+e.lim+'</span><span class="ciegas">'+e.ciegas+'</span><span class="ciegas">Buy-in '+e.bi+'</span></div></div>';
+}).join('');
+
+/* ---------- 4 personajes ---------- */
+var FICHAS=[
+  {k:"novato",datos:"28 años · dependiente en una tienda · sin hijos, con pareja",frase:"El Omaha es una montaña rusa. No sé si soy ganador o he tenido suerte.",
+   stats:[["Tiempo",4],["Energía",4],["Bankroll",1],["Estudio",1],["Tilt",3,1]],
+   duele:"Llegó del Hold'em hace meses. Juega desde el móvil, mezcla el bankroll con lo de casa y no sabe ni por dónde empezar a estudiar.",
+   necesita:"Lo básico bien puesto: reglas de bankroll simples, rakeback explicado y qué mirar primero.",
+   gancho:"Cuánto rakeback estás dejando en la mesa en PLO5"},
+  {k:"ratito",centro:true,datos:"34 años · administrativo en logística · un hijo de 2 años",frase:"Con el curro y el niño no me da la vida para estudiar. Llevo 3 meses en PLO10 en break even.",
+   stats:[["Tiempo",1],["Energía",1],["Bankroll",2],["Estudio",1],["Tilt",3,1]],
+   duele:"Juega \"un ratito\" a las 22:30 mientras su pareja ve una serie, y acaba a la 1:30 intentando recuperar. Siente culpa por jugar en vez de estar con ellos.",
+   necesita:"Ver que se puede con poco tiempo: una rutina de 20–30 minutos y lo que hace Tony con 8 horas de curro.",
+   gancho:"Si juegas PLO10 después de 8 horas de trabajo, esto es para ti"},
+  {k:"atascado",datos:"37 años · comercial por turnos · dos hijos",frase:"Cada vez que subo a PLO25 me devuelven abajo. Pierdo lo de la semana en una sesión de tilt.",
+   stats:[["Tiempo",2],["Energía",2],["Bankroll",3],["Estudio",2],["Tilt",5,1]],
+   duele:"Ya no es nuevo y sabe jugar, pero lleva meses sin moverse. Cada mala sesión le borra la semana y empieza a pensar que \"el tilt es su carácter\".",
+   necesita:"Rutinas antes y después de jugar, límites de pérdida por sesión y un plan claro para subir y quedarse.",
+   gancho:"El error que me tuvo 6 meses atascado en PLO20"},
+  {k:"casi",datos:"41 años · encargado de almacén · un hijo de 6 años",frase:"Llego tarde. Los buenos empezaron con 20 años y sin trabajo.",
+   stats:[["Tiempo",2],["Energía",3],["Bankroll",4],["Estudio",4],["Tilt",2,1]],
+   duele:"Gana en PLO50, lleva sus números y es el techo del avatar. La meta secreta de dejar el trabajo le pesa más que a nadie, y cree que ya no le toca.",
+   necesita:"Una prueba de que es posible: las gráficas reales de Tony cada mes y el camino que está haciendo ahora, a la vista de todos.",
+   gancho:"Mi mes en números: trabajando 40 h a la semana"}
+];
+function barras(n,malo){var h='';for(var i=0;i<5;i++)h+='<i'+(i<n?' class="on"':'')+'></i>';return h;}
+document.getElementById('personajesGrid').innerHTML=FICHAS.map(function(f){
+  var p=PJ[f.k];
+  return '<article class="pj'+(f.centro?' centro':'')+'">'+
+    '<div class="pj-top"><div class="pj-foto" style="--disco:'+p.fondo+'">'+imgPJ(f.k)+'</div><div class="nombre"><span class="lim">'+p.lim+(f.centro?' · EL CENTRO':'')+'</span><h3>'+p.nombre+'</h3><p class="datos"><b style="color:var(--hueso)">'+p.real+'</b> · '+f.datos+'</p></div></div>'+
+    '<p class="pj-frase">"'+f.frase+'"</p>'+
+    '<div class="pj-body">'+
+      '<div class="stats">'+f.stats.map(function(s){var malo=s[2];return '<div class="stat'+(malo?' malo':'')+'"><span>'+s[0]+'</span><div class="barra" aria-hidden="true">'+barras(s[1])+'</div><em>'+s[1]+'/5</em></div>';}).join('')+'</div>'+
+      '<div class="pj-dos"><div><span class="eti r">Lo que le duele</span><p>'+f.duele+'</p></div><div><span class="eti v">Lo que necesita de Tony</span><p>'+f.necesita+'</p></div></div>'+
+      '<div class="gancho"><span class="eti">El gancho que le para el scroll</span><p>"'+f.gancho+'"</p></div>'+
+    '</div></article>';
+}).join('');
+
+/* ---------- martes ---------- */
+var DIA=[
+  ["07:00",80,"Se levanta tarde, café y sale corriendo. Mira un short de póker en el bus"],
+  ["09–18",45,"Trabajo. En el descanso piensa en la mano que perdió anoche"],
+  ["18:30",30,"Llega a casa: niño, cena, baño, recoger"],
+  ["21:00",22,"Cena rápida, algo de picar o comida a domicilio. Hoy no entrenó, ayer tampoco"],
+  ["22:30",18,"Abre 2–4 mesas de PLO10 \"un ratito\" mientras la pareja ve una serie"],
+  ["00:30",10,"Un cooler o un mal beat. Sigue jugando para recuperar"],
+  ["01:30",4,"Cierra en negativo y se acuesta mirando el historial. Mañana, 6 horas de sueño"]
+];
+document.getElementById('dia').innerHTML=DIA.map(function(d){
+  var c=d[1]>40?'var(--verde)':(d[1]>15?'var(--naranja)':'var(--rojo)');
+  return '<div class="hora'+(d[1]<=10?' critica':'')+'"><span class="h">'+d[0]+'</span><p>'+d[2]+'</p><div class="bateria" aria-label="Batería '+d[1]+' %"><div class="cuerpo"><div class="carga" style="width:'+d[1]+'%;background:'+c+'"></div></div><span style="color:'+c+'">'+d[1]+'%</span></div></div>';
+}).join('');
+
+/* ---------- dolores ---------- */
+var DOL=[
+  ["juego","El Omaha es una montaña rusa, no sé si soy ganador o he tenido suerte"],
+  ["juego","Llevo 3 meses en PLO10 y estoy en break even"],
+  ["tiempo","Con el curro y el niño no me da la vida para estudiar"],
+  ["juego","Cada vez que subo a PLO25 me devuelven abajo"],
+  ["tiempo","Mi pareja piensa que el póker es un vicio"],
+  ["dinero","No tengo bankroll de verdad, juego con lo que sobra"],
+  ["juego","Pierdo todo lo de la semana en una sesión de tilt"],
+  ["tiempo","Me siento culpable cuando juego en vez de estar con ellos"],
+  ["yo","Quizá no valgo para esto"],
+  ["juego","No sé qué estudiar ni por dónde empezar con los solvers"],
+  ["tiempo","Juego a las 12 de la noche reventado y así no se puede"],
+  ["dinero","Si pierdo este mes lo voy a notar en casa"],
+  ["yo","Llego tarde, los buenos empezaron con 20 años y sin trabajo"],
+  ["yo","Estoy siempre cansado y con la cabeza en otra parte"]
+];
+var CAT={juego:"El juego",tiempo:"Tiempo y familia",dinero:"Dinero",yo:"Él mismo"};
+var HORAS=["23:47","00:12","07:41","01:03","22:58","13:20","01:36","23:15","02:04","14:05","00:31","21:12","01:58","08:20"];
+function pintaChat(f){
+  var h=DOL.map(function(d,i){if(f!=="todo"&&d[0]!==f)return '';return '<div class="msg"><p>'+d[1]+'</p><div class="de"><span>'+CAT[d[0]]+'</span><span>'+HORAS[i]+'</span></div></div>';}).join('');
+  if(f==="todo"||f==="yo") h+='<div class="msg miedo"><span class="eti r">El miedo de fondo</span><p style="margin-top:6px">Quedarse para siempre en un trabajo que no le llena, y que el póker se quede en un hobby caro.</p></div>';
+  document.getElementById('chat').innerHTML=h;
+}
+pintaChat("todo");
+document.querySelectorAll('.filtros button').forEach(function(b){b.addEventListener('click',function(){
+  document.querySelectorAll('.filtros button').forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false');});
+  pintaChat(b.getAttribute('data-f'));
+});});
+
+/* ---------- desea ---------- */
+var DES=[
+  ["Subir de límite y quedarse","No tengo tiempo para estudiar","Rutina de estudio de 20–30 minutos: lo que él hace con 8 horas de trabajo"],
+  ["Saber si es ganador","El Omaha es pura varianza","Sus gráficas reales, bb/100 y muestra, cada mes"],
+  ["Un bankroll que no dependa de casa","Con lo que gano no da para un bankroll","Reglas de bankroll simples y rakeback explicado"],
+  ["Que su pareja lo vea en serio","Para ella es un vicio","El póker como proyecto: horarios, límites de pérdida, números"],
+  ["Jugar con la cabeza clara","El tilt es mi carácter","Rutinas antes y después de jugar, límites de sesión"],
+  ["Tener energía","No tengo tiempo para entrenar ni cocinar","Lo que hace Tony: entreno, calistenia y comida simple"],
+  ["Dejar el trabajo algún día","Eso es para cracks que empezaron jóvenes","Tony lo está intentando ahora, a la vista de todos"]
+];
+document.getElementById('deseaList').innerHTML=DES.map(function(d){
+  return '<div class="fila-d"><div class="q"><span class="eti">Quiere</span><b>'+d[0]+'</b></div><div class="b"><span class="eti">Se lo impide</span><b><i>"'+d[1]+'"</i></b></div><div class="t"><span class="eti">Tony responde</span><b>'+d[2]+'</b></div></div>';
+}).join('');
+
+/* ---------- canales ---------- */
+var CAN=[
+  ["puerta","La puerta","Instagram","Reels e historias en el scroll de noche y en el transporte.","Reels de 30–45 s y carruseles que se guardan"],
+  ["puerta","La puerta","YouTube Shorts","Igual que los reels.","Los mismos reels"],
+  ["casa","Donde se queda","YouTube largo","El finde o mientras cena.","Resumen mensual, explicativos, entrevistas"],
+  ["casa","Donde se queda","Twitch y directos","Ve jugar a otros cuando no puede jugar él.","Directos cortos y con tema, no maratones"],
+  ["apoyo","Más adelante","Telegram, Discord, WhatsApp","Grupos de manos y de rakeback.","Comunidad propia"],
+  ["apoyo","Contexto","Salas","Winamax y PokerStars sobre todo.","Rakeback, promos y niveles VIP explicados"],
+  ["apoyo","Contexto","Herramientas","Hand2Note y algún solver de prueba.","Cómo usarlas sin perder horas"]
+];
+document.getElementById('canalesGrid').innerHTML=CAN.map(function(c){
+  return '<div class="canal"><span class="rol '+c[0]+'">'+c[1]+'</span><h3>'+c[2]+'</h3><p>'+c[3]+'</p><p><b>Le damos:</b> '+c[4]+'</p></div>';
+}).join('')+'<div class="canal" style="background:var(--naranja);border-color:var(--naranja);color:var(--negro);justify-content:flex-end"><h3 style="font-size:30px">Móvil primero</h3><p style="color:var(--negro)">Todo se diseña para verse en vertical, con el sonido apagado y en 3 segundos.</p></div>';
+
+/* ---------- voz y ganchos ---------- */
+var VOZ=[["\"Lo que hago yo con 8 h de curro\"","\"Lo que tienes que hacer\""],["\"El proceso\", \"la rutina\", \"mis números\"","\"Libertad financiera\", \"hazte rico\""],["bb/100, muestra, bankroll, rakeback","Jerga de solver sin explicar"],["\"Esto me pasaba en PLO10\"","\"Eso es de jugador malo\""],["\"Con poco tiempo\"","\"Si quieres, puedes\""],["Niño, pareja, curro, cansancio","Lujo, viajes, coches"]];
+document.getElementById('voz').innerHTML='<div class="h si">Decimos</div><div class="h no">Evitamos</div>'+VOZ.map(function(v){return '<div>'+v[0]+'</div><div class="no-t">'+v[1]+'</div>';}).join('');
+var GAN=[
+  ["Si juegas PLO10 después de 8 horas de trabajo, esto es para ti","Dani"],
+  ["20 minutos al día de estudio: esto es lo que hago","Dani"],
+  ["Si tu pareja piensa que el póker es un vicio, enséñale esto","Dani"],
+  ["Jugaba a la 1 de la mañana reventado. Lo que cambié","Rubén"],
+  ["Cuánto rakeback estás dejando en la mesa en PLO5","Álex"],
+  ["El error que me tuvo 6 meses atascado en PLO20","Rubén"],
+  ["Mi mes en números: trabajando 40 h a la semana","Javi"],
+  ["Los 3 tipos de jugador de PLO10: ¿cuál eres tú?","Todos"]
+];
+document.getElementById('reels').innerHTML=GAN.map(function(g,i){
+  return '<div class="reel"><div class="in"><span class="num">'+String(i+1).padStart(2,'0')+'</span><span class="para">Para '+g[1]+'</span><p>'+g[0].replace(/(PLO\d+|\d+ ?h|20 minutos|rakeback|vicio|reventado|números|3 tipos)/i,'<span class="n">$1</span>')+'</p><img src="logo/logotipo-bicolor.svg" alt=""></div></div>';
+}).join('');
+
+/* ---------- checklist ---------- */
+var CHK=[
+  ["¿Dani se reconoce en los primeros 3 segundos?","Su límite, su trabajo, su cansancio o su frase"],
+  ["¿Entra en uno de los 4 temas?","El proceso real, Lo que te pasa es normal, Empieza bien o Vida de jugador"],
+  ["¿Tiene una prueba?","Un número, una gráfica, una mano, algo que Tony hizo"],
+  ["¿Se puede aplicar con poco tiempo?","Algo que Dani hace hoy en menos de 30 minutos"],
+  ["¿Termina sin anuncio?","Los códigos van en la bio, la página o la palabra clave, no en el texto"]
+];
+document.getElementById('checkList').innerHTML=CHK.map(function(c,i){return '<label for="ck'+i+'"><input type="checkbox" id="ck'+i+'"><div><b>'+c[0]+'</b><span>'+c[1]+'</span></div></label>';}).join('');
+function cuenta(){
+  var n=0;for(var i=0;i<5;i++)if(document.getElementById('ck'+i).checked)n++;
+  document.querySelectorAll('#fichas i').forEach(function(f,i){f.className=i<n?'on':'';});
+  var v=document.getElementById('veredicto');
+  v.textContent=n+' de 5 · '+(n>=4?'se publica':'se reescribe');
+  v.style.color=n>=4?'var(--verde)':'var(--hueso)';
+}
+document.getElementById('checkList').addEventListener('change',cuenta);cuenta();
+</script>
+
+</body></html>
