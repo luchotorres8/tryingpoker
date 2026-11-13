@@ -119,12 +119,51 @@ footer b{color:var(--hueso)}
 .sticky .tag{font-size:12px}
 .sticky .btn{padding:14px 20px;font-size:17px}
 
+/* pop-up: guía por email */
+.modal{border:none;padding:0;margin:auto;background:transparent;color:var(--hueso);width:calc(100% - 32px);max-width:460px;max-height:calc(100svh - 32px);overflow:visible}
+.modal::backdrop{background:rgba(11,11,11,.78);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+.modal[open]{animation:up .35s var(--ease) both}
+.modal[open]::backdrop{animation:fade .35s var(--ease) both}
+@keyframes fade{from{opacity:0}}
+.m-card{position:relative;background:var(--carbon);border:1px solid var(--linea);border-radius:6px;padding:32px 28px 26px;box-shadow:0 30px 80px -20px rgba(0,0,0,.9);max-height:calc(100svh - 32px);overflow:auto}
+.m-x{position:absolute;right:8px;top:8px;width:44px;height:44px;border:none;background:none;color:var(--gris);cursor:pointer;display:grid;place-content:center;border-radius:6px}
+.m-x svg{width:22px;height:22px}
+@media (hover:hover){.m-x:hover{color:var(--hueso);background:var(--mesa)}}
+.m-head{display:grid;grid-template-columns:72px 1fr;gap:18px;align-items:center;margin-bottom:22px;padding-right:28px}
+.m-head img{width:72px;border-radius:4px;border:1px solid var(--linea)}
+.modal h2{font-size:34px;margin:6px 0 0;line-height:.95}
+.modal p{font-size:16px;line-height:1.5}
+.m-field{display:block;margin-bottom:14px}
+.m-field>span:first-child{display:block;font-size:15px;font-weight:600;margin-bottom:8px}
+.m-field input{width:100%;font:inherit;font-size:17px;color:var(--hueso);background:var(--negro);border:1px solid var(--linea);border-radius:6px;padding:14px 16px;transition:border-color .2s}
+.m-field input::placeholder{color:#6d6a65}
+.m-field input:focus{outline:none;border-color:var(--naranja)}
+.m-field input[aria-invalid=true]{border-color:#E5484D}
+.m-err{display:none;color:#E5484D;font-size:14px;line-height:1.4;margin-top:6px}
+.m-err.on{display:block}
+.m-check{display:grid;grid-template-columns:22px 1fr;gap:12px;align-items:start;font-size:14px;line-height:1.5;color:var(--gris);margin:4px 0 20px;cursor:pointer}
+.m-check input{appearance:none;-webkit-appearance:none;width:22px;height:22px;border:1.5px solid var(--gris);border-radius:6px;background:var(--negro);margin-top:1px;cursor:pointer;display:grid;place-content:center}
+.m-check input:checked{background:var(--naranja);border-color:var(--naranja)}
+.m-check input:checked::after{content:"";width:10px;height:6px;border-left:2.5px solid var(--negro);border-bottom:2.5px solid var(--negro);transform:rotate(-45deg) translate(1px,-1px)}
+.m-check input:focus-visible{outline:2px solid var(--naranja);outline-offset:2px}
+.m-check .m-err{grid-column:2;margin-top:2px}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.modal .btn{width:100%;border:none;cursor:pointer}
+.modal .btn[disabled]{opacity:.6;cursor:wait}
+.m-small{font-size:13px !important;color:var(--gris);margin-top:14px;text-align:center}
+.m-ok{width:56px;height:56px;border-radius:50%;background:var(--verde);display:grid;place-content:center;margin-bottom:18px}
+.m-ok svg{width:28px;height:28px;color:var(--negro)}
+.m-done p{margin:14px 0 22px}
+.m-done b{color:var(--hueso);word-break:break-all}
+.m-link{background:none;border:none;font:inherit;font-size:14px;color:var(--gris);text-decoration:underline;cursor:pointer;margin-top:14px;display:block;margin-inline:auto}
+@media (max-width:420px){.m-card{padding:28px 20px 22px}.modal h2{font-size:30px}.m-head{grid-template-columns:56px 1fr;gap:14px}.m-head img{width:56px}}
+
 /* entrada */
 .rise{opacity:0;transform:translateY(40px);transition:opacity .35s var(--ease),transform .35s var(--ease)}
 .rise.in{opacity:1;transform:none}
 .hero h1 span{animation:up .35s var(--ease) both;animation-delay:calc(var(--i)*70ms + 120ms)}
 @keyframes up{from{opacity:0;transform:translateY(40px)}}
-@media (prefers-reduced-motion:reduce){.rise,.hero h1 span{opacity:1;transform:none;transition:none;animation:none}.sticky{transition:none}html{scroll-behavior:auto}}
+@media (prefers-reduced-motion:reduce){.rise,.hero h1 span{opacity:1;transform:none;transition:none;animation:none}.sticky{transition:none}html{scroll-behavior:auto}.modal[open],.modal[open]::backdrop{animation:none}}
 
 @media (max-width:900px){
   body{font-size:17px}
@@ -175,7 +214,7 @@ footer b{color:var(--hueso)}
     </h1>
     <p class="lead">Quiero vivir del póker y lo estoy intentando a la vista de todos: cada mes publico mis números, también cuando pierdo.</p>
     <div class="cta-row">
-      <a class="btn" href="guia-empieza-en-plo.pdf" download="Empieza-en-PLO-TryingPoker.pdf" data-dl>
+      <a class="btn" href="guia-empieza-en-plo.pdf" download="Empieza-en-PLO-TryingPoker.pdf" data-dl="hero">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0l-5-5m5 5l5-5M4 21h16"/></svg>
         Descargar la guía gratis
       </a>
@@ -230,11 +269,11 @@ footer b{color:var(--hueso)}
       <li><div><b>No entender la varianza</b><span>Puedes jugar bien y perder, y jugar mal y ganar.</span></div></li>
       <li><div><b>Confundir volumen con mejora</b><span>Jugar más no significa jugar mejor.</span></div></li>
     </ol>
-    <a class="btn" href="guia-empieza-en-plo.pdf" download="Empieza-en-PLO-TryingPoker.pdf" data-dl>
+    <a class="btn" href="guia-empieza-en-plo.pdf" download="Empieza-en-PLO-TryingPoker.pdf" data-dl="guia">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0l-5-5m5 5l5-5M4 21h16"/></svg>
       Descargar el PDF
     </a>
-    <span class="note" style="margin-left:18px">9 páginas · sin registro</span>
+    <span class="note" style="margin-left:18px" id="nota-guia">9 páginas · gratis</span>
   </div>
 </div></section>
 
@@ -257,10 +296,101 @@ footer b{color:var(--hueso)}
 
 <div class="sticky" id="sticky">
   <div><b>Empieza en PLO</b><span class="tag">Guía gratis · PDF</span></div>
-  <a class="btn" href="guia-empieza-en-plo.pdf" download="Empieza-en-PLO-TryingPoker.pdf" data-dl>Descargar</a>
+  <a class="btn" href="guia-empieza-en-plo.pdf" download="Empieza-en-PLO-TryingPoker.pdf" data-dl="barra-movil">Descargar</a>
 </div>
 
+<dialog class="modal" id="modal" aria-labelledby="m-titulo">
+  <div class="m-card">
+    <button class="m-x" type="button" data-cerrar aria-label="Cerrar">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
+    </button>
+    <form id="m-form" novalidate>
+      <div class="m-head">
+        <img src="img/guia-portada.jpg" alt="" width="777" height="1100">
+        <div><span class="tag">Guía gratis · PDF</span><h2 id="m-titulo">Te la mando al <span class="acc">email</span></h2></div>
+      </div>
+      <label class="m-field"><span>Tu email</span>
+        <input type="email" name="email" id="m-email" autocomplete="email" inputmode="email" required maxlength="120" placeholder="tu@email.com" aria-describedby="m-email-err">
+        <span class="m-err" id="m-email-err" role="alert">Revisa el email: parece que le falta algo.</span>
+      </label>
+      <label class="hp" aria-hidden="true">No rellenar <input type="text" name="web" tabindex="-1" autocomplete="off"></label>
+      <label class="m-check">
+        <input type="checkbox" name="consiente" id="m-check" value="si" aria-describedby="m-check-err">
+        <span>Quiero recibir la guía y emails de Toni con contenido de PLO. Me doy de baja cuando quiera.</span>
+        <span class="m-err" id="m-check-err" role="alert">Marca la casilla para que pueda enviártela.</span>
+      </label>
+      <button class="btn" type="submit" id="m-send">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+        Enviarme la guía
+      </button>
+      <p class="m-small">Tu email no se cede a nadie. Sin spam.</p>
+    </form>
+    <div class="m-done" id="m-done" hidden>
+      <div class="m-ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></div>
+      <span class="tag">Enviada</span>
+      <h2>Revisa tu <span class="acc">email</span></h2>
+      <p class="muted">Te he enviado la guía a <b id="m-donde"></b>. Si no la ves en un par de minutos, mira en spam o en promociones.</p>
+      <button class="btn" type="button" data-cerrar>Vale</button>
+      <button class="m-link" type="button" id="m-otra">¿Te has equivocado de email?</button>
+    </div>
+  </div>
+</dialog>
+
 <script>
+// ===== Guía por email =====
+// endpoint: URL de la aplicación web del Apps Script (termina en /exec). Ver Web-apps-script/INSTALAR.md.
+// Mientras esté vacío, en la web publicada los botones descargan el PDF directamente como antes;
+// en localhost se abre el pop-up en modo prueba (no envía nada).
+const GUIA = { endpoint: 'https://script.google.com/macros/s/AKfycby7JCLt8fPvtWA509BcKDCCf4NgskpirLWnaSfXu1xAgwVhLlPiTz4QpaJANK7FN2Kw0g/exec' };
+const modal = document.getElementById('modal');
+const local = /^(localhost|127\.0\.0\.1)$/.test(location.hostname);
+if ((GUIA.endpoint || local) && modal.showModal) {
+  document.getElementById('nota-guia').textContent = '9 páginas · te llega al email';
+  const form = document.getElementById('m-form'), done = document.getElementById('m-done');
+  const email = document.getElementById('m-email'), emailErr = document.getElementById('m-email-err');
+  const check = document.getElementById('m-check'), checkErr = document.getElementById('m-check-err');
+  const send = document.getElementById('m-send'), sendHTML = send.innerHTML;
+  const params = new URLSearchParams(location.search);
+  let origen = 'web';
+  const valid = (v) => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v);
+  const verForm = () => { done.hidden = true; form.hidden = false; send.disabled = false; send.innerHTML = sendHTML; };
+  document.querySelectorAll('[data-dl]').forEach(a => a.addEventListener('click', (e) => {
+    e.preventDefault();
+    origen = a.dataset.dl + (params.get('origen') ? '·' + params.get('origen').slice(0, 20) : '');
+    if (!done.hidden) verForm();
+    modal.showModal();
+    if (matchMedia('(hover:hover)').matches) email.focus();
+  }));
+  modal.querySelectorAll('[data-cerrar]').forEach(b => b.addEventListener('click', () => modal.close()));
+  modal.addEventListener('click', (e) => { if (e.target === modal) modal.close(); }); // clic fuera de la tarjeta
+  document.getElementById('m-otra').addEventListener('click', () => { verForm(); email.select(); });
+  email.addEventListener('input', () => { if (valid(email.value.trim())) { email.removeAttribute('aria-invalid'); emailErr.classList.remove('on'); } });
+  check.addEventListener('change', () => { if (check.checked) checkErr.classList.remove('on'); });
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const v = email.value.trim(), okEmail = valid(v), okCheck = check.checked;
+    if (okEmail) email.removeAttribute('aria-invalid'); else email.setAttribute('aria-invalid', 'true');
+    emailErr.textContent = 'Revisa el email: parece que le falta algo.';
+    emailErr.classList.toggle('on', !okEmail);
+    checkErr.classList.toggle('on', !okCheck);
+    if (!okEmail) return email.focus();
+    if (!okCheck) return check.focus();
+    send.disabled = true; send.textContent = 'Enviando…';
+    const data = new URLSearchParams(new FormData(form));
+    data.set('email', v); data.set('origen', origen);
+    try {
+      if (GUIA.endpoint) await fetch(GUIA.endpoint, { method: 'POST', mode: 'no-cors', body: data }); // Apps Script no da CORS: no se lee la respuesta
+      else console.warn('Guía por email: modo prueba, falta GUIA.endpoint. No se ha enviado nada.');
+      document.getElementById('m-donde').textContent = v;
+      form.hidden = true; done.hidden = false;
+    } catch (err) {
+      send.disabled = false; send.innerHTML = sendHTML;
+      emailErr.textContent = 'No se ha podido enviar. Revisa tu conexión e inténtalo otra vez.';
+      emailErr.classList.add('on');
+    }
+  });
+}
+
 // Barra fija en el móvil: aparece al pasar el hero y se esconde en la sección de la guía (que ya tiene su botón).
 const sticky = document.getElementById('sticky');
 let pastHero = false, onGuia = false;
