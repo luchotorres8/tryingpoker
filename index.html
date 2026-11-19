@@ -158,9 +158,76 @@ footer b{color:var(--hueso)}
 .m-link{background:none;border:none;font:inherit;font-size:14px;color:var(--gris);text-decoration:underline;cursor:pointer;margin-top:14px;display:block;margin-inline:auto}
 @media (max-width:420px){.m-card{padding:28px 20px 22px}.modal h2{font-size:30px}.m-head{grid-template-columns:56px 1fr;gap:14px}.m-head img{width:56px}}
 
+/* sesión 1 a 1 */
+.sesion{background:var(--carbon)}
+.sesion .wrap{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:64px;align-items:start}
+.s-intro{position:sticky;top:40px}
+.s-intro h2{margin-bottom:22px}
+.pasos{list-style:none;margin:30px 0 26px;border-top:1px solid var(--linea)}
+.pasos li{display:grid;grid-template-columns:52px 1fr;gap:6px;padding:15px 0;border-bottom:1px solid var(--linea);align-items:baseline}
+.pasos li span:first-child{font-family:'Anton',Impact,sans-serif;font-size:26px;line-height:1;color:var(--naranja)}
+.pasos b{font-weight:600;display:block}
+.pasos li div span{display:block;color:var(--gris);font-size:16px}
+.s-card{background:var(--negro);border:1px solid var(--linea);border-radius:6px;padding:36px 32px 30px}
+.s-form fieldset{border:none;margin:0 0 30px;padding:0;min-width:0}
+.s-form legend{display:flex;align-items:baseline;gap:12px;width:100%;padding:0 0 12px;margin-bottom:20px;border-bottom:1px solid var(--linea);font-family:'Anton',Impact,sans-serif;font-size:24px;line-height:1;text-transform:uppercase}
+.s-form legend span{font-size:15px;color:var(--naranja)}
+.s-row{display:grid;grid-template-columns:1fr 1fr;gap:0 16px}
+.s-field{display:block;margin-bottom:20px;border:none;padding:0;min-width:0}
+.s-lab{display:block;font-size:16px;font-weight:600;line-height:1.4;margin-bottom:9px}
+.s-lab i{font-style:normal;font-weight:400;color:var(--gris);font-size:14px}
+.s-hint{display:block;font-size:14px;color:var(--gris);line-height:1.4;margin:-4px 0 9px}
+.s-field input[type=text],.s-field input[type=email],.s-field input[type=tel],.s-field select,.s-field textarea{width:100%;font:inherit;font-size:17px;line-height:1.4;color:var(--hueso);background:var(--carbon);border:1px solid var(--linea);border-radius:6px;padding:13px 15px;transition:border-color .2s}
+.s-field textarea{min-height:104px;resize:vertical}
+.s-field select{appearance:none;-webkit-appearance:none;cursor:pointer;padding-right:44px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%239A968F' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;background-size:20px}
+.s-field ::placeholder{color:#6d6a65}
+.s-field input:focus,.s-field select:focus,.s-field textarea:focus{outline:none;border-color:var(--naranja)}
+.s-field [aria-invalid=true]{border-color:#E5484D}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{position:relative;cursor:pointer}
+.chip input{position:absolute;opacity:0;width:1px;height:1px;pointer-events:none}
+.chip span{display:inline-flex;align-items:center;min-height:44px;padding:9px 16px;border:1px solid var(--linea);border-radius:6px;background:var(--carbon);font-size:16px;font-weight:500;line-height:1.2;transition:background .15s,border-color .15s,color .15s}
+.chip input:checked+span{background:var(--naranja);border-color:var(--naranja);color:var(--negro);font-weight:600}
+.chip input:focus-visible+span{outline:2px solid var(--naranja);outline-offset:2px}
+@media (hover:hover){.chip:hover span{border-color:var(--gris)}.chip input:checked+span{border-color:var(--naranja)}}
+.s-field.bad .chip span{border-color:#E5484D}
+.s-err{display:none;color:#E5484D;font-size:14px;line-height:1.4;margin-top:7px}
+.s-err.on{display:block}
+.s-form .m-check{margin:0 0 14px}
+.s-form .m-check:last-of-type{margin-bottom:24px}
+.s-form .btn{width:100%;border:none;cursor:pointer}
+.s-form .btn[disabled]{opacity:.6;cursor:wait}
+.s-form fieldset.s-field{margin:0 0 22px}
+.s-form legend.s-lab{display:block;width:auto;padding:0;margin-bottom:10px;border:none;font-family:'Barlow',Arial,sans-serif;font-size:16px;font-weight:600;line-height:1.4;text-transform:none}
+.s-form legend.s-lab i{font-size:14px;color:var(--gris)}
+.m-check .s-err{grid-column:2;margin-top:0}
+.s-small{font-size:14px;color:var(--gris);margin-top:14px;text-align:center}
+.s-done{text-align:left}
+.s-done h2{font-size:clamp(36px,5vw,52px);margin:8px 0 18px}
+.s-done p{max-width:30em;margin-bottom:24px}
+.s-done b{color:var(--hueso)}
+.s-done .btn{max-width:100%}
+.s-done .s-small{text-align:left;margin-top:16px;max-width:30em}
+@media (max-width:560px){.s-done .btn{width:100%}}
+/* etapas */
+.s-prog{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:30px}
+.s-prog i{display:block;height:4px;border-radius:2px;background:var(--linea);transition:background .35s var(--ease)}
+.s-prog span{display:block;margin-top:9px;font-family:'Barlow Condensed',Arial,sans-serif;font-weight:700;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:#6d6a65;transition:color .35s var(--ease)}
+.s-prog .on i,.s-prog .ok i{background:var(--naranja)}
+.s-prog .on span{color:var(--hueso)}
+.s-prog .ok span{color:var(--gris)}
+.s-step:focus{outline:none}
+.s-step.entra{animation:up .35s var(--ease) both}
+.s-step>fieldset{margin-bottom:8px}
+.s-nav{display:flex;gap:12px;margin-top:8px}
+.s-nav [hidden]{display:none}
+.s-form .s-nav .btn{width:auto;flex:1 1 auto}
+.s-form .s-nav .btn.ghost{flex:0 0 auto;padding:18px 22px;font-size:20px}
+
 /* entrada */
 .rise{opacity:0;transform:translateY(40px);transition:opacity .35s var(--ease),transform .35s var(--ease)}
 .rise.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.s-step.entra{animation:none}}
 .hero h1 span{animation:up .35s var(--ease) both;animation-delay:calc(var(--i)*70ms + 120ms)}
 @keyframes up{from{opacity:0;transform:translateY(40px)}}
 @media (prefers-reduced-motion:reduce){.rise,.hero h1 span{opacity:1;transform:none;transition:none;animation:none}.sticky{transition:none}html{scroll-behavior:auto}.modal[open],.modal[open]::backdrop{animation:none}}
@@ -186,10 +253,15 @@ footer b{color:var(--hueso)}
   .sello{right:-12px;top:-14px;width:78px;height:78px;font-size:13px}
   .guia .btn{width:100%}
   .guia .note{text-align:center;display:block;margin-top:14px}
+  .sesion .wrap{grid-template-columns:1fr;gap:28px}
+  .s-intro{position:static}
+  .pasos{margin:24px 0 8px}
+  .s-card{padding:28px 20px 24px}
   .sticky{display:flex}
   footer{padding-bottom:110px}
   .top nav{gap:18px}
 }
+@media (max-width:560px){.s-row{grid-template-columns:1fr}.s-form legend{font-size:22px}}
 @media (max-width:380px){.facts .tag{font-size:11px;letter-spacing:.08em}.facts div{padding:12px 10px}}
 </style>
 </head>
@@ -200,6 +272,7 @@ footer b{color:var(--hueso)}
   <nav class="tag" aria-label="Redes">
     <a href="https://www.instagram.com/tryingpoker/" target="_blank" rel="noopener">Instagram</a>
     <a href="https://www.youtube.com/@tryingpoker" target="_blank" rel="noopener">YouTube</a>
+    <a href="#sesion" class="acc">Sesión 1 a 1</a>
   </nav>
 </div></header>
 
@@ -285,6 +358,177 @@ footer b{color:var(--hueso)}
   <div class="links">
     <a class="btn ghost" href="https://www.instagram.com/tryingpoker/" target="_blank" rel="noopener">@tryingpoker en Instagram</a>
     <a class="btn ghost" href="https://www.youtube.com/@tryingpoker" target="_blank" rel="noopener">Canal de YouTube</a>
+  </div>
+</div></section>
+
+<!-- SESIÓN 1 A 1 -->
+<section class="sesion" id="sesion"><div class="wrap">
+  <div class="s-intro">
+    <span class="tag">Sesión 1 a 1 · Con Toni</span>
+    <h2>Pide tu sesión <span class="grad" style="white-space:nowrap">1 a 1</span></h2>
+    <p class="lead">Si quieres que revisemos juntos tu bankroll, tu límite y tu forma de estudiar, cuéntame cómo juegas y te escribo yo.</p>
+    <ol class="pasos">
+      <li><span>01</span><div><b>Me cuentas tu juego</b><span>Tres pasos cortos, unos 3 minutos. Cuanto más concreto, mejor.</span></div></li>
+      <li><span>02</span><div><b>Lo leo yo</b><span>Sin bots ni comerciales. Si veo que te puedo ayudar, te escribo por WhatsApp.</span></div></li>
+      <li><span>03</span><div><b>Cuadramos la sesión</b><span>Elegimos el día, la hora y en qué nos centramos.</span></div></li>
+    </ol>
+    <p class="muted">No hace falta jugar alto: me sirve igual si estás en PLO2 que en PLO50. Lo que importa es que quieras tomártelo en serio.</p>
+  </div>
+
+  <div class="s-card">
+    <form class="s-form" id="s-form" novalidate>
+      <div class="s-prog" aria-hidden="true">
+        <div class="on"><i></i><span>Tu juego</span></div>
+        <div><i></i><span>Lo que buscas</span></div>
+        <div><i></i><span>Sobre ti</span></div>
+      </div>
+      <p class="hp" aria-live="polite" id="s-vivo">Paso 1 de 3: tu juego</p>
+
+      <div class="s-step" data-paso="1" tabindex="-1">
+        <fieldset>
+          <legend><span>01</span>Tu juego</legend>
+          <fieldset class="s-field" data-req data-err="Elige una opción."><legend class="s-lab">¿Qué juegas?</legend>
+            <div class="chips">
+              <label class="chip"><input type="radio" name="variante" value="PLO4"><span>PLO4</span></label>
+              <label class="chip"><input type="radio" name="variante" value="PLO5"><span>PLO5</span></label>
+              <label class="chip"><input type="radio" name="variante" value="Las dos"><span>Las dos</span></label>
+            </div>
+          </fieldset>
+          <fieldset class="s-field" data-req data-err="Elige tu límite."><legend class="s-lab">¿En qué límite juegas ahora?</legend>
+            <div class="chips">
+              <label class="chip"><input type="radio" name="limite" value="PLO2"><span>PLO2</span></label>
+              <label class="chip"><input type="radio" name="limite" value="PLO5"><span>PLO5</span></label>
+              <label class="chip"><input type="radio" name="limite" value="PLO10"><span>PLO10</span></label>
+              <label class="chip"><input type="radio" name="limite" value="PLO25"><span>PLO25</span></label>
+              <label class="chip"><input type="radio" name="limite" value="PLO50"><span>PLO50</span></label>
+              <label class="chip"><input type="radio" name="limite" value="PLO100 o más"><span>PLO100 o más</span></label>
+            </div>
+          </fieldset>
+          <fieldset class="s-field"><legend class="s-lab">¿En qué salas juegas? <i>(puedes marcar varias)</i></legend>
+            <div class="chips">
+              <label class="chip"><input type="checkbox" name="salas" value="Winamax"><span>Winamax</span></label>
+              <label class="chip"><input type="checkbox" name="salas" value="PokerStars"><span>PokerStars</span></label>
+              <label class="chip"><input type="checkbox" name="salas" value="GGPoker"><span>GGPoker</span></label>
+              <label class="chip"><input type="checkbox" name="salas" value="888poker"><span>888poker</span></label>
+              <label class="chip"><input type="checkbox" name="salas" value="Otra"><span>Otra</span></label>
+            </div>
+          </fieldset>
+          <fieldset class="s-field" data-req data-err="Elige una opción, aunque sea aproximada."><legend class="s-lab">¿Cuántas manos juegas al mes, más o menos?</legend>
+            <div class="chips">
+              <label class="chip"><input type="radio" name="manos" value="Menos de 5.000"><span>Menos de 5.000</span></label>
+              <label class="chip"><input type="radio" name="manos" value="5.000 a 20.000"><span>5.000 a 20.000</span></label>
+              <label class="chip"><input type="radio" name="manos" value="20.000 a 50.000"><span>20.000 a 50.000</span></label>
+              <label class="chip"><input type="radio" name="manos" value="Más de 50.000"><span>Más de 50.000</span></label>
+            </div>
+          </fieldset>
+          <fieldset class="s-field" data-req data-err="Elige una opción. «No lo tengo separado» también vale."><legend class="s-lab">¿Cuántos buy-ins tienes de bankroll para tu límite?</legend>
+            <div class="chips">
+              <label class="chip"><input type="radio" name="bankroll" value="Menos de 30"><span>Menos de 30</span></label>
+              <label class="chip"><input type="radio" name="bankroll" value="30 a 60"><span>30 a 60</span></label>
+              <label class="chip"><input type="radio" name="bankroll" value="60 a 100"><span>60 a 100</span></label>
+              <label class="chip"><input type="radio" name="bankroll" value="Más de 100"><span>Más de 100</span></label>
+              <label class="chip"><input type="radio" name="bankroll" value="No lo tengo separado"><span>No lo tengo separado</span></label>
+            </div>
+          </fieldset>
+          <fieldset class="s-field" data-req data-err="Elige una opción."><legend class="s-lab">¿Juegas a tiempo completo o lo combinas con algo?</legend>
+            <div class="chips">
+              <label class="chip"><input type="radio" name="dedicacion" value="Tiempo completo"><span>Tiempo completo</span></label>
+              <label class="chip"><input type="radio" name="dedicacion" value="Medio tiempo"><span>Medio tiempo</span></label>
+              <label class="chip"><input type="radio" name="dedicacion" value="Lo combino con trabajo o estudios"><span>Lo combino con trabajo o estudios</span></label>
+            </div>
+          </fieldset>
+          <fieldset class="s-field"><legend class="s-lab">¿Usas alguna herramienta? <i>(opcional)</i></legend>
+            <div class="chips">
+              <label class="chip"><input type="checkbox" name="herramientas" value="Hand2Note"><span>Hand2Note</span></label>
+              <label class="chip"><input type="checkbox" name="herramientas" value="PokerTracker 4"><span>PokerTracker 4</span></label>
+              <label class="chip"><input type="checkbox" name="herramientas" value="Hold'em Manager 3"><span>Hold’em Manager 3</span></label>
+              <label class="chip"><input type="checkbox" name="herramientas" value="Solver"><span>Algún solver</span></label>
+              <label class="chip"><input type="checkbox" name="herramientas" value="Ninguna"><span>Ninguna</span></label>
+            </div>
+          </fieldset>
+        </fieldset>
+      </div>
+
+      <div class="s-step" data-paso="2" tabindex="-1" hidden>
+        <fieldset>
+          <legend><span>02</span>Lo que buscas</legend>
+          <label class="s-field"><span class="s-lab">¿Qué te está frenando ahora mismo?</span>
+            <textarea name="obstaculo" required maxlength="1500" rows="4" placeholder="Ej.: llevo cuatro meses atascado en PLO10 y entro en tilt cuando pierdo dos buy-ins seguidos." data-err="Cuéntame algo, aunque sea una frase."></textarea>
+          </label>
+          <label class="s-field"><span class="s-lab">¿Qué te gustaría sacar de la sesión? <i>(opcional)</i></span>
+            <textarea name="objetivo" maxlength="1500" rows="3" placeholder="Ej.: revisar manos mías, montar un plan de estudio, saber cuándo subir de límite…"></textarea>
+          </label>
+          <fieldset class="s-field" data-req data-err="Marca al menos una franja."><legend class="s-lab">¿Cuándo te vendría bien? <i>(puedes marcar varias)</i></legend>
+            <div class="chips">
+              <label class="chip"><input type="checkbox" name="disponibilidad" value="Mañanas"><span>Mañanas</span></label>
+              <label class="chip"><input type="checkbox" name="disponibilidad" value="Tardes"><span>Tardes</span></label>
+              <label class="chip"><input type="checkbox" name="disponibilidad" value="Noches"><span>Noches</span></label>
+              <label class="chip"><input type="checkbox" name="disponibilidad" value="Fines de semana"><span>Fines de semana</span></label>
+            </div>
+          </fieldset>
+        </fieldset>
+      </div>
+
+      <div class="s-step" data-paso="3" tabindex="-1" hidden>
+        <fieldset>
+          <legend><span>03</span>Sobre ti</legend>
+          <div class="s-row">
+            <label class="s-field"><span class="s-lab">Nombre</span>
+              <input type="text" name="nombre" autocomplete="given-name" required maxlength="60" data-err="Dime cómo te llamas.">
+            </label>
+            <label class="s-field"><span class="s-lab">Apellidos <i>(opcional)</i></span>
+              <input type="text" name="apellidos" autocomplete="family-name" maxlength="80">
+            </label>
+          </div>
+          <label class="s-field"><span class="s-lab">Email</span>
+            <input type="email" name="email" autocomplete="email" inputmode="email" required maxlength="120" placeholder="tu@email.com" data-err="Revisa el email: parece que le falta algo.">
+          </label>
+          <div class="s-row">
+            <label class="s-field"><span class="s-lab">WhatsApp</span>
+              <span class="s-hint">Con el prefijo del país.</span>
+              <input type="tel" name="whatsapp" autocomplete="tel" inputmode="tel" required maxlength="24" placeholder="+34 600 000 000" data-err="Pon tu número con el prefijo, por ejemplo +34.">
+            </label>
+            <label class="s-field"><span class="s-lab">País</span>
+              <span class="s-hint">Para cuadrar el horario.</span>
+              <select name="pais" autocomplete="country-name" required data-err="Elige tu país.">
+                <option value="" selected disabled>Elige tu país</option>
+                <option>España</option><option>Andorra</option><option>Portugal</option>
+                <option>México</option><option>Argentina</option><option>Colombia</option><option>Chile</option><option>Perú</option><option>Uruguay</option><option>Venezuela</option><option>Ecuador</option><option>Bolivia</option><option>Paraguay</option><option>Panamá</option><option>Costa Rica</option><option>República Dominicana</option><option>Estados Unidos</option>
+                <option>Otro país</option>
+              </select>
+            </label>
+          </div>
+        </fieldset>
+        <label class="hp" aria-hidden="true">No rellenar <input type="text" name="web" tabindex="-1" autocomplete="off"></label>
+        <label class="m-check">
+          <input type="checkbox" name="mayor" value="si" required data-err="Las sesiones son solo para mayores de 18.">
+          <span>Tengo 18 años o más.</span>
+        </label>
+        <label class="m-check">
+          <input type="checkbox" name="privacidad" value="si" required data-err="Marca la casilla para que pueda contestarte.">
+          <span>Acepto que Toni use estos datos solo para responder a mi solicitud y escribirme por WhatsApp o email.</span>
+        </label>
+      </div>
+
+      <div class="s-nav">
+        <button class="btn ghost" type="button" id="s-atras" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>Atrás</button>
+        <button class="btn" type="button" id="s-sig">Siguiente<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+        <button class="btn" type="submit" id="s-send" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>Enviar solicitud</button>
+      </div>
+      <p class="s-small" id="s-cuenta">Paso 1 de 3 · Tus datos no se ceden a nadie.</p>
+    </form>
+
+    <div class="s-done" id="s-done" hidden tabindex="-1">
+      <div class="m-ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></div>
+      <span class="tag">Último paso</span>
+      <h2>Gracias, <span class="acc" id="s-nombre"></span></h2>
+      <p class="muted">Ya tengo tu solicitud. Para que me llegue directa al móvil, <b>mándamela también por WhatsApp</b>: el mensaje ya va escrito con tu resumen, solo tienes que darle a enviar.</p>
+      <a class="btn" id="s-wa" href="https://wa.me/34617169553" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>
+        Enviar por WhatsApp
+      </a>
+      <p class="s-small">Si prefieres no hacerlo, no pasa nada: te escribo yo al <b id="s-tel"></b> en los próximos días. Tienes una copia en tu email.</p>
+    </div>
   </div>
 </div></section>
 </main>
@@ -391,12 +635,124 @@ if ((GUIA.endpoint || local) && modal.showModal) {
   });
 }
 
-// Barra fija en el móvil: aparece al pasar el hero y se esconde en la sección de la guía (que ya tiene su botón).
+// ===== Sesión 1 a 1 =====
+// Va al mismo Apps Script que la guía (GUIA.endpoint) con tipo=sesion: fila en la hoja «Sesiones»,
+// aviso a Toni y copia a quien la pide. Ver Web-apps-script/INSTALAR.md.
+// En localhost no se envía nada (modo prueba) salvo que la URL lleve ?enviar=1.
+(() => {
+  const form = document.getElementById('s-form'), done = document.getElementById('s-done');
+  const send = document.getElementById('s-send'), sendHTML = send.innerHTML;
+  const prueba = local && !new URLSearchParams(location.search).has('enviar');
+  const WA = '34617169553';
+  const emailOk = (v) => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v);
+  const telOk = (v) => v.replace(/\D/g, '').length >= 8;
+  // Un mensaje de error debajo de cada campo obligatorio.
+  const reqs = [...form.querySelectorAll('[required],[data-req]')];
+  reqs.forEach((el, i) => {
+    const err = document.createElement('span');
+    err.className = 's-err'; err.id = 's-err-' + i; err.setAttribute('role', 'alert');
+    err.textContent = el.dataset.err || 'Este campo es obligatorio.';
+    (el.matches('fieldset') ? el : el.closest('label')).appendChild(err);
+    if (!el.matches('fieldset')) el.setAttribute('aria-describedby', err.id);
+    el._err = err;
+  });
+  const valido = (el) => {
+    if (el.matches('fieldset')) return !!el.querySelector('input:checked');
+    if (el.type === 'checkbox') return el.checked;
+    const v = el.value.trim();
+    if (el.type === 'email') return emailOk(v);
+    if (el.type === 'tel') return telOk(v);
+    return !!v;
+  };
+  const marcar = (el, ok) => {
+    el._err.classList.toggle('on', !ok);
+    if (el.matches('fieldset')) el.classList.toggle('bad', !ok);
+    else if (ok) el.removeAttribute('aria-invalid'); else el.setAttribute('aria-invalid', 'true');
+  };
+  // Se limpia el error en cuanto se corrige.
+  reqs.forEach(el => el.addEventListener(el.matches('fieldset,select,[type=checkbox]') ? 'change' : 'input', () => { if (valido(el)) marcar(el, true); }));
+  const lista = (name) => [...form.querySelectorAll(`[name="${name}"]:checked`)].map(i => i.value).join(' · ');
+
+  // ----- Etapas: 1 tu juego · 2 lo que buscas · 3 sobre ti -----
+  const pasos = [...form.querySelectorAll('.s-step')], total = pasos.length;
+  const prog = [...form.querySelectorAll('.s-prog > div')];
+  const atras = document.getElementById('s-atras'), sig = document.getElementById('s-sig');
+  const cuenta = document.getElementById('s-cuenta'), vivo = document.getElementById('s-vivo');
+  const card = form.closest('.s-card');
+  const suave = () => matchMedia('(prefers-reduced-motion:reduce)').matches ? 'auto' : 'smooth';
+  let paso = 1;
+  const mostrar = (n) => {
+    paso = n;
+    pasos.forEach((el, i) => { el.hidden = i + 1 !== n; el.classList.toggle('entra', i + 1 === n); });
+    prog.forEach((el, i) => { el.classList.toggle('on', i + 1 === n); el.classList.toggle('ok', i + 1 < n); });
+    atras.hidden = n === 1; sig.hidden = n === total; send.hidden = n !== total;
+    cuenta.textContent = 'Paso ' + n + ' de ' + total + ' · Tus datos no se ceden a nadie.';
+    vivo.textContent = 'Paso ' + n + ' de ' + total + ': ' + prog[n - 1].textContent.trim().toLowerCase();
+    // Que el principio de la etapa quede a la vista (en el móvil, el botón queda muy abajo).
+    const top = card.getBoundingClientRect().top;
+    if (top < 0 || top > innerHeight * .5) window.scrollTo({ top: scrollY + top - 16, behavior: suave() });
+    pasos[n - 1].focus({ preventScroll: true });
+  };
+  // Valida los campos obligatorios de una etapa; si falla, lleva al primero que falta.
+  const revisar = (n) => {
+    let primero = null;
+    reqs.filter(el => pasos[n - 1].contains(el)).forEach(el => { const ok = valido(el); marcar(el, ok); if (!ok && !primero) primero = el; });
+    if (primero) {
+      (primero.matches('fieldset') ? primero : primero.closest('label')).scrollIntoView({ behavior: suave(), block: 'center' });
+      (primero.matches('fieldset') ? primero.querySelector('input') : primero).focus({ preventScroll: true });
+    }
+    return !primero;
+  };
+  // Resumen que el jugador le manda a Toni por WhatsApp (ya escrito: solo tiene que darle a enviar).
+  const resumenWa = (d) => {
+    const v = (k) => (d.get(k) || '').trim();
+    const corta = (t, max) => t.length > max ? t.slice(0, max - 1).trimEnd() + '…' : t;
+    const linea = (k, t) => t ? '\n• *' + k + ':* ' + t : '';
+    const variante = v('variante') === 'Las dos' ? 'PLO4 y PLO5' : v('variante');
+    const bank = v('bankroll');
+    return 'Hola, Toni. Soy ' + (v('nombre') + ' ' + v('apellidos')).trim() + ' y te acabo de pedir una sesión 1 a 1 desde la web.\n' +
+      linea('Juego', [v('limite'), variante].filter(Boolean).join(' · ')) +
+      linea('Bankroll', bank && bank !== 'No lo tengo separado' ? bank + ' buy-ins' : bank) +
+      linea('Dedicación', v('dedicacion')) +
+      linea('Lo que más me frena', corta(v('obstaculo').replace(/\s+/g, ' '), 400)) +
+      linea('Disponibilidad', v('disponibilidad')) +
+      (v('pais') ? '\n\nEstoy en ' + v('pais') + '.' : '');
+  };
+  sig.addEventListener('click', () => { if (revisar(paso)) mostrar(paso + 1); });
+  atras.addEventListener('click', () => mostrar(paso - 1));
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (paso < total) { if (revisar(paso)) mostrar(paso + 1); return; } // Enter en una etapa intermedia = Siguiente
+    for (let n = 1; n <= total; n++) if (!revisar(n)) { if (n !== paso) { mostrar(n); revisar(n); } return; }
+    send.disabled = true; send.textContent = 'Enviando…';
+    const data = new URLSearchParams(new FormData(form));
+    ['salas', 'herramientas', 'disponibilidad'].forEach(n => data.set(n, lista(n)));
+    data.set('tipo', 'sesion');
+    data.set('origen', 'web' + (new URLSearchParams(location.search).get('origen') ? '·' + new URLSearchParams(location.search).get('origen').slice(0, 20) : ''));
+    try {
+      if (GUIA.endpoint && !prueba) await fetch(GUIA.endpoint, { method: 'POST', mode: 'no-cors', body: data }); // Apps Script no da CORS: no se lee la respuesta
+      else console.warn('Sesión 1 a 1: modo prueba, no se ha enviado nada.', Object.fromEntries(data));
+      const nombre = data.get('nombre').trim().split(/\s+/)[0];
+      document.getElementById('s-nombre').textContent = nombre;
+      document.getElementById('s-tel').textContent = data.get('whatsapp').trim();
+      document.getElementById('s-wa').href = 'https://wa.me/' + WA + '?text=' + encodeURIComponent(resumenWa(data));
+      form.hidden = true; done.hidden = false;
+      done.scrollIntoView({ block: 'center' }); done.focus({ preventScroll: true });
+    } catch (err) {
+      send.disabled = false; send.innerHTML = sendHTML;
+      alert('No se ha podido enviar. Revisa tu conexión e inténtalo otra vez.');
+    }
+  });
+})();
+
+// Barra fija en el móvil: aparece al pasar el hero y se esconde en la guía (que ya tiene su botón) y en el formulario de sesión.
 const sticky = document.getElementById('sticky');
-let pastHero = false, onGuia = false;
-const upd = () => sticky.classList.toggle('on', pastHero && !onGuia);
+let pastHero = false, onGuia = false, onSesion = false;
+const upd = () => sticky.classList.toggle('on', pastHero && !onGuia && !onSesion);
 new IntersectionObserver(([e]) => { pastHero = !e.isIntersecting; upd(); }).observe(document.getElementById('inicio'));
 new IntersectionObserver(([e]) => { onGuia = e.isIntersecting; upd(); }, { threshold: .35 }).observe(document.getElementById('guia'));
+new IntersectionObserver(([e]) => { onSesion = e.isIntersecting; upd(); }).observe(document.getElementById('sesion'));
 // Entradas: subida de 40 px y aparición, una vez.
 const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { rootMargin: '0px 0px -8% 0px' });
 document.querySelectorAll('.rise').forEach(el => io.observe(el));
