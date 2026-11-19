@@ -1,0 +1,416 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Exprimir el vídeo de Winamax</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@600;700&display=swap">
+<style>
+/* Layout: una columna de lectura (manual TryingPoker v1.0): negro, hueso y un solo naranja; Anton en titulares, Barlow en texto */
+:root {
+  --negro: #0B0B0B; --carbon: #161616; --mesa: #1E1E1E; --linea: #2A2A2A;
+  --naranja: #F7961A; --naranja-cl: #FFB23E; --verde: #3DB14F; --rojo: #E5484D;
+  --hueso: #F5F2EC; --gris: #9A968F;
+  --display: "Anton", "Bebas Neue", Impact, sans-serif;
+  --texto: "Barlow", "Inter", Arial, sans-serif;
+  --etiqueta: "Barlow Condensed", "Roboto Condensed", "Arial Narrow", sans-serif;
+  color-scheme: dark;
+}
+body { background: var(--negro); color: var(--hueso); font-family: var(--texto); font-size: 17px; line-height: 1.6; }
+.envoltura { max-width: 980px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 48px 96px; display: flex; flex-direction: column; gap: 64px; }
+a { color: var(--naranja-cl); }
+a:focus-visible, button:focus-visible { outline: 3px solid var(--naranja); outline-offset: 3px; }
+.eti { font-family: var(--etiqueta); font-weight: 700; font-size: 14px; letter-spacing: .14em; text-transform: uppercase; color: var(--gris); }
+.eti.nar { color: var(--naranja); }
+h1, h2, h3 { font-family: var(--display); font-weight: 400; text-transform: uppercase; line-height: .96; letter-spacing: .01em; text-wrap: balance; margin: 0; }
+h1 { font-size: clamp(44px, 8vw, 84px); }
+h2 { font-size: clamp(32px, 5vw, 48px); }
+h3 { font-size: 24px; line-height: 1.05; }
+h1 em, h2 em { font-style: normal; color: var(--naranja); }
+p { margin: 0; max-width: 68ch; }
+.gris { color: var(--gris); }
+section { display: flex; flex-direction: column; gap: 22px; }
+.cabeza { display: flex; flex-direction: column; gap: 18px; }
+.lead { font-size: 20px; line-height: 1.5; max-width: 62ch; }
+
+/* cifras */
+.cifras { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; }
+.dato { background: var(--carbon); border: 1px solid var(--linea); border-radius: 6px; padding: 18px 20px; display: flex; flex-direction: column; gap: 6px; }
+.dato b { font-family: var(--display); font-weight: 400; font-size: 44px; line-height: 1; font-variant-numeric: tabular-nums; }
+.dato b.nar { color: var(--naranja); }
+.dato span { font-size: 15px; color: var(--gris); line-height: 1.35; }
+
+/* tabla de búsqueda */
+.tabla { overflow-x: auto; border: 1px solid var(--linea); border-radius: 6px; }
+table { width: 100%; border-collapse: collapse; font-size: 15px; min-width: 560px; }
+th { text-align: left; font-family: var(--etiqueta); font-weight: 700; letter-spacing: .1em; text-transform: uppercase; font-size: 13px; color: var(--gris); padding: 12px 14px; border-bottom: 1px solid var(--linea); background: var(--carbon); }
+td { padding: 11px 14px; border-bottom: 1px solid var(--linea); vertical-align: top; }
+tr:last-child td { border-bottom: 0; }
+td.num { font-variant-numeric: tabular-nums; text-align: right; white-space: nowrap; }
+tr.toni td { color: var(--naranja-cl); font-weight: 600; }
+
+.claves { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; }
+.clave { border-top: 3px solid var(--naranja); padding-top: 14px; display: flex; flex-direction: column; gap: 8px; }
+.clave p { font-size: 16px; }
+
+/* reels */
+.reels { display: flex; flex-direction: column; gap: 14px; }
+.reel { display: grid; grid-template-columns: 56px 1fr; gap: 18px; background: var(--carbon); border: 1px solid var(--linea); border-radius: 6px; padding: 20px; }
+.reel .orden { font-family: var(--display); font-size: 40px; line-height: 1; color: var(--naranja); }
+.reel .cuerpo { display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.meta { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { font-family: var(--etiqueta); font-weight: 700; font-size: 13px; letter-spacing: .1em; text-transform: uppercase; padding: 4px 9px; border: 1px solid var(--linea); border-radius: 6px; color: var(--gris); }
+.chip.nar { border-color: var(--naranja); color: var(--naranja); }
+.copy { background: var(--negro); border: 1px dashed var(--linea); border-radius: 6px; padding: 14px 16px; font-size: 15px; line-height: 1.5; white-space: pre-line; position: relative; min-width: 0; overflow-wrap: anywhere; }
+.copiar { position: absolute; top: 8px; right: 8px; font-family: var(--etiqueta); font-weight: 700; font-size: 12px; letter-spacing: .1em; text-transform: uppercase; background: var(--mesa); color: var(--hueso); border: 1px solid var(--linea); border-radius: 6px; padding: 5px 10px; cursor: pointer; }
+.copiar:hover { border-color: var(--naranja); color: var(--naranja); }
+.aviso { border-left: 3px solid var(--rojo); padding: 4px 0 4px 16px; font-size: 15px; color: var(--hueso); max-width: 75ch; }
+.aviso b { color: var(--rojo); }
+
+/* ideas */
+.grupo { display: flex; flex-direction: column; gap: 14px; }
+.grupo > .eti { padding-bottom: 6px; border-bottom: 1px solid var(--linea); }
+.ideas { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 12px; }
+.idea { background: var(--carbon); border: 1px solid var(--linea); border-radius: 6px; padding: 20px; display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+.idea.top { border-color: var(--naranja); }
+.idea h3 { font-size: 22px; }
+.idea dl { margin: 0; display: grid; grid-template-columns: 92px 1fr; gap: 6px 12px; font-size: 15px; line-height: 1.45; }
+.idea dt { font-family: var(--etiqueta); font-weight: 700; letter-spacing: .1em; text-transform: uppercase; font-size: 12px; color: var(--gris); padding-top: 3px; }
+.idea dd { margin: 0; min-width: 0; }
+.mini { display: inline-block; font-family: var(--display); text-transform: uppercase; background: var(--negro); border: 2px solid var(--naranja); color: var(--hueso); padding: 2px 8px; border-radius: 4px; font-size: 16px; letter-spacing: .02em; }
+
+/* reglas y calendario */
+.reglas { display: flex; flex-direction: column; gap: 0; border: 1px solid var(--linea); border-radius: 6px; }
+.regla { display: grid; grid-template-columns: 220px 1fr; gap: 18px; padding: 16px 20px; border-bottom: 1px solid var(--linea); }
+.regla:last-child { border-bottom: 0; }
+.regla b { font-weight: 700; }
+.semanas { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 12px; }
+.semana { background: var(--carbon); border: 1px solid var(--linea); border-radius: 6px; padding: 18px; display: flex; flex-direction: column; gap: 8px; }
+.semana h3 { font-size: 20px; }
+.semana p { font-size: 15px; }
+footer { font-size: 14px; color: var(--gris); border-top: 1px solid var(--linea); padding-top: 20px; display: flex; flex-direction: column; gap: 6px; }
+@media (max-width: 640px) {
+  .reel { grid-template-columns: 1fr; gap: 8px; }
+  .regla { grid-template-columns: 1fr; gap: 4px; }
+  .idea dl { grid-template-columns: 1fr; gap: 2px; }
+  .idea dd { margin-bottom: 8px; }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+
+<div class="envoltura">
+
+<header class="cabeza">
+  <div class="eti nar">TryingPoker · YouTube + Instagram · 19/11/2026</div>
+  <h1>El vídeo de <em>Winamax</em>, exprimido</h1>
+  <p class="lead">El vídeo del nuevo VIP de Winamax es el más visto del canal con diferencia. Aquí están los 5 reels que salen de él y 11 ideas para que Toni grabe nuevos vídeos sobre el mismo tema: el dinero que la sala te devuelve, o te quita.</p>
+</header>
+
+<section>
+  <div class="eti">1 · Por qué funcionó</div>
+  <h2>No fue Winamax: fue <em>el rakeback</em></h2>
+  <div class="cifras">
+    <div class="dato"><b class="nar">3.145</b><span>vistas de «Nuevo sistema VIP de Winamax… EXPLICADO» (02/10)</span></div>
+    <div class="dato"><b>~41</b><span>vistas de mediana en los vídeos largos del canal</span></div>
+    <div class="dato"><b>441</b><span>el segundo más visto: «¿Algunas salas se quieren cargar el póker profesional?». También va de salas</span></div>
+    <div class="dato"><b>18</b><span>comentarios con debate: regulares enfadados, dudas de torneos, gente de Argentina</span></div>
+  </div>
+  <p>Es el primer resultado en YouTube para «winamax overdrive», «rakeback winamax» y «rakeback poker explicado». Toni cogió un directo de hora y media de MentoPoker y lo convirtió en un vídeo de 28 minutos con un título que la gente busca, el mismo día del cambio. Ese directo original tiene 4.203 vistas. En español casi nadie más cubre este tema:</p>
+  <div class="tabla">
+    <table>
+      <thead><tr><th>Vídeo en YouTube (búsqueda del 19/11)</th><th>Canal</th><th style="text-align:right">Vistas</th></tr></thead>
+      <tbody>
+        <tr><td>¿Dónde jugar póker? Cómo elegir tu primera sala</td><td>Zeros Poker</td><td class="num">336.626</td></tr>
+        <tr><td>Changement du Programme VIP Winamax (el mismo tema, en francés)</td><td>zChance44</td><td class="num">23.600</td></tr>
+        <tr><td>Explicación de Ocean Rewards de GG Poker</td><td>Bigboomriver</td><td class="num">11.086</td></tr>
+        <tr><td>Nuevo sistema VIP de Winamax (el directo original)</td><td>MentoPoker</td><td class="num">4.203</td></tr>
+        <tr><td>Un vicio llamado rakeback</td><td>Rigel Vlog</td><td class="num">3.801</td></tr>
+        <tr><td>La verdad del rake en GG Poker</td><td>Pokernauta</td><td class="num">3.515</td></tr>
+        <tr class="toni"><td>Nuevo sistema VIP de Winamax… EXPLICADO</td><td>TryingPoker</td><td class="num">3.145</td></tr>
+        <tr><td>Las 5 mejores salas de póker con rakeback de 2026</td><td>Card Player</td><td class="num">2.371</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="claves">
+    <div class="clave"><h3>Se busca</h3><p>Responde a una duda concreta («¿qué cambia en Winamax?») en el momento en que la gente la tiene. Los vídeos de sesiones y los resúmenes mensuales no los busca nadie.</p></div>
+    <div class="clave"><h3>Toca el bolsillo</h3><p>Rake, rakeback y bonos son dinero real para cualquier jugador, gane o pierda. Por eso el comentario más largo es de un regular que dice que los cambios le cuestan dinero.</p></div>
+    <div class="clave"><h3>Pide la voz del jugador</h3><p>Un comentario lo deja claro: «traed opiniones de jugadores, no de un representante de Winamax». Ese hueco es para Toni: el jugador que trabaja, juega por rakeback y hace las cuentas.</p></div>
+  </div>
+</section>
+
+<section>
+  <div class="eti">2 · Los recortes para Instagram</div>
+  <h2>5 reels, <em>listos</em> para subir</h2>
+  <p>Formato reacción: quien habla sale en grande, Toni aparece en un círculo naranja cuando escucha y, cuando habla él, ocupa el cuadro entero. Subtítulo de una palabra y claves tipográficas, como en los reels de rakeback. No llevan placa de cierre. Los archivos están en <code>TryingPoker/Contenido/Reels/Winamax-VIP/Renders/</code>.</p>
+  <p class="gris">Orden recomendado: primero la polémica, que se comparte y se comenta, y al final el resumen, que manda tráfico al vídeo de YouTube.</p>
+
+  <div class="reels">
+    <article class="reel">
+      <div class="orden">1</div>
+      <div class="cuerpo">
+        <h3>¿Menos de 26? Sin VIP</h3>
+        <div class="meta"><span class="chip nar">WX-menores26.mp4</span><span class="chip">26 s</span><span class="chip">Winamax + Toni</span><span class="chip">Polémica</span></div>
+        <p>El representante de Winamax explica que a los menores de 26 años no se les puede dar trato VIP en España (ni eventos ni regalos, solo rakeback). Toni remata: «España es un cachondeo, tío… la mayoría de edad está en 18».</p>
+        <div class="copy" id="c1"><button class="copiar" type="button" data-c="c1">Copiar</button>En España, si tienes menos de 26 años, Winamax no puede tratarte como VIP.
+
+Lo explicó el equipo de póker de Winamax en el directo de MentoPoker.
+Rakeback, sí. Eventos en vivo y regalos, no.
+Mayor de edad a los 18, VIP a los 26.
+
+¿Tiene sentido? Te leo en comentarios.
+
++18 · Juega con responsabilidad
+#poker #pokerespaña #winamax</div>
+      </div>
+    </article>
+
+    <article class="reel">
+      <div class="orden">2</div>
+      <div class="cuerpo">
+        <h3>¿Cuántas horas para tu bono?</h3>
+        <div class="meta"><span class="chip nar">WX-horas.mp4</span><span class="chip">32 s</span><span class="chip">Miguel + Winamax + Toni</span><span class="chip">Polémica</span></div>
+        <p>Un Red Diamond de Escape dice que solo el primer bono son 15 horas. Winamax responde que el siguiente son «10-11 horas, eso no te lo voy a negar». Toni: «eso no es normal, ¿cuántos jugadores hacen eso? ¿un 5 %? ¿un 2 %?». Cierra con el comentario del jugador al que los cambios le cuestan 10.000 € al año.</p>
+        <div class="copy" id="c2"><button class="copiar" type="button" data-c="c2">Copiar</button>15 horas para tu primer bono. 10-11 para el siguiente. ¿De verdad?
+
+Se lo preguntaron en directo al equipo de póker de Winamax.
+Su respuesta: «una buena panzada de grind».
+Mi opinión: eso no es normal. Y no compensa.
+
+¿Cuántas horas juegas tú al día? Comenta el número.
+
++18 · Juega con responsabilidad
+#poker #grinder #winamax</div>
+      </div>
+    </article>
+
+    <article class="reel">
+      <div class="orden">3</div>
+      <div class="cuerpo">
+        <h3>La sala no piensa en ti</h3>
+        <div class="meta"><span class="chip nar">WX-recreacional.mp4</span><span class="chip">36 s</span><span class="chip">Miguel + Toni</span><span class="chip">Opinión</span></div>
+        <p>Miguel (CEO de MentoPoker): «las salas piensan más en el recreacional que en los regulares, y es normal… el regular se aprovecha de que hay gente peor jugando». Si el sistema atrae un 20 % más de manos recreativas, tu winrate sube. Toni cierra con «es un fifty-fifty».</p>
+        <div class="copy" id="c3"><button class="copiar" type="button" data-c="c3">Copiar</button>La sala no trabaja para ti. Y es normal.
+
+El cliente que cuida la sala es el recreacional, no el regular.
+Si un cambio trae más jugadores recreativos, tu winrate sube aunque el rakeback baje un poco.
+
+¿Estás de acuerdo? Comenta SÍ o NO.
+
++18 · Juega con responsabilidad
+#poker #pokeronline #plo</div>
+      </div>
+    </article>
+
+    <article class="reel">
+      <div class="orden">4</div>
+      <div class="cuerpo">
+        <h3>Consejo: no juegues Escape</h3>
+        <div class="meta"><span class="chip nar">WX-escape.mp4</span><span class="chip">25 s</span><span class="chip">Solo Toni</span><span class="chip">Consejo</span></div>
+        <p>Es el único reel con solo la voz de Toni. Dice que las mesas rápidas tipo zoom se comen el rakeback y que, si quieres ganar dinero, selecciones bien tus mesas y juegues mesas regulares.</p>
+        <div class="copy" id="c4"><button class="copiar" type="button" data-c="c4">Copiar</button>Si quieres ganar dinero, no juegues Escape.
+
+Las mesas rápidas tipo zoom te hacen pagar rake a lo loco.
+Si quieres divertirte, vale. Si quieres ganar, selecciona tus mesas.
+
+Guárdalo para la próxima vez que abras el lobby.
+
++18 · Juega con responsabilidad
+#poker #cashgame #pokerespaña</div>
+      </div>
+    </article>
+
+    <article class="reel">
+      <div class="orden">5</div>
+      <div class="cuerpo">
+        <h3>Winamax cambia su rakeback</h3>
+        <div class="meta"><span class="chip nar">WX-cambios.mp4</span><span class="chip">56 s</span><span class="chip">Toni + Winamax + Miguel</span><span class="chip">Promo del vídeo</span></div>
+        <p>El resumen: todos tienen status desde el principio, bonos ilimitados, 90 días en vez de 30, boosts del +25 % al +100 %, la mitad de millas y el ejemplo de Diamond 1 (de 10.000 millas a 650 por bono, de 50 € a 10 €). Lleva la etiqueta «Vídeo completo en YouTube» al final. Encaja mejor justo antes del vídeo «1 mes después» (idea 1).</p>
+        <div class="copy" id="c5"><button class="copiar" type="button" data-c="c5">Copiar</button>Winamax ha cambiado su programa VIP. Esto es lo que cambia para ti, en un minuto.
+
+Bonos ilimitados y 90 días para completarlos.
+Boosts de millas del +25 % al +100 %.
+La contrapartida: ahora generas la mitad de millas.
+
+El análisis completo está en mi YouTube (enlace en la bio).
+
++18 · Juega con responsabilidad
+#poker #rakeback #winamax</div>
+      </div>
+    </article>
+  </div>
+
+  <p class="aviso"><b>Antes de publicar.</b> Cuatro de los reels usan la imagen y la voz de Miguel y del representante de Winamax, que salen del directo de MentoPoker. Toni ya lo publicó en YouTube y MentoPoker es su escuela, pero conviene que se lo diga a Miguel. Si a Miguel le parece bien, publicad como colaboración con @mentopoker: el reel llega también a su audiencia. Sobre la norma de los menores de 26, el reel solo recoge lo que dijo Winamax en el directo.</p>
+</section>
+
+<section>
+  <div class="eti">3 · Ideas para los próximos vídeos de YouTube</div>
+  <h2>11 ángulos para <em>seguir</em> exprimiendo el tema</h2>
+  <p>Cada idea lleva título buscable, frase de miniatura (máximo 4 palabras), gancho de los primeros segundos y si es un vídeo de alcance (gente que no conoce a Toni y busca el tema) o de fidelización (sus seguidores). Las de borde naranja son las primeras que grabaría.</p>
+
+  <div class="grupo">
+    <div class="eti nar">A · Secuelas directas, ahora que el tema está caliente</div>
+    <div class="ideas">
+      <article class="idea top">
+        <h3>1 · Nuevo VIP de Winamax, un mes después</h3>
+        <dl>
+          <dt>Título</dt><dd>Nuevo VIP de Winamax un mes después: ¿ganas más o menos rakeback?</dd>
+          <dt>Miniatura</dt><dd><span class="mini">¿Menos rakeback?</span></dd>
+          <dt>Gancho</dt><dd>«Winamax prometió que nadie perdería rakeback. Ha pasado un mes y he hablado con los jugadores. Esto es lo que ha pasado.»</dd>
+          <dt>Tipo</dt><dd>Alcance. Es la secuela que pedían los comentarios y la charla que Miguel y Winamax dejaron pendiente «después de un mes».</dd>
+          <dt>Cómo</dt><dd>Recoger por historias de IG los números de 3 perfiles (recreativo de fin de semana, regular de 4-6 h, Red Diamond) y compararlos con el sistema anterior. Hay que grabarlo ya: Overdrive salió a principios de octubre.</dd>
+        </dl>
+      </article>
+      <article class="idea top">
+        <h3>2 · Cuántas horas hay que jugar para cada bono</h3>
+        <dl>
+          <dt>Título</dt><dd>¿Cuántas horas hay que jugar en Winamax para cada bono? (calculadora)</dd>
+          <dt>Miniatura</dt><dd><span class="mini">¿11 horas?</span></dd>
+          <dt>Gancho</dt><dd>«Para el primer bono, 15 horas. Para el siguiente, 10 u 11. ¿Merece la pena? He hecho las cuentas por nivel.»</dd>
+          <dt>Tipo</dt><dd>Alcance y captación de leads. El propio representante dijo que no hay calculadora oficial y que la gente se la hace.</dd>
+          <dt>Cómo</dt><dd>Podemos hacer una calculadora web (como los otros recursos de Toni) que pida el correo, y el vídeo la enseña.</dd>
+        </dl>
+      </article>
+      <article class="idea">
+        <h3>3 · Un mes en Winamax con el VIP nuevo</h3>
+        <dl>
+          <dt>Título</dt><dd>Jugué un mes en Winamax con el nuevo VIP: mis números reales</dd>
+          <dt>Miniatura</dt><dd><span class="mini">Mis números</span></dd>
+          <dt>Gancho</dt><dd>«Nunca jugaba en Winamax porque su rakeback no me compensaba. Este mes lo he probado. Manos, rake y bonos.»</dd>
+          <dt>Tipo</dt><dd>Fidelización con potencial de alcance. Cumple la promesa del canal: resultados reales, con números.</dd>
+          <dt>Ojo</dt><dd>Toni pidió hablar antes de enseñar sus gráficas. Se puede enseñar solo rake y rakeback, sin el resultado en mesa.</dd>
+        </dl>
+      </article>
+    </div>
+  </div>
+
+  <div class="grupo">
+    <div class="eti nar">B · Explicativos que se buscan durante años</div>
+    <div class="ideas">
+      <article class="idea top">
+        <h3>4 · Rake y rakeback, explicado</h3>
+        <dl>
+          <dt>Título</dt><dd>Rake y rakeback explicados en 10 minutos (si estás empezando)</dd>
+          <dt>Miniatura</dt><dd><span class="mini">Te lo devuelven</span></dd>
+          <dt>Gancho</dt><dd>«Cada mano que juegas, la sala se queda una parte. Si no sabes cuánto te devuelve, estás perdiendo dinero.»</dd>
+          <dt>Tipo</dt><dd>Alcance, evergreen. Es el pilar «Empieza bien» del manual y enlaza con la guía «Empieza en PLO».</dd>
+        </dl>
+      </article>
+      <article class="idea top">
+        <h3>5 · Qué sala te devuelve más en España</h3>
+        <dl>
+          <dt>Título</dt><dd>Winamax, PokerStars o GGPoker: ¿qué sala te devuelve más en España?</dd>
+          <dt>Miniatura</dt><dd><span class="mini">¿Cuál elijo?</span></dd>
+          <dt>Gancho</dt><dd>«En España solo puedes elegir entre dos o tres salas. Esta es la que más te devuelve según cuánto juegues.»</dd>
+          <dt>Tipo</dt><dd>Alcance. «Dónde jugar póker» tiene un vídeo con 336.000 vistas, y un comentario lo pide: «en el mercado español poco puedes elegir».</dd>
+          <dt>Cómo</dt><dd>Una tabla por perfil (PLO25, PLO50, PLO100 y horas al mes). Toni guarda dinero en varias salas, así que puede hablar de todas.</dd>
+        </dl>
+      </article>
+      <article class="idea">
+        <h3>6 · Cómo calculo mi rakeback real</h3>
+        <dl>
+          <dt>Título</dt><dd>Cómo calcular tu rakeback real en cada sala (tutorial con tracker)</dd>
+          <dt>Miniatura</dt><dd><span class="mini">Tu % real</span></dd>
+          <dt>Gancho</dt><dd>«Entre millas, bonos y promos, nadie sabe cuánto rakeback cobra de verdad. Yo lo apunto así.»</dd>
+          <dt>Tipo</dt><dd>Alcance. Toni ya lo explicó en un comentario: filtra por sala en el tracker, lo apunta y saca la media. Puede llevar el código de Hand2Note (una marca por pieza).</dd>
+        </dl>
+      </article>
+      <article class="idea">
+        <h3>7 · Serie «Salas explicadas»</h3>
+        <dl>
+          <dt>Título</dt><dd>[Programa] de [sala] EXPLICADO: lo que cambia para ti</dd>
+          <dt>Miniatura</dt><dd><span class="mini">¿Qué cambia?</span></dd>
+          <dt>Gancho</dt><dd>La novedad en la primera frase, con su cifra.</dd>
+          <dt>Tipo</dt><dd>Alcance. Repetir la fórmula que funcionó cada vez que una sala cambie su VIP o sus promos: Ocean Rewards de GG, PokerStars, CoinPoker (un comentario preguntó «¿y CoinPoker?»). Publicar en menos de 48 h.</dd>
+        </dl>
+      </article>
+    </div>
+  </div>
+
+  <div class="grupo">
+    <div class="eti nar">C · Opinión y polémica, para los comentarios</div>
+    <div class="ideas">
+      <article class="idea">
+        <h3>8 · 11 horas al día por un bono</h3>
+        <dl>
+          <dt>Título</dt><dd>¿Merece la pena jugar 11 horas al día por un bono?</dd>
+          <dt>Miniatura</dt><dd><span class="mini">No compensa</span></dd>
+          <dt>Gancho</dt><dd>«Hay regulares jugando 11 horas seguidas para no perder su status. Yo trabajo 7 horas y juego. Esto es lo que pienso.»</dd>
+          <dt>Tipo</dt><dd>Alcance y debate. Enlaza con su vídeo «¿Estás sacrificando tu winrate por el rakeback?» (202 vistas), que así gana una segunda vida.</dd>
+        </dl>
+      </article>
+      <article class="idea">
+        <h3>9 · Cómo gana dinero una sala</h3>
+        <dl>
+          <dt>Título</dt><dd>La sala no trabaja para ti: así gana dinero el póker online</dd>
+          <dt>Miniatura</dt><dd><span class="mini">No eres el cliente</span></dd>
+          <dt>Gancho</dt><dd>«Para la sala, tú no eres el cliente importante. Y eso es bueno para ti.»</dd>
+          <dt>Tipo</dt><dd>Alcance. Los dos vídeos más vistos del canal van de esto (Winamax y la reacción a Sergi Reixach). Sirve el argumento de Miguel: rake, recreativos y tráfico.</dd>
+        </dl>
+      </article>
+      <article class="idea">
+        <h3>10 · Menos de 26 años y póker en España</h3>
+        <dl>
+          <dt>Título</dt><dd>Si tienes menos de 26 años, esto es lo que no te dan las salas de póker</dd>
+          <dt>Miniatura</dt><dd><span class="mini">Sin VIP</span></dd>
+          <dt>Gancho</dt><dd>«Con 18 años puedes jugar. Con 25 no puedes ser VIP. Te explico por qué.»</dd>
+          <dt>Tipo</dt><dd>Alcance, para el público joven del canal (22-40). Antes de grabar hay que comprobar qué dice exactamente la norma española de 2020 sobre promociones a menores de 26, y no repetirlo de memoria.</dd>
+        </dl>
+      </article>
+      <article class="idea">
+        <h3>11 · Dónde jugar desde Latinoamérica</h3>
+        <dl>
+          <dt>Título</dt><dd>Winamax no llegará a Latinoamérica: dónde jugar si estás en Argentina o México</dd>
+          <dt>Miniatura</dt><dd><span class="mini">¿Y en LatAm?</span></dd>
+          <dt>Gancho</dt><dd>«Winamax lo ha confirmado: de momento, nada de Latinoamérica. Entonces, ¿dónde juegas?»</dd>
+          <dt>Tipo</dt><dd>Alcance para el segundo público. En el directo lo preguntaron y en los comentarios hay jugadores de Argentina. Solo si Toni quiere abrirse a Latinoamérica (sigue pendiente).</dd>
+        </dl>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="eti">4 · Cómo empaquetarlos</div>
+  <h2>Lo que hay que <em>repetir</em></h2>
+  <div class="reglas">
+    <div class="regla"><b>La palabra clave primero</b><span>El título empieza por lo que la gente escribe en el buscador («Nuevo VIP de Winamax…», «Rake y rakeback…») y termina en «explicado» cuando lo es. Nada de «TryingPoker |» delante.</span></div>
+    <div class="regla"><b>Llegar el primero</b><span>Cuando una sala cambia algo, el vídeo sale en 48 horas. La versión larga del directo ya la hace otro; Toni hace la versión explicada y con opinión de jugador.</span></div>
+    <div class="regla"><b>8 a 12 minutos</b><span>El vídeo original duraba 28 minutos porque era la reacción a un directo entero. Los siguientes, más cortos y con capítulos.</span></div>
+    <div class="regla"><b>Miniatura simple</b><span>Cara expresiva, un objeto (fichas o el logo de la sala si es su vídeo), fondo negro y como mucho 4 palabras en naranja. Sin resumen.</span></div>
+    <div class="regla"><b>Una lista «Salas y rakeback»</b><span>Todos los vídeos del tema en una lista. Cada uno termina recomendando el siguiente en la pantalla final, y la suscripción se pide a mitad de vídeo.</span></div>
+    <div class="regla"><b>Reels y Shorts que empujan</b><span>De cada vídeo salen 3 o 4 recortes como los de esta entrega. El Short lleva el vídeo largo como «vídeo relacionado».</span></div>
+    <div class="regla"><b>Descripción con palabras clave</b><span>Las dos primeras líneas explican el tema con las palabras que se buscan, los capítulos van después y los códigos de afiliado al final.</span></div>
+  </div>
+</section>
+
+<section>
+  <div class="eti">5 · Propuesta de orden</div>
+  <h2>Las próximas <em>4 semanas</em></h2>
+  <div class="semanas">
+    <div class="semana"><span class="eti nar">Semana del 24/11</span><h3>VIP de Winamax, un mes después</h3><p>Antes, historias de IG pidiendo números a los seguidores. En Instagram: reels 1 y 2.</p></div>
+    <div class="semana"><span class="eti nar">Semana del 1/12</span><h3>Rake y rakeback explicados</h3><p>El evergreen que sostiene toda la lista. En Instagram: reels 3 y 4.</p></div>
+    <div class="semana"><span class="eti nar">Semana del 8/12</span><h3>Qué sala te devuelve más en España</h3><p>La comparativa por perfiles. En Instagram: reel 5 y recortes del vídeo nuevo.</p></div>
+    <div class="semana"><span class="eti nar">Semana del 15/12</span><h3>Cuántas horas para cada bono</h3><p>Con la calculadora como lead magnet. En Instagram: recortes de los vídeos 1 y 2.</p></div>
+  </div>
+  <p class="gris">Cada vídeo de esta lista se guioniza con la estructura de 5 bloques (gancho, pico de interés, historia, valor en pasos y CTA). Todo lo que hable de salas lleva «+18 · Juega con responsabilidad».</p>
+</section>
+
+<footer>
+  <span>Fuentes: vistas del canal y búsquedas de YouTube consultadas el 19/11/2026; transcripción del vídeo n_DcK5RoiXg y sus 18 comentarios.</span>
+  <span>Vídeo original: <a href="https://www.youtube.com/watch?v=n_DcK5RoiXg" target="_blank" rel="noopener">Nuevo sistema VIP de Winamax: Rakeback, niveles y recompensas EXPLICADO</a></span>
+</footer>
+
+</div>
+
+<script>
+document.querySelectorAll(".copiar").forEach((b) => {
+  b.addEventListener("click", () => {
+    const caja = document.getElementById(b.dataset.c);
+    const texto = caja.innerText.replace(/^Copiar\s*/, "").replace(/^Copiado\s*/, "");
+    const ok = () => { b.textContent = "Copiado"; setTimeout(() => (b.textContent = "Copiar"), 1600); };
+    const plan_b = () => { const r = document.createRange(); r.selectNodeContents(caja); const s = getSelection(); s.removeAllRanges(); s.addRange(r); };
+    try { navigator.clipboard.writeText(texto).then(ok, plan_b); } catch (e) { plan_b(); }
+  });
+});
+</script>
+
+</body></html>
